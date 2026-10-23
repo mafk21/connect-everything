@@ -38,15 +38,17 @@ The web is full of lists that were generated instead of curated. This is the opp
 
 **533 entries across 504 distinct domains.** Thirteen domains carry more than one entry. GitHub accounts for 17 — each a separate open-source project (ripgrep, fzf, llama.cpp, Sigma-style rules and others) — and Hugging Face for 3 (models, Learn, PEFT). The rest are sites that genuinely cover two things: Figma and FigJam, Svelte and SvelteKit, MDN's reference and its tutorials.
 
-Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **35 terms** — every one in use, none drifting into synonyms.
+Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **64 terms, grouped into seven families** — every one in use, none drifting into synonyms.
 
 ## Features
 
 **Browsing**
-- Sidebar categories (single-select) and tags (multi-select, **AND** semantics)
+- Sidebar categories (single-select) with icons and counts
+- Tags (multi-select, **AND** semantics) as a chip cloud grouped by family — Discipline, Format, Subject, Security, AI & LLM, Practice, Qualities — with the last four folded away until asked for
+- Categories also appear as a scrolling chip row on small screens, where the sidebar is hidden
+- An applied-filter bar names everything currently narrowing the view and lets you remove it one chip at a time
+- Sort by newest or A–Z
 - Counts recalculated against your *other* active filters, so you always see what is reachable
-- Sort by featured first, newest, or A–Z
-- Long tag lists collapse behind "Show all 64 tags" — and render in full without JavaScript
 
 **Search**
 - Matches title, domain, description, category and tags
@@ -59,7 +61,7 @@ Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a con
 
 **Details that matter**
 - Tag chips on a card add that tag to your filters
-- Kebab menu: open in a new tab, or copy the link
+- One action per card: the whole card opens the resource in a new tab
 - Works without JavaScript: the grid is server-rendered and every card links out
 - Favicon with a deterministic monogram fallback, so a slow or blocked icon never leaves a blank tile
 
@@ -68,7 +70,7 @@ Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a con
 | Route | Purpose |
 |---|---|
 | `/` | The library — all resources, live filtering |
-| `/featured` | Curator's picks |
+| `/featured` | Start here — the twelve picks to open first |
 | `/suggest` | How to suggest a resource, via GitHub |
 | `/404` | Search, category shortcuts and three picks instead of a dead end |
 
@@ -165,8 +167,8 @@ Measured on the 533-entry build:
 
 | Asset | Gzipped |
 |---|---|
-| HTML (`/`) | 146.5 KB |
-| CSS | 7.1 KB |
+| HTML (`/`) | 133.2 KB |
+| CSS | 7.2 KB |
 | JS | 2.8 KB |
 
 Favicons are the only third-party request per card: lazy-loaded in a fixed-size box, so they cannot shift layout.

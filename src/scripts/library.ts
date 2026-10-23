@@ -25,7 +25,7 @@ interface State {
   query: string;
   category: string | null;
   tags: Set<string>;
-  sort: 'featured' | 'newest' | 'az';
+  sort: 'newest' | 'az';
 }
 
 function init(scope: HTMLElement) {
@@ -51,6 +51,9 @@ function init(scope: HTMLElement) {
   const applyFilters = document.querySelector<HTMLButtonElement>('[data-apply-filters]');
   const badge = document.querySelector<HTMLElement>('[data-filter-badge]');
   const allLink = document.querySelector<HTMLElement>('[data-nav-all]');
+  const activeBar = document.querySelector<HTMLElement>('[data-active-filters]');
+  const activeList = document.querySelector<HTMLElement>('[data-active-list]');
+  const clearCategory = document.querySelector<HTMLButtonElement>('[data-clear-category]');
 
   const state: State = readUrl();
 
@@ -88,10 +91,7 @@ function init(scope: HTMLElement) {
       return;
     }
 
-    if (event.key === 'Escape') {
-      closeMenus();
-      if (dialog?.open) dialog.close();
-    }
+    if (event.key === 'Escape' && dialog?.open) dialog.close();
   });
 
   // --------------------------------------------------------------- filters
@@ -107,6 +107,11 @@ function init(scope: HTMLElement) {
     button.addEventListener('click', () => {
       toggleTag(button.dataset.filterTag!);
     });
+  });
+
+  clearCategory?.addEventListener('click', () => {
+    state.category = null;
+    update();
   });
 
   clearButtons.forEach((button) => {
@@ -148,59 +153,30 @@ function init(scope: HTMLElement) {
     openFilters?.focus();
   });
 
-  function closeMenus() {
-    document.querySelectorAll<HTMLDetailsElement>('[data-menu][open]').forEach((menu) => {
-      menu.open = false;
-    });
-  }
-
-  document.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    if (!target.closest('[data-menu]')) closeMenus();
-  });
-
-  // ------------------------------------------------------- long tag lists
-  const tagLists = [...document.querySelectorAll<HTMLElement>('[data-tag-list]')];
+  // ------------------------------------------------------- tag groups
+  // Chips are grouped, and only the first few groups are shown until asked.
+  const tagGroupSets = [...document.querySelectorAll<HTMLElement>('[data-tag-groups]')];
   const toggleTags = [...document.querySelectorAll<HTMLButtonElement>('[data-toggle-tags]')];
 
-  tagLists.forEach((list) => {
-    if (!list.querySelector('.tag-extra')) return;
-    list.classList.add('is-collapsed');
+  tagGroupSets.forEach((set) => {
+    if (set.querySelector('.tag-extra')) set.classList.add('is-collapsed');
   });
   toggleTags.forEach((button) => {
     button.hidden = false;
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
       const panel = button.closest('[data-filter-panel]');
-      panel?.querySelectorAll<HTMLElement>('[data-tag-list]').forEach((list) => {
-        list.classList.toggle('is-collapsed', expanded);
-      });
+      panel
+        ?.querySelectorAll<HTMLElement>('[data-tag-groups]')
+        .forEach((set) => set.classList.toggle('is-collapsed', expanded));
       button.setAttribute('aria-expanded', String(!expanded));
       const label = button.querySelector('[data-toggle-tags-label]');
       if (label) {
         label.textContent = expanded
-          ? (button.dataset.more ?? 'Show all tags')
-          : (button.dataset.less ?? 'Show fewer tags');
+          ? (button.dataset.more ?? 'All tags')
+          : (button.dataset.less ?? 'Fewer tags');
       }
     });
-  });
-
-  // --------------------------------------------------------- copy to clip
-  document.addEventListener('click', async (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-copy-link]');
-    if (!button) return;
-    const url = button.dataset.copyLink ?? '';
-    try {
-      await navigator.clipboard.writeText(url);
-      const original = button.textContent;
-      button.textContent = 'Copied';
-      button.closest<HTMLDetailsElement>('[data-menu]')?.removeAttribute('open');
-      window.setTimeout(() => {
-        button.textContent = original;
-      }, 1400);
-    } catch {
-      window.prompt('Copy this link', url);
-    }
   });
 
   // ------------------------------------------------------------ the render
@@ -252,6 +228,8 @@ function init(scope: HTMLElement) {
       );
     });
 
+    if (clearCategory) clearCategory.setAttribute('aria-pressed', String(!state.category));
+
     categoryButtons.forEach((button) => {
       const id = button.dataset.filterCategory!;
       const active = state.category === id;
@@ -283,7 +261,12 @@ function init(scope: HTMLElement) {
     if (emptyState) emptyState.classList.toggle('hidden', matched.length !== 0);
 
     const anyFilter = isFiltered(state);
-    clearButtons.forEach((button) => {
+    clearCategory?.addEventListener('click', () => {
+    state.category = null;
+    update();
+  });
+
+  clearButtons.forEach((button) => {
       button.hidden = !anyFilter;
     });
 
@@ -292,6 +275,8 @@ function init(scope: HTMLElement) {
       ['bg-mint-100', 'text-teal-900'].forEach((name) => allLink.classList.toggle(name, !anyFilter));
       allLink.classList.toggle('text-ink-soft', anyFilter);
     }
+
+    renderActiveFilters();
 
     if (badge) {
       const activeCount = (state.category ? 1 : 0) + state.tags.size;
@@ -304,6 +289,69 @@ function init(scope: HTMLElement) {
     }
 
     return matched.length;
+  }
+
+  /**
+   * The "Showing …" bar. Without it, a narrowed view looked identical to a
+   * filtered one that happened to be short — the main source of confusion.
+   */
+  function renderActiveFilters() {
+    if (!activeBar || !activeList) return;
+
+    const entries: { label: string; clear: () => void }[] = [];
+
+    if (state.query) {
+      entries.push({
+        label: `“${state.query}”`,
+        clear: () => {
+          state.query = '';
+          if (search) search.value = '';
+        },
+      });
+    }
+
+    if (state.category) {
+      const label =
+        document.querySelector<HTMLElement>(`[data-filter-category="${state.category}"]`)
+          ?.dataset.label ?? state.category;
+      entries.push({
+        label,
+        clear: () => {
+          state.category = null;
+        },
+      });
+    }
+
+    [...state.tags].forEach((tag) => {
+      entries.push({ label: tag, clear: () => state.tags.delete(tag) });
+    });
+
+    activeBar.hidden = entries.length === 0;
+    activeList.textContent = '';
+
+    entries.forEach((entry) => {
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'chip chip--active';
+      button.setAttribute('aria-label', `Remove filter: ${entry.label}`);
+      button.append(entry.label);
+
+      const cross = document.createElement('span');
+      cross.className = 'chip__x';
+      cross.setAttribute('aria-hidden', 'true');
+      cross.textContent = '×';
+      button.append(cross);
+
+      button.addEventListener('click', () => {
+        entry.clear();
+        update();
+        search?.focus({ preventScroll: true });
+      });
+
+      li.append(button);
+      activeList.append(li);
+    });
   }
 
   function announce(visible: number) {
@@ -323,7 +371,7 @@ function init(scope: HTMLElement) {
     if (state.query) params.set('q', state.query);
     if (state.category) params.set('category', state.category);
     [...state.tags].sort().forEach((tag) => params.append('tag', tag));
-    if (state.sort !== 'featured') params.set('sort', state.sort);
+    if (state.sort !== 'newest') params.set('sort', state.sort);
     const query = params.toString();
     const next = `${window.location.pathname}${query ? `?${query}` : ''}`;
     window.history.replaceState(null, '', next);
@@ -377,26 +425,25 @@ function matches(card: Card, state: State): boolean {
 function comparator(sort: State['sort']) {
   return (a: Card, b: Card) => {
     if (sort === 'az') return a.title.localeCompare(b.title);
-    if (sort === 'newest') return b.date.localeCompare(a.date) || a.title.localeCompare(b.title);
-    if (a.featured !== b.featured) return a.featured ? -1 : 1;
     return b.date.localeCompare(a.date) || a.title.localeCompare(b.title);
   };
 }
 
 const ACTIVE_ROW = ['bg-mint-100', 'text-teal-900', 'font-medium'];
+const ACTIVE_TILE = ['bg-teal-900', 'text-white'];
+const IDLE_TILE = ['bg-mint-100', 'text-teal-800'];
 
 function styleRow(button: HTMLButtonElement, active: boolean, count: number) {
   button.classList.toggle('opacity-45', !active && count === 0);
-  ACTIVE_ROW.forEach((name) => button.classList.toggle(name, active));
 
-  const marker = button.querySelector<HTMLElement>('[data-marker]');
-  if (!marker) return;
-  marker.classList.toggle('bg-teal-700', active);
-  marker.classList.toggle('border-teal-700', active);
-  marker.classList.toggle('bg-white', !active);
-  marker.classList.toggle('border-line-strong', !active);
-  const tick = marker.querySelector('svg');
-  if (tick) tick.classList.toggle('hidden', !active);
+  // Chips (mobile category row, tag cloud) style themselves from aria-pressed.
+  const isChip = button.classList.contains('chip');
+  if (!isChip) ACTIVE_ROW.forEach((name) => button.classList.toggle(name, active));
+
+  const tile = button.querySelector<HTMLElement>('[data-marker]');
+  if (!tile) return;
+  ACTIVE_TILE.forEach((name) => tile.classList.toggle(name, active));
+  IDLE_TILE.forEach((name) => tile.classList.toggle(name, !active));
 }
 
 function headingFor(state: State): string {
@@ -424,7 +471,7 @@ function readUrl(): State {
     query: params.get('q')?.trim() ?? '',
     category: params.get('category'),
     tags: new Set(params.getAll('tag')),
-    sort: sort === 'newest' || sort === 'az' ? sort : 'featured',
+    sort: sort === 'az' ? 'az' : 'newest',
   };
 }
 

@@ -39,19 +39,6 @@ const added = formatDate(resource.dateAdded);
       <p class="r-card__domain">{domain}</p>
     </div>
 
-    <details class="r-card__menu" data-menu>
-      <summary class="r-card__menu-button" aria-label={`More options for ${resource.title}`}>
-        <svg class="size-4" aria-hidden="true"><use href="#icon-kebab" /></svg>
-      </summary>
-      <div class="r-card__menu-panel">
-        <a href={resource.url} target="_blank" rel="noopener noreferrer" class="r-card__menu-item">
-          Open in new tab
-        </a>
-        <button type="button" data-copy-link={resource.url} class="r-card__menu-item r-card__menu-item--button">
-          Copy link
-        </button>
-      </div>
-    </details>
   </header>
 
   <p class="r-card__desc" data-description>{resource.description}</p>
@@ -87,7 +74,7 @@ const added = formatDate(resource.dateAdded);
       resource.featured && (
         <span class="r-card__featured">
           <svg class="size-3.5" aria-hidden="true"><use href="#icon-star" /></svg>
-          <span>Featured</span>
+          <span>Start here</span>
         </span>
       )
     }
