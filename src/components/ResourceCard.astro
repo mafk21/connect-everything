@@ -12,16 +12,13 @@ interface Props {
 const { resource, mode = 'live' } = Astro.props;
 const domain = domainOf(resource.url);
 const added = formatDate(resource.dateAdded);
-const chip = 'relative z-10 rounded-chip bg-chip px-2 py-[3px] text-[12px] font-medium text-chip-text transition-colors hover:bg-mint-200 hover:text-teal-900';
 ---
 
 <article
-  class="group relative flex h-full flex-col rounded-card border border-line bg-white p-4 shadow-card transition duration-150 ease-out hover:-translate-y-0.5 hover:border-line-strong hover:shadow-card-hover focus-within:border-line-strong"
+  class="r-card"
   data-resource={resource.id}
   data-category={resource.category}
   data-tags={resource.tags.join('|')}
-  data-title={resource.title}
-  data-description={resource.description}
   data-featured={resource.featured ? 'true' : 'false'}
   data-date={resource.dateAdded}
 >
@@ -30,96 +27,67 @@ const chip = 'relative z-10 rounded-chip bg-chip px-2 py-[3px] text-[12px] font-
     href={resource.url}
     target="_blank"
     rel="noopener noreferrer"
-    class="absolute inset-0 z-0 rounded-card focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+    class="r-card__link"
   >
     <span class="sr-only">{resource.title} — {domain}, opens in a new tab</span>
   </a>
 
-  <header class="flex items-start gap-3">
+  <header class="r-card__head">
     <Favicon title={resource.title} url={resource.url} />
-    <div class="min-w-0 flex-1 pt-0.5">
-      <h3 class="truncate text-card-title font-semibold text-ink" data-title-el>{resource.title}</h3>
-      <p class="truncate text-meta text-ink-muted">{domain}</p>
+    <div class="r-card__titles">
+      <h3 class="r-card__title" data-title-el>{resource.title}</h3>
+      <p class="r-card__domain">{domain}</p>
     </div>
 
-    <details class="relative z-10 -mr-1 -mt-1 shrink-0" data-menu>
-      <summary
-        class="grid size-8 cursor-pointer list-none place-items-center rounded-md text-ink-soft transition-colors hover:bg-mint-100 hover:text-teal-900 [&::-webkit-details-marker]:hidden"
-        aria-label={`More options for ${resource.title}`}
-      >
-        <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
-          <circle cx="12" cy="5.5" r="1.6" />
-          <circle cx="12" cy="12" r="1.6" />
-          <circle cx="12" cy="18.5" r="1.6" />
-        </svg>
+    <details class="r-card__menu" data-menu>
+      <summary class="r-card__menu-button" aria-label={`More options for ${resource.title}`}>
+        <svg class="size-4" aria-hidden="true"><use href="#icon-kebab" /></svg>
       </summary>
-      <div
-        class="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-chip border border-line bg-white py-1 shadow-card-hover"
-      >
-        <a
-          href={resource.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block px-3 py-2 text-meta text-ink-soft hover:bg-mint-100 hover:text-teal-900"
-        >
+      <div class="r-card__menu-panel">
+        <a href={resource.url} target="_blank" rel="noopener noreferrer" class="r-card__menu-item">
           Open in new tab
         </a>
-        <button
-          type="button"
-          data-copy-link={resource.url}
-          class="block w-full px-3 py-2 text-left text-meta text-ink-soft hover:bg-mint-100 hover:text-teal-900"
-        >
+        <button type="button" data-copy-link={resource.url} class="r-card__menu-item r-card__menu-item--button">
           Copy link
         </button>
       </div>
     </details>
   </header>
 
-  <p class="mt-3 line-clamp-3 text-meta leading-relaxed text-ink-soft" data-description>
-    {resource.description}
-  </p>
+  <p class="r-card__desc" data-description>{resource.description}</p>
 
-  <ul class="mt-3 flex flex-wrap gap-1.5">
+  <ul class="r-card__tags">
     {
-      resource.tags.map((tag) =>
-        mode === 'live' ? (
-          <li>
-            <button type="button" data-filter-tag={tag} class={chip}>
+      resource.tags.map((tag) => (
+        <li>
+          {mode === 'live' ? (
+            <button type="button" data-filter-tag={tag} class="chip">
               {tag}
             </button>
-          </li>
-        ) : (
-          <li>
-            <a href={`/?tag=${encodeURIComponent(tag)}`} class={chip}>
+          ) : (
+            <a href={`/?tag=${encodeURIComponent(tag)}`} class="chip">
               {tag}
             </a>
-          </li>
-        )
-      )
+          )}
+        </li>
+      ))
     }
   </ul>
 
-  <footer class="mt-auto flex items-center gap-3 border-t border-line pt-3 pb-0.5 text-[12px] text-ink-muted">
-    <span class="flex items-center gap-1.5" title="Category">
-      <svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 7.5h16M4 12h10M4 16.5h7" />
-      </svg>
+  <footer class="r-card__foot">
+    <span class="r-card__meta">
+      <svg class="size-3.5" aria-hidden="true"><use href="#icon-category" /></svg>
       {categoryLabel(resource.category)}
     </span>
-    <span class="flex items-center gap-1.5" title="Date added">
-      <svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="4" y="5.5" width="16" height="15" rx="2.5" />
-        <path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" />
-      </svg>
+    <span class="r-card__meta">
+      <svg class="size-3.5" aria-hidden="true"><use href="#icon-calendar" /></svg>
       {added}
     </span>
     {
       resource.featured && (
-        <span class="ml-auto flex items-center gap-1.5 text-teal-800" title="Featured by the curator">
-          <svg viewBox="0 0 24 24" class="size-3.5" fill="currentColor" aria-hidden="true">
-            <path d="m12 3.8 2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.8-5.1 2.8 1-5.7-4.1-4 5.7-.8L12 3.8Z" />
-          </svg>
-          <span class="font-medium">Featured</span>
+        <span class="r-card__featured">
+          <svg class="size-3.5" aria-hidden="true"><use href="#icon-star" /></svg>
+          <span>Featured</span>
         </span>
       )
     }

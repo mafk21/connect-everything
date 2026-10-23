@@ -5,6 +5,7 @@ import SearchField from '../components/SearchField.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Brand from '../components/Brand.astro';
 import MobileFilters from '../components/MobileFilters.astro';
+import IconSprite from '../components/IconSprite.astro';
 import type { Resource } from '../data/resources';
 import { categoryCounts, tagCounts, type CountedOption } from '../lib/derive';
 
@@ -48,6 +49,8 @@ const live = mode === 'live';
       class="grid min-h-[calc(100dvh-24px)] grid-cols-1 overflow-hidden rounded-panel border border-line bg-white shadow-panel sm:min-h-[calc(100dvh-32px)] lg:min-h-[calc(100dvh-48px)] lg:grid-cols-[var(--spacing-sidebar)_1fr]"
       data-library={live ? 'live' : 'static'}
     >
+      <IconSprite />
+
       <div class="hidden lg:block">
         <Sidebar
           categories={categories}
