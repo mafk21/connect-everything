@@ -136,6 +136,9 @@
 ------------------------------------------------------------------- */
 @layer components {
   .r-card {
+    /* Long libraries: skip layout and paint for cards off screen. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 15rem;
     position: relative;
     display: flex;
     flex-direction: column;

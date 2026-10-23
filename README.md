@@ -2,7 +2,7 @@
 
 **A public, hand-curated toolbox of the useful internet** — websites, tools, tutorials and references worth keeping. Browse, search, filter, and click straight through to the thing you need.
 
-**462 resources · 9 categories · 59 tags · no accounts · no tracking · no ads**
+**533 resources · 9 categories · 64 tags · no accounts · no tracking · no ads**
 
 ![Connect Everything](public/og-default.png)
 
@@ -27,16 +27,16 @@ The web is full of lists that were generated instead of curated. This is the opp
 | Category | Entries | What it covers |
 |---|---|---|
 | Design | 50 | UI tools, type, colour, icons, UX research |
-| Development | 62 | Frameworks, runtimes, testing, databases — plus AI coding agents |
-| Learning | 50 | Courses, practice sites, newsletters, podcasts |
+| Development | 92 | Frameworks, runtimes, testing, databases, AI coding agents |
+| Learning | 60 | Courses, practice sites, newsletters, podcasts, AI fundamentals |
 | Tools | 50 | CLI, automation, small web utilities |
 | Productivity | 50 | Notes, tasks, calendars, email, time |
 | Media | 50 | Photos, video, audio, icons, editors, conversion |
-| Data & AI | 50 | Models, data tooling, visualisation, research |
+| Data & AI | 81 | LLM APIs, agents, RAG, fine-tuning, evals, data tooling |
 | Security | 50 | Red teaming, blue teaming, bug bounties, OSINT, forensics |
 | Reference | 50 | Specs, docs, standards, cheatsheets |
 
-**462 entries across 445 distinct domains.** Nine domains carry more than one entry — GitHub hosts eight separate projects (ripgrep, fzf, llama.cpp and others), and the rest are cases where one site genuinely covers two things: Figma and FigJam, Svelte and SvelteKit, MDN's reference and its tutorials.
+**533 entries across 504 distinct domains.** Thirteen domains carry more than one entry. GitHub accounts for 17 — each a separate open-source project (ripgrep, fzf, llama.cpp, Sigma-style rules and others) — and Hugging Face for 3 (models, Learn, PEFT). The rest are sites that genuinely cover two things: Figma and FigJam, Svelte and SvelteKit, MDN's reference and its tutorials.
 
 Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **35 terms** — every one in use, none drifting into synonyms.
 
@@ -46,7 +46,7 @@ Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a con
 - Sidebar categories (single-select) and tags (multi-select, **AND** semantics)
 - Counts recalculated against your *other* active filters, so you always see what is reachable
 - Sort by featured first, newest, or A–Z
-- Long tag lists collapse behind "Show all 59 tags" — and render in full without JavaScript
+- Long tag lists collapse behind "Show all 64 tags" — and render in full without JavaScript
 
 **Search**
 - Matches title, domain, description, category and tags
@@ -161,19 +161,19 @@ Expectations are derived from the page's own data attributes rather than hardcod
 
 ## Performance
 
-Measured on the 462-entry build:
+Measured on the 533-entry build:
 
 | Asset | Gzipped |
 |---|---|
-| HTML (`/`) | 128.0 KB |
+| HTML (`/`) | 146.5 KB |
 | CSS | 7.1 KB |
 | JS | 2.8 KB |
 
 Favicons are the only third-party request per card: lazy-loaded in a fixed-size box, so they cannot shift layout.
 
-**The HTML is now the biggest asset.** At 400 entries the page is 1.16 MB raw and 111 KB gzipped, because every card is server-rendered so that the library works without JavaScript and stays crawlable. Two optimisations already applied: one SVG sprite instead of four inlined icons per card, and component classes instead of repeated utility strings (that pair cut 1.96 MB down to 1.16 MB).
+**The HTML is now the biggest asset.** At 400 entries the page is 1.16 MB raw and 111 KB gzipped, because every card is server-rendered so that the library works without JavaScript and stays crawlable. Three optimisations applied so far: one SVG sprite instead of four inlined icons per card, component classes instead of repeated utility strings (together cutting 1.96 MB to 1.16 MB at 400 entries), and `content-visibility: auto` on cards so off-screen entries skip layout and paint entirely.
 
-The next step, if this grows much beyond 460, is to render the first ~60 cards and paginate the rest, or split each category onto its own page. Not done yet, because it trades away the "everything visible in one place" behaviour that makes the library pleasant to browse.
+The next step, if this grows much beyond 550, is to render the first ~60 cards and paginate the rest, or split each category onto its own page. Not done yet, because it trades away the "everything visible in one place" behaviour that makes the library pleasant to browse.
 
 **Not yet measured:** Lighthouse and 200% zoom, because this environment has no browser. Both are one-command checks on a real machine — see *Known gaps* below.
 

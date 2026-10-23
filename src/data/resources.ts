@@ -530,6 +530,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2025-11-04',
   },
   {
+    id: "bootstrap",
+    title: "Bootstrap",
+    url: "https://getbootstrap.com",
+    description:
+      "The framework that made responsive layouts normal, still maintained and still the fastest way to a decent admin interface. Predictable, if not fashionable.",
+    category: 'development',
+    tags: ['CSS', 'Framework', 'Documentation'],
+    dateAdded: '2026-10-20',
+  },
+  {
     id: "github-copilot",
     title: "GitHub Copilot",
     url: "https://github.com/features/copilot",
@@ -550,6 +560,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-10-16',
   },
   {
+    id: "pico-css",
+    title: "Pico CSS",
+    url: "https://picocss.com",
+    description:
+      "A minimal stylesheet that styles semantic HTML with no classes at all. Ideal when the markup should stay clean and the page still needs to look considered.",
+    category: 'development',
+    tags: ['CSS', 'Framework', 'Open source'],
+    dateAdded: '2026-10-16',
+  },
+  {
     id: "claude-code",
     title: "Claude Code",
     url: "https://www.anthropic.com/claude-code",
@@ -558,6 +578,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['AI coding', 'CLI', 'Tools'],
     dateAdded: '2026-10-13',
+  },
+  {
+    id: "open-props",
+    title: "Open Props",
+    url: "https://open-props.style",
+    description:
+      "A set of CSS custom properties for spacing, colour, easing and shadows, usable with or without the framework you already have. Sane defaults, no build step required.",
+    category: 'development',
+    tags: ['CSS', 'Design', 'Open source'],
+    dateAdded: '2026-10-12',
   },
   {
     id: "windsurf",
@@ -570,6 +600,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-10-10',
   },
   {
+    id: "daisyui",
+    title: "daisyUI",
+    url: "https://daisyui.com",
+    description:
+      "Component classes for Tailwind, so a button is a class rather than eleven utilities. Themes ship with it, which suits projects that need several looks quickly.",
+    category: 'development',
+    tags: ['CSS', 'Framework', 'Tools'],
+    dateAdded: '2026-10-09',
+  },
+  {
     id: "zed",
     title: "Zed",
     url: "https://zed.dev",
@@ -578,6 +618,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['AI coding', 'Tools', 'Open source'],
     dateAdded: '2026-10-07',
+  },
+  {
+    id: "headless-ui",
+    title: "Headless UI",
+    url: "https://headlessui.com",
+    description:
+      "Unstyled, accessible React and Vue components from the Tailwind team, covering menus, dialogs and comboboxes. Less complete than Radix, smaller to learn.",
+    category: 'development',
+    tags: ['Accessibility', 'Framework', 'Open source'],
+    dateAdded: '2026-10-06',
   },
   {
     id: "aider",
@@ -590,6 +640,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-10-04',
   },
   {
+    id: "floating-ui",
+    title: "Floating UI",
+    url: "https://floating-ui.com",
+    description:
+      "Positioning for tooltips, popovers and dropdowns that actually stays on screen, with collision handling. The library behind most components that get this right.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Open source'],
+    dateAdded: '2026-10-03',
+  },
+  {
     id: "cline",
     title: "Cline",
     url: "https://cline.bot",
@@ -598,6 +658,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['AI coding', 'Tools', 'Open source'],
     dateAdded: '2026-10-01',
+  },
+  {
+    id: "motion",
+    title: "Motion",
+    url: "https://motion.dev",
+    description:
+      "The animation library formerly known as Framer Motion, with a declarative API for React and a smaller vanilla core. Everything from a hover lift to layout transitions.",
+    category: 'development',
+    tags: ['Animation', 'JavaScript', 'Open source'],
+    dateAdded: '2026-09-30',
   },
   {
     id: "continue",
@@ -617,6 +687,16 @@ export const RESOURCES: Resource[] = [
       "A progressive framework with single-file components and unusually readable documentation. Adoptable in one component or a whole application, without a rewrite.",
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Documentation'],
+    dateAdded: '2026-09-27',
+  },
+  {
+    id: "gsap",
+    title: "GSAP",
+    url: "https://gsap.com",
+    description:
+      "A timeline-based animation engine that has been the standard for scroll-driven storytelling for over a decade. Now free, including the plugins that used to cost money.",
+    category: 'development',
+    tags: ['Animation', 'JavaScript', 'Tools'],
     dateAdded: '2026-09-27',
   },
   {
@@ -640,6 +720,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-25',
   },
   {
+    id: "threejs",
+    title: "three.js",
+    url: "https://threejs.org",
+    description:
+      "3D in the browser, with an enormous set of examples to learn from. The foundation of nearly every WebGL experience you have admired.",
+    category: 'development',
+    tags: ['3D', 'JavaScript', 'Open source'],
+    dateAdded: '2026-09-24',
+  },
+  {
     id: "nuxt",
     title: "Nuxt",
     url: "https://nuxt.com",
@@ -658,6 +748,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['AI coding', 'Tools'],
     dateAdded: '2026-09-22',
+  },
+  {
+    id: "pixijs",
+    title: "PixiJS",
+    url: "https://pixijs.com",
+    description:
+      "A fast 2D renderer for the web, aimed at games and interactive scenes rather than documents. Good when the DOM is the wrong tool for the job.",
+    category: 'development',
+    tags: ['Animation', 'JavaScript', 'Open source'],
+    dateAdded: '2026-09-21',
   },
   {
     id: "lovable",
@@ -680,6 +780,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-18',
   },
   {
+    id: "tanstack-table",
+    title: "TanStack Table",
+    url: "https://tanstack.com/table",
+    description:
+      "Headless table logic: sorting, filtering, grouping and virtualisation, with the markup left to you. The reason your data grid does not have to be a dependency.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Performance'],
+    dateAdded: '2026-09-18',
+  },
+  {
     id: "openhands",
     title: "OpenHands",
     url: "https://github.com/All-Hands-AI/OpenHands",
@@ -688,6 +798,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['AI coding', 'Open source', 'Tools'],
     dateAdded: '2026-09-16',
+  },
+  {
+    id: "react-hook-form",
+    title: "React Hook Form",
+    url: "https://react-hook-form.com",
+    description:
+      "Form state without re-rendering on every keystroke, with validation that integrates with schema libraries. The practical fix for forms that feel sluggish.",
+    category: 'development',
+    tags: ['JavaScript', 'Framework', 'Performance'],
+    dateAdded: '2026-09-15',
   },
   {
     id: "sveltekit",
@@ -700,6 +820,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-14',
   },
   {
+    id: "zustand",
+    title: "Zustand",
+    url: "https://zustand.docs.pmnd.rs",
+    description:
+      "A tiny state store with no boilerplate: one hook, one object, selectors when you need them. What most applications reach for instead of a full state framework.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Open source'],
+    dateAdded: '2026-09-12',
+  },
+  {
     id: "solidjs",
     title: "SolidJS",
     url: "https://www.solidjs.com",
@@ -708,6 +838,26 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Performance'],
     dateAdded: '2026-09-10',
+  },
+  {
+    id: "jotai",
+    title: "Jotai",
+    url: "https://jotai.org",
+    description:
+      "Atomic state for React, where each piece is independent and derived values recompute themselves. A better fit than a global store for fine-grained interfaces.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Open source'],
+    dateAdded: '2026-09-09',
+  },
+  {
+    id: "xstate",
+    title: "XState",
+    url: "https://stately.ai/docs/xstate",
+    description:
+      "State machines and actors for interfaces with genuinely complex behaviour, with a visual editor that checks your logic. Heavy for a toggle, transformative for a flow.",
+    category: 'development',
+    tags: ['JavaScript', 'Diagrams', 'Tools'],
+    dateAdded: '2026-09-06',
   },
   {
     id: "qwik",
@@ -720,6 +870,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-05',
   },
   {
+    id: "swr",
+    title: "SWR",
+    url: "https://swr.vercel.app",
+    description:
+      "Data fetching with stale-while-revalidate caching in a single hook, from the team behind Next.js. Less capable than TanStack Query, and much smaller.",
+    category: 'development',
+    tags: ['JavaScript', 'Performance', 'Tools'],
+    dateAdded: '2026-09-03',
+  },
+  {
     id: "remix",
     title: "Remix",
     url: "https://remix.run",
@@ -728,6 +888,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Performance'],
     dateAdded: '2026-09-01',
+  },
+  {
+    id: "valibot",
+    title: "Valibot",
+    url: "https://valibot.dev",
+    description:
+      "Schema validation with a tree-shakeable API, so a bundle only pays for the checks it uses. The lightweight alternative to Zod when size is the constraint.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Performance'],
+    dateAdded: '2026-08-31',
   },
   {
     id: "nodejs",
@@ -740,6 +910,26 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-28',
   },
   {
+    id: "date-fns",
+    title: "date-fns",
+    url: "https://date-fns.org",
+    description:
+      "Date utilities as individual functions rather than one mutable object, which plays well with tree shaking and immutable data. The sane default for date maths.",
+    category: 'development',
+    tags: ['JavaScript', 'Tools', 'Open source'],
+    dateAdded: '2026-08-28',
+  },
+  {
+    id: "msw",
+    title: "Mock Service Worker",
+    url: "https://mswjs.io",
+    description:
+      "Mocks APIs at the network layer, so tests and local development share the same handlers. Removes the fixture sprawl that comes with mocking modules.",
+    category: 'development',
+    tags: ['Testing', 'JavaScript', 'Open source'],
+    dateAdded: '2026-08-25',
+  },
+  {
     id: "deno",
     title: "Deno",
     url: "https://deno.com",
@@ -748,6 +938,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['JavaScript', 'Tools', 'Security'],
     dateAdded: '2026-08-24',
+  },
+  {
+    id: "testing-library",
+    title: "Testing Library",
+    url: "https://testing-library.com",
+    description:
+      "Queries components the way a user finds them — by role and label — which quietly enforces accessibility. The philosophy is the valuable part.",
+    category: 'development',
+    tags: ['Testing', 'Accessibility', 'JavaScript'],
+    dateAdded: '2026-08-22',
   },
   {
     id: "bun",
@@ -760,6 +960,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-20',
   },
   {
+    id: "k6",
+    title: "k6",
+    url: "https://k6.io",
+    description:
+      "Load testing with scripts written in JavaScript, run from the command line or CI. Answers whether the thing survives traffic before traffic arrives.",
+    category: 'development',
+    tags: ['Testing', 'Performance', 'Tools'],
+    dateAdded: '2026-08-19',
+  },
+  {
     id: "express",
     title: "Express",
     url: "https://expressjs.com",
@@ -768,6 +978,26 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Documentation'],
     dateAdded: '2026-08-16',
+  },
+  {
+    id: "lighthouse-ci",
+    title: "Lighthouse CI",
+    url: "https://github.com/GoogleChrome/lighthouse-ci",
+    description:
+      "Runs Lighthouse on every pull request and fails when performance budgets slip. The mechanism that makes a performance score an actual constraint.",
+    category: 'development',
+    tags: ['Performance', 'Testing', 'DevOps'],
+    dateAdded: '2026-08-16',
+  },
+  {
+    id: "nx",
+    title: "Nx",
+    url: "https://nx.dev",
+    description:
+      "Monorepo tooling with dependency graphs, affected-only builds and generators, more opinionated and more capable than plain workspaces.",
+    category: 'development',
+    tags: ['Tools', 'DevOps', 'Performance'],
+    dateAdded: '2026-08-13',
   },
   {
     id: "fastify",
@@ -780,6 +1010,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-12',
   },
   {
+    id: "lightning-css",
+    title: "Lightning CSS",
+    url: "https://lightningcss.dev",
+    description:
+      "A very fast CSS parser, transformer and minifier written in Rust, handling nesting and vendor prefixes. What more build pipelines will look like.",
+    category: 'development',
+    tags: ['CSS', 'Performance', 'Tools'],
+    dateAdded: '2026-08-10',
+  },
+  {
     id: "hono",
     title: "Hono",
     url: "https://hono.dev",
@@ -788,6 +1028,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Performance'],
     dateAdded: '2026-08-08',
+  },
+  {
+    id: "railway",
+    title: "Railway",
+    url: "https://railway.com",
+    description:
+      "Deploys a service and a database in a few clicks, with logs and metrics attached. The least ceremony between a repository and a running API.",
+    category: 'development',
+    tags: ['Cloud', 'DevOps', 'Tools'],
+    dateAdded: '2026-08-07',
   },
   {
     id: "nestjs",
@@ -800,6 +1050,26 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-04',
   },
   {
+    id: "fly-io",
+    title: "Fly.io",
+    url: "https://fly.io",
+    description:
+      "Runs containers close to users in many regions, with Postgres and volume storage. The practical step up from a single-region host.",
+    category: 'development',
+    tags: ['Cloud', 'DevOps', 'Performance'],
+    dateAdded: '2026-08-04',
+  },
+  {
+    id: "neon",
+    title: "Neon",
+    url: "https://neon.tech",
+    description:
+      "Serverless Postgres with branching, so a pull request can have its own database copy. The copy-and-branch model is what makes it interesting.",
+    category: 'development',
+    tags: ['Databases', 'Cloud', 'DevOps'],
+    dateAdded: '2026-08-01',
+  },
+  {
     id: "trpc",
     title: "tRPC",
     url: "https://trpc.io",
@@ -808,6 +1078,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['JavaScript', 'Tools', 'Documentation'],
     dateAdded: '2026-07-31',
+  },
+  {
+    id: "turso",
+    title: "Turso",
+    url: "https://turso.tech",
+    description:
+      "SQLite replicated to the edge with per-database pricing, and embedded replicas that read locally. An appealing option for read-heavy applications.",
+    category: 'development',
+    tags: ['Databases', 'Cloud', 'Performance'],
+    dateAdded: '2026-07-29',
   },
   {
     id: "graphql",
@@ -820,6 +1100,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-07-27',
   },
   {
+    id: "upstash",
+    title: "Upstash",
+    url: "https://upstash.com",
+    description:
+      "Serverless Redis and Kafka with per-request pricing that scales to zero. Fits the usage pattern of most small applications far better than a fixed instance.",
+    category: 'development',
+    tags: ['Databases', 'Cloud', 'Tools'],
+    dateAdded: '2026-07-26',
+  },
+  {
     id: "prisma",
     title: "Prisma",
     url: "https://www.prisma.io",
@@ -827,6 +1117,16 @@ export const RESOURCES: Resource[] = [
       "A typed ORM with a declarative schema and generated client, plus migrations that read clearly. Good when you want the database model to be the source of truth.",
     category: 'development',
     tags: ['Databases', 'Tools', 'JavaScript'],
+    dateAdded: '2026-07-23',
+  },
+  {
+    id: "otel",
+    title: "OpenTelemetry",
+    url: "https://opentelemetry.io",
+    description:
+      "The vendor-neutral standard for traces, metrics and logs, with SDKs for every major language. Instrument once, and send it wherever you like.",
+    category: 'development',
+    tags: ['DevOps', 'Documentation', 'Open source'],
     dateAdded: '2026-07-23',
   },
   {
@@ -1152,6 +1452,86 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2025-11-05',
   },
   {
+    id: "deeplearning-ai",
+    title: "DeepLearning.AI",
+    url: "https://www.deeplearning.ai",
+    description:
+      "Andrew Ng's courses, including the short LLM series on prompting, RAG and agents. Free to audit, and unusually well paced for working developers.",
+    category: 'learning',
+    tags: ['Learning', 'LLM', 'Tutorial'],
+    dateAdded: '2026-10-18',
+  },
+  {
+    id: "karpathy-zero-to-hero",
+    title: "Neural Networks: Zero to Hero",
+    url: "https://karpathy.ai/zero-to-hero.html",
+    description:
+      "Andrej Karpathy builds backpropagation, a tokeniser and GPT from scratch on video, explaining every line. The clearest path from curiosity to understanding.",
+    category: 'learning',
+    tags: ['Learning', 'LLM', 'Video'],
+    dateAdded: '2026-10-15',
+  },
+  {
+    id: "hf-learn",
+    title: "Hugging Face Learn",
+    url: "https://huggingface.co/learn",
+    description:
+      "Free courses on NLP, transformers, agents and diffusion, each paired with runnable notebooks. The most current structured material on open models.",
+    category: 'learning',
+    tags: ['Learning', 'LLM', 'Tutorial'],
+    dateAdded: '2026-10-12',
+  },
+  {
+    id: "3blue1brown-nn",
+    title: "3Blue1Brown: Neural Networks",
+    url: "https://www.3blue1brown.com/topics/neural-networks",
+    description:
+      "Visual explanations of what a neural network is doing, from gradient descent to transformers. Watch these before the maths-heavy course.",
+    category: 'learning',
+    tags: ['Learning', 'Video', 'AI'],
+    dateAdded: '2026-10-09',
+  },
+  {
+    id: "google-ml-crash-course",
+    title: "Google Machine Learning Crash Course",
+    url: "https://developers.google.com/machine-learning/crash-course",
+    description:
+      "A free, practical introduction with interactive exercises on real datasets. Covers the fundamentals without assuming a research background.",
+    category: 'learning',
+    tags: ['Learning', 'Tutorial', 'Data'],
+    dateAdded: '2026-10-06',
+  },
+  {
+    id: "lilian-weng",
+    title: "Lil'Log",
+    url: "https://lilianweng.github.io",
+    description:
+      "Deep, carefully sourced posts on agents, hallucination, diffusion and retrieval, written by a researcher who explains mechanisms rather than results.",
+    category: 'learning',
+    tags: ['LLM', 'Learning', 'Reference'],
+    dateAdded: '2026-10-03',
+  },
+  {
+    id: "simon-willison",
+    title: "Simon Willison's Weblog",
+    url: "https://simonwillison.net",
+    description:
+      "Daily, sceptical, hands-on notes on LLM tooling and what actually works. The most reliable signal-to-noise in a field that mostly produces noise.",
+    category: 'learning',
+    tags: ['LLM', 'Learning', 'AI coding'],
+    dateAdded: '2026-09-30',
+  },
+  {
+    id: "latent-space",
+    title: "Latent Space",
+    url: "https://www.latent.space",
+    description:
+      "A podcast and newsletter for people building with AI, heavy on engineering detail and interviews with the people shipping. Practical rather than breathless.",
+    category: 'learning',
+    tags: ['Podcasts', 'LLM', 'Learning'],
+    dateAdded: '2026-09-27',
+  },
+  {
     id: "mdn-learn",
     title: "MDN Learn",
     url: "https://developer.mozilla.org/en-US/docs/Learn_web_development",
@@ -1162,6 +1542,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-26',
   },
   {
+    id: "learn-prompting",
+    title: "Learn Prompting",
+    url: "https://learnprompting.org",
+    description:
+      "A free, structured course from basic prompting to retrieval and agents, with exercises. Opens with what the models cannot do, which is rare.",
+    category: 'learning',
+    tags: ['Learning', 'LLM', 'Tutorial'],
+    dateAdded: '2026-09-24',
+  },
+  {
     id: "full-stack-open",
     title: "Full Stack Open",
     url: "https://fullstackopen.com/en/",
@@ -1170,6 +1560,16 @@ export const RESOURCES: Resource[] = [
     category: 'learning',
     tags: ['Learning', 'Practice', 'JavaScript'],
     dateAdded: '2026-09-22',
+  },
+  {
+    id: "illustrated-transformer",
+    title: "The Illustrated Transformer",
+    url: "https://jalammar.github.io/illustrated-transformer/",
+    description:
+      "Attention and transformers explained with diagrams rather than notation, step by step through a translation example. The clearest forty minutes you can spend on the architecture.",
+    category: 'learning',
+    tags: ['LLM', 'Learning', 'Reference'],
+    dateAdded: '2026-09-21',
   },
   {
     id: "boot-dev",
@@ -3159,6 +3559,106 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2025-11-10',
   },
   {
+    id: "openai-platform",
+    title: "OpenAI Platform",
+    url: "https://platform.openai.com/docs",
+    description:
+      "The API reference and guides for the current models: structured outputs, tool calling, embeddings and batch jobs. The cookbook beside it is often more useful than the reference.",
+    category: 'data-ai',
+    tags: ['LLM', 'Documentation', 'AI'],
+    dateAdded: '2026-10-21',
+  },
+  {
+    id: "anthropic-docs",
+    title: "Anthropic Docs",
+    url: "https://docs.anthropic.com",
+    description:
+      "The Claude API reference, with unusually careful guidance on prompting, tool use and building agents. Worth reading for the advice, not just the endpoints.",
+    category: 'data-ai',
+    tags: ['LLM', 'Documentation', 'AI'],
+    dateAdded: '2026-10-19',
+  },
+  {
+    id: "google-ai-studio",
+    title: "Google AI Studio",
+    url: "https://aistudio.google.com",
+    description:
+      "A browser workbench for the Gemini models: prompt, tune parameters, compare outputs and export working code. The fastest way to try a long-context model.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'AI'],
+    dateAdded: '2026-10-17',
+  },
+  {
+    id: "vercel-ai-sdk",
+    title: "AI SDK",
+    url: "https://ai-sdk.dev",
+    description:
+      "A TypeScript toolkit for streaming text, tool calls and structured output across providers, with React hooks that handle the hard parts. The default for AI features in a web app.",
+    category: 'data-ai',
+    tags: ['LLM', 'Framework', 'AI coding'],
+    dateAdded: '2026-10-14',
+  },
+  {
+    id: "langgraph",
+    title: "LangGraph",
+    url: "https://langchain-ai.github.io/langgraph/",
+    description:
+      "Build agents as explicit graphs of state and transitions, with human-in-the-loop checkpoints. The clearest mental model for anything beyond a single prompt.",
+    category: 'data-ai',
+    tags: ['Agents', 'LLM', 'Framework'],
+    dateAdded: '2026-10-11',
+  },
+  {
+    id: "crewai",
+    title: "CrewAI",
+    url: "https://www.crewai.com",
+    description:
+      "Frames multi-agent systems as roles, tasks and a crew, which maps well onto how people actually describe a workflow. Quick to a running prototype.",
+    category: 'data-ai',
+    tags: ['Agents', 'LLM', 'Framework'],
+    dateAdded: '2026-10-08',
+  },
+  {
+    id: "autogen",
+    title: "AutoGen",
+    url: "https://microsoft.github.io/autogen/",
+    description:
+      "Microsoft's framework for multi-agent conversations, with patterns for group chat and code execution. Research-flavoured and still actively moving.",
+    category: 'data-ai',
+    tags: ['Agents', 'LLM', 'Open source'],
+    dateAdded: '2026-10-05',
+  },
+  {
+    id: "dspy",
+    title: "DSPy",
+    url: "https://dspy.ai",
+    description:
+      "Replace hand-written prompts with programs whose instructions are optimised against your examples. Reframes prompt engineering as a compile step.",
+    category: 'data-ai',
+    tags: ['LLM', 'Framework', 'Evaluation'],
+    dateAdded: '2026-10-02',
+  },
+  {
+    id: "instructor",
+    title: "Instructor",
+    url: "https://python.useinstructor.com",
+    description:
+      "Turns LLM responses into validated Pydantic models, with retries when the model returns something malformed. Structured output without the parsing code.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'Open source'],
+    dateAdded: '2026-09-29',
+  },
+  {
+    id: "outlines",
+    title: "Outlines",
+    url: "https://dottxt-ai.github.io/outlines/",
+    description:
+      "Constrains generation to a schema or grammar at the token level, so the model cannot return invalid JSON. The idea is more interesting than the library.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'Open source'],
+    dateAdded: '2026-09-26',
+  },
+  {
     id: "google-gemini",
     title: "Google Gemini",
     url: "https://gemini.google.com",
@@ -3167,6 +3667,26 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Tools'],
     dateAdded: '2026-09-23',
+  },
+  {
+    id: "litellm",
+    title: "LiteLLM",
+    url: "https://docs.litellm.ai",
+    description:
+      "One OpenAI-compatible interface in front of a hundred providers, with budgets, fallbacks and logging. The pragmatic way to stop rewriting your client code.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'Open source'],
+    dateAdded: '2026-09-23',
+  },
+  {
+    id: "ollama-models",
+    title: "Ollama Model Library",
+    url: "https://ollama.com/library",
+    description:
+      "A browsable catalogue of open-weight models with sizes and quantisations, each runnable with one command. The simplest way to find what fits your machine.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'Open source'],
+    dateAdded: '2026-09-20',
   },
   {
     id: "microsoft-copilot",
@@ -3179,6 +3699,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-19',
   },
   {
+    id: "lm-evaluation-harness",
+    title: "LM Evaluation Harness",
+    url: "https://github.com/EleutherAI/lm-evaluation-harness",
+    description:
+      "The framework behind most published benchmark numbers, usable on your own models and tasks. Running it yourself is the cure for trusting a leaderboard.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Open source'],
+    dateAdded: '2026-09-17',
+  },
+  {
     id: "mistral",
     title: "Mistral AI",
     url: "https://mistral.ai",
@@ -3187,6 +3717,26 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Open source'],
     dateAdded: '2026-09-14',
+  },
+  {
+    id: "promptfoo",
+    title: "Promptfoo",
+    url: "https://www.promptfoo.dev",
+    description:
+      "Test prompts and models like code: define cases, run them in CI and diff results between changes. The most practical tool for stopping regressions quietly shipped.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Tools'],
+    dateAdded: '2026-09-14',
+  },
+  {
+    id: "ragas",
+    title: "Ragas",
+    url: "https://docs.ragas.io",
+    description:
+      "Metrics for retrieval-augmented pipelines, scoring faithfulness, relevance and context quality separately. Useful because it tells you which half is failing.",
+    category: 'data-ai',
+    tags: ['RAG', 'Evaluation', 'LLM'],
+    dateAdded: '2026-09-11',
   },
   {
     id: "groq",
@@ -3199,6 +3749,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-10',
   },
   {
+    id: "langsmith",
+    title: "LangSmith",
+    url: "https://smith.langchain.com",
+    description:
+      "Tracing and evaluation for LLM applications, showing every step of a chain with inputs and costs. The debugging view you miss after the first complex run.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Tools'],
+    dateAdded: '2026-09-08',
+  },
+  {
     id: "openrouter",
     title: "OpenRouter",
     url: "https://openrouter.ai",
@@ -3207,6 +3767,26 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Tools'],
     dateAdded: '2026-09-05',
+  },
+  {
+    id: "braintrust",
+    title: "Braintrust",
+    url: "https://www.braintrust.dev",
+    description:
+      "Evaluation, datasets and prompt playgrounds for teams shipping AI features, with a usable free tier. Built around comparing versions rather than single runs.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Tools'],
+    dateAdded: '2026-09-05',
+  },
+  {
+    id: "helicone",
+    title: "Helicone",
+    url: "https://helicone.ai",
+    description:
+      "A proxy that logs LLM requests, cost and latency without changing your application code. The quickest way to find out where the bill is coming from.",
+    category: 'data-ai',
+    tags: ['LLM', 'Tools', 'Open source'],
+    dateAdded: '2026-09-02',
   },
   {
     id: "together-ai",
@@ -3219,6 +3799,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-01',
   },
   {
+    id: "chroma",
+    title: "Chroma",
+    url: "https://www.trychroma.com",
+    description:
+      "An embedding database that runs in-process for prototypes and scales to a server, with metadata filtering built in. Fastest path to a working retrieval demo.",
+    category: 'data-ai',
+    tags: ['RAG', 'Databases', 'Open source'],
+    dateAdded: '2026-08-30',
+  },
+  {
     id: "lm-studio",
     title: "LM Studio",
     url: "https://lmstudio.ai",
@@ -3227,6 +3817,16 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Tools', 'Privacy'],
     dateAdded: '2026-08-28',
+  },
+  {
+    id: "qdrant",
+    title: "Qdrant",
+    url: "https://qdrant.tech",
+    description:
+      "A vector database written in Rust with strong filtering and a generous free tier. Solid documentation, including guidance on choosing distance metrics.",
+    category: 'data-ai',
+    tags: ['RAG', 'Databases', 'Open source'],
+    dateAdded: '2026-08-27',
   },
   {
     id: "llama-cpp",
@@ -3239,6 +3839,26 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-24',
   },
   {
+    id: "weaviate",
+    title: "Weaviate",
+    url: "https://weaviate.io",
+    description:
+      "Vector search with hybrid keyword-plus-semantic queries and modules for common embedding models. Good when retrieval quality needs both approaches.",
+    category: 'data-ai',
+    tags: ['RAG', 'Databases', 'Open source'],
+    dateAdded: '2026-08-24',
+  },
+  {
+    id: "pinecone",
+    title: "Pinecone",
+    url: "https://www.pinecone.io",
+    description:
+      "Managed vector search with no infrastructure to run, priced by usage. The default when retrieval is a feature rather than a project.",
+    category: 'data-ai',
+    tags: ['RAG', 'Databases', 'Tools'],
+    dateAdded: '2026-08-21',
+  },
+  {
     id: "open-webui",
     title: "Open WebUI",
     url: "https://openwebui.com",
@@ -3247,6 +3867,16 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Open source', 'Privacy'],
     dateAdded: '2026-08-20',
+  },
+  {
+    id: "pgvector",
+    title: "pgvector",
+    url: "https://github.com/pgvector/pgvector",
+    description:
+      "Vector similarity search as a Postgres extension, so embeddings live beside your relational data. Usually the right first answer before adding a dedicated database.",
+    category: 'data-ai',
+    tags: ['RAG', 'Databases', 'Open source'],
+    dateAdded: '2026-08-18',
   },
   {
     id: "jan",
@@ -3259,6 +3889,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-16',
   },
   {
+    id: "unsloth",
+    title: "Unsloth",
+    url: "https://unsloth.ai",
+    description:
+      "Fine-tunes open models roughly twice as fast using less memory, with notebooks that run on a single consumer GPU. Makes LoRA practical without a cluster.",
+    category: 'data-ai',
+    tags: ['Fine-tuning', 'LLM', 'Open source'],
+    dateAdded: '2026-08-15',
+  },
+  {
     id: "langchain",
     title: "LangChain",
     url: "https://www.langchain.com",
@@ -3267,6 +3907,26 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Framework', 'Documentation'],
     dateAdded: '2026-08-12',
+  },
+  {
+    id: "axolotl",
+    title: "Axolotl",
+    url: "https://axolotl.ai",
+    description:
+      "A YAML-driven fine-tuning framework that covers the configurations people actually use, with sensible defaults for LoRA and full fine-tunes.",
+    category: 'data-ai',
+    tags: ['Fine-tuning', 'LLM', 'Open source'],
+    dateAdded: '2026-08-12',
+  },
+  {
+    id: "huggingface-peft",
+    title: "Hugging Face PEFT",
+    url: "https://huggingface.co/docs/peft",
+    description:
+      "Parameter-efficient fine-tuning methods — LoRA, prefix tuning and friends — implemented against the Transformers stack. The reference for what each method costs.",
+    category: 'data-ai',
+    tags: ['Fine-tuning', 'LLM', 'Documentation'],
+    dateAdded: '2026-08-09',
   },
   {
     id: "llamaindex",
@@ -3279,6 +3939,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-08-08',
   },
   {
+    id: "modal",
+    title: "Modal",
+    url: "https://modal.com",
+    description:
+      "Serverless GPUs on demand, billed by the second with no cluster to manage. Particularly good for batch inference and fine-tuning jobs that run occasionally.",
+    category: 'data-ai',
+    tags: ['AI', 'Cloud', 'Tools'],
+    dateAdded: '2026-08-06',
+  },
+  {
     id: "vllm",
     title: "vLLM",
     url: "https://docs.vllm.ai",
@@ -3287,6 +3957,16 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Performance', 'Documentation'],
     dateAdded: '2026-08-04',
+  },
+  {
+    id: "runpod",
+    title: "RunPod",
+    url: "https://www.runpod.io",
+    description:
+      "Rents GPUs by the hour with templates for the usual frameworks, and persistent volumes so work survives a restart. Cheaper than managed endpoints for experiments.",
+    category: 'data-ai',
+    tags: ['AI', 'Cloud', 'Tools'],
+    dateAdded: '2026-08-03',
   },
   {
     id: "wandb",
@@ -3299,6 +3979,26 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-07-31',
   },
   {
+    id: "fireworks-ai",
+    title: "Fireworks AI",
+    url: "https://fireworks.ai",
+    description:
+      "Fast hosted inference for open models, with fine-tuning and a serverless-to-dedicated path. A useful comparison point when latency budgets matter.",
+    category: 'data-ai',
+    tags: ['LLM', 'AI', 'Tools'],
+    dateAdded: '2026-07-31',
+  },
+  {
+    id: "artificial-analysis",
+    title: "Artificial Analysis",
+    url: "https://artificialanalysis.ai",
+    description:
+      "Side-by-side benchmarks for price, speed and quality across hosted models, updated as providers change. The sanity check before committing to a model.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Reference'],
+    dateAdded: '2026-07-28',
+  },
+  {
     id: "mlflow",
     title: "MLflow",
     url: "https://mlflow.org",
@@ -3307,6 +4007,16 @@ export const RESOURCES: Resource[] = [
     category: 'data-ai',
     tags: ['AI', 'Open source', 'Data'],
     dateAdded: '2026-07-27',
+  },
+  {
+    id: "lmarena",
+    title: "LMArena",
+    url: "https://lmarena.ai",
+    description:
+      "Blind, crowdsourced model comparisons scored by human preference, with a leaderboard that shifts monthly. The closest thing to an opinion poll of users.",
+    category: 'data-ai',
+    tags: ['Evaluation', 'LLM', 'Community'],
+    dateAdded: '2026-07-25',
   },
   {
     id: "scikit-learn",

@@ -57,7 +57,13 @@ export const TAGS = [
   'Cryptography',
   // working practice
   'Productivity',
+  // AI / LLM practice
+  'LLM',
   'AI coding',
+  'Agents',
+  'RAG',
+  'Fine-tuning',
+  'Evaluation',
   'Notes',
   'Writing',
   'Email',
