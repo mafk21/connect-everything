@@ -1,90 +1,102 @@
 # Connect Everything
 
-**A public, hand-curated toolbox of the useful internet** — websites, tools, tutorials and references worth keeping. Browse it, search it, filter it, and click straight through to the thing you need.
+**A public, hand-curated toolbox of the useful internet** — websites, tools, tutorials and references worth keeping. Browse, search, filter, and click straight through to the thing you need.
 
-No accounts. No login. No tracking. Every entry is picked by a person, described in a sentence, and reviewed before it goes live.
+**94 resources · 8 categories · 35 tags · no accounts · no tracking · no ads**
 
-```
-npm install && npm run dev    →  http://localhost:4321
+![Connect Everything](public/og-default.png)
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
 ```
 
 ---
 
 ## Why it exists
 
-The web is full of lists that were generated instead of curated. This is the opposite: a small, deliberate library where everything in it earned its place, and the only thing a visitor has to do is click.
+The web is full of lists that were generated instead of curated. This is the opposite: a small, deliberate library where everything earned its place, and the only thing a visitor has to do is click.
 
 - **One click out.** The whole card is a link. No detail page, no interstitial, no "read more".
 - **No account wall.** Visitors browse freely; there is nothing to sign up for.
 - **Nothing is for sale.** No sponsored entries, no affiliate links, no ads.
-- **Honest metadata.** No view counters or "trending" numbers, because we cannot compute them honestly without tracking you.
+- **Honest metadata.** No view counters or "trending" numbers, because they cannot be computed honestly without tracking visitors. Featured entries get a small badge instead.
 
-## What's built
+## What's inside
 
-| Area | Status |
-|---|---|
-| Static site, design system, responsive shell | ✅ Done |
-| Resource cards, favicons with monogram fallback | ✅ Done |
-| Live search with match highlighting | ✅ Done |
-| Category + tag filtering with live counts | ✅ Done |
-| Sorting, shareable URLs, empty state | ✅ Done |
-| Mobile filter sheet, keyboard shortcuts | ✅ Done |
-| `/404`, footer nav, keyboard and motion polish | ✅ Done |
-| Sitemap, robots, JSON-LD, OG card, link checker | ✅ Done |
-| Library expanded to 94 resources | ✅ Done |
-| Lighthouse and 200% zoom verification | ⏳ Needs a browser |
+| Category | Entries | What it covers |
+|---|---|---|
+| Design | 12 | UI tools, type, colour, icons, illustrations |
+| Development | 12 | Frameworks, build tools, testing, validation |
+| Learning | 12 | Courses, tutorials, practice and communities |
+| Tools | 12 | Small utilities that save an afternoon |
+| Productivity | 10 | Notes, tasks, planning, time |
+| Media | 12 | Images, icons, video, audio, conversion |
+| Data & AI | 12 | Models, datasets, research, assistants |
+| Reference | 12 | Docs worth keeping one tab away |
 
-**94 resources** across **8 categories**, drawn from a controlled **35-tag vocabulary**. Full plan and milestone history: [`docs/PLAN.md`](docs/PLAN.md).
+Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **35 terms** — every one in use, none drifting into synonyms.
 
 ## Features
 
 **Browsing**
 - Sidebar categories (single-select) and tags (multi-select, **AND** semantics)
-- Counts that recalculate against your *other* active filters, so you always see what's reachable
+- Counts recalculated against your *other* active filters, so you always see what is reachable
 - Sort by featured first, newest, or A–Z
+- Long tag lists collapse behind "Show all 35 tags" — and render in full without JavaScript
 
 **Search**
 - Matches title, domain, description, category and tags
-- Multi-word queries are AND (`css grid` → only CSS-Tricks)
-- Matches highlighted in place; press `/` or `⌘K` to focus, `Esc` to clear
+- Multi-word queries are AND (`css grid` → CSS-Tricks, and nothing else)
+- Matches highlighted in place; `/` or `⌘K` focuses the field, `Esc` clears it
 
-**Everything is shareable**
-- Every filter, query and sort is mirrored in the URL
+**Every view is linkable**
+- Query, category, tags and sort are mirrored in the URL
 - `?q=free&category=learning&tag=Practice&sort=az` restores exactly that view
 
 **Details that matter**
-- Tag chips on a card are clickable — they add that tag to your filters
+- Tag chips on a card add that tag to your filters
 - Kebab menu: open in a new tab, or copy the link
 - Works without JavaScript: the grid is server-rendered and every card links out
-- Keyboard operable throughout, with visible focus rings and polite result announcements
+- Favicon with a deterministic monogram fallback, so a slow or blocked icon never leaves a blank tile
 
 ## Routes
 
 | Route | Purpose |
 |---|---|
-| `/` | The library (all resources, live filtering) |
+| `/` | The library — all resources, live filtering |
 | `/featured` | Curator's picks |
 | `/suggest` | How to suggest a resource, via GitHub |
+| `/404` | Search, category shortcuts and three picks instead of a dead end |
+
+## Accessibility
+
+- One `h1` per page, landmark structure, skip link, visible focus rings everywhere
+- Filters are real toggle buttons with `aria-pressed`; result counts are announced politely
+- The mobile filter sheet traps focus, closes on `Escape`/backdrop, and returns focus to its trigger
+- Contrast audited: body and meta text clear **AA** on both canvas and card surfaces (`--color-ink-muted` was moved from `#7c8b8a`, which measured 3.55:1, to `#5c6e6c` at 5.38:1)
+- All motion respects `prefers-reduced-motion`
+- Fully usable with JavaScript disabled — filtering degrades to plain category links
 
 ## Tech
 
 **Astro 6** (static output) · **Tailwind CSS 4** · **TypeScript** · self-hosted **Inter**
 
-No client framework, no state library, no database, no backend. The interactive layer is ~7 KB of vanilla TypeScript that enhances already-rendered HTML. Requires Node `>= 22.12`.
+No client framework, no state library, no database, no backend. The interactive layer is a single 7.7 KB TypeScript module (2.8 KB gzipped) that enhances already-rendered HTML. Requires Node `>= 22.12`.
 
 ```
-~/connect-everything
+connect-everything/
 ├── src/
-│   ├── data/            # the library — categories, tags, resources
-│   ├── components/      # cards, sidebar, filters, favicon, brand
+│   ├── data/            # the library — resources, categories, tags
+│   ├── components/      # card, sidebar, filters, favicon, brand, ornaments
 │   ├── layouts/         # base shell + library layout
-│   ├── lib/             # derive (domain/favicon/dates), validate
-│   ├── scripts/         # the search/filter engine
-│   ├── pages/           # index, featured, suggest
+│   ├── lib/             # derive (domain/favicon/dates) + build-time validation
+│   ├── scripts/         # search, filter, sort engine
+│   ├── pages/           # index, featured, suggest, 404
 │   └── styles/          # design tokens
 ├── tests/               # engine tests against the real built HTML
 ├── scripts/             # link checker, OG image generator
-├── docs/PLAN.md         # product + technical plan
+├── docs/PLAN.md         # product + technical plan, milestone by milestone
 └── public/              # favicon, robots.txt, OG card
 ```
 
@@ -106,20 +118,20 @@ Everything lives in one file: [`src/data/resources.ts`](src/data/resources.ts). 
 }
 ```
 
-**Derived automatically — never type these:** the domain, the favicon (with a deterministic monogram fallback if it fails to load), and all sidebar counts.
+**Derived automatically — never type these:** the domain, the favicon, and every sidebar count.
 
-**Rules, enforced at build time** (`npm run build` fails with a specific message if any are broken):
+**Rules, enforced at build time.** `npm run build` fails with a specific message naming the entry and the field, so a malformed resource can never reach the published library.
 
 | Field | Rule |
 |---|---|
 | `id` | kebab-case, unique |
-| `url` | absolute, `https`, no duplicates — `www` and trailing slashes are normalised |
+| `url` | absolute, `https`, no duplicates (`www` and trailing slashes are normalised) |
 | `description` | 60–220 characters, written in a human voice |
 | `category` | one of the 8 in `src/data/categories.ts` |
 | `tags` | 1–5, each already in `src/data/tags.ts` |
 | `dateAdded` | `YYYY-MM-DD`, not in the future |
 
-Adding a tag means adding one line to [`src/data/tags.ts`](src/data/tags.ts) first — the controlled vocabulary is what stops the sidebar fragmenting into `js` / `javascript` / `JavaScript`.
+Descriptions in the current library run 98–168 characters (mean 143). Adding a *tag* means adding one line to [`src/data/tags.ts`](src/data/tags.ts) first — the controlled vocabulary is what stops the sidebar fragmenting into `js` / `javascript` / `JavaScript`.
 
 **What gets in:** still online and maintained · free, or worth the price · useful before you sign up · something a person would genuinely return to.
 
@@ -128,20 +140,21 @@ Adding a tag means adding one line to [`src/data/tags.ts`](src/data/tags.ts) fir
 | Command | What it does |
 |---|---|
 | `npm run dev` | Dev server on `:4321` |
-| `npm run build` | Static build to `dist/`, validating all content |
+| `npm run build` | Static build to `dist/`, validating every entry |
 | `npm run preview` | Serve the production build locally |
-| `npm test` | Build, then run the search/filter tests against the real HTML |
+| `npm test` | Build, then run both test suites against the real HTML |
 | `npm run check` | Type-check `.astro` and `.ts` files |
 | `npm run links` | Sweep every resource URL for dead links (needs real internet) |
-| `npm run og` | Regenerate `public/og-default.png` (needs `pillow`, `fonttools`, `brotli`) |
+| `npm run og` | Regenerate the OG card (needs `pillow`, `fonttools`, `brotli`) |
 
 ## Testing
 
-`npm test` builds the site and drives the actual engine module against the built HTML in jsdom — not a mocked DOM. **34 assertions** cover search (including multi-term AND and highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, sorting, the empty state, card chips and menu behaviour.
+`npm test` builds the site, then drives the real engine module against the real built HTML in jsdom — not a mocked DOM.
 
-Expectations are derived from the page's own data attributes rather than hardcoded counts, so adding resources never breaks the suite. A second process runs **8 hydration assertions** proving that a URL like `?q=free&category=learning&tag=Practice&sort=az` restores exactly that view and the URL is left untouched on load.
+- **34 assertions** on the library page: search (single and multi-term AND, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, all three sorts, empty state, clearing, card chips, and menu behaviour.
+- **8 assertions** in a separate process: a shared link restores query, category, tag and sort, every visible card genuinely matches, and the URL is left untouched on load.
 
-Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list — it never leaves a blank page.
+Expectations are derived from the page's own data attributes rather than hardcoded counts, so growing the library never breaks the suite. Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list rather than a blank page.
 
 ## Performance
 
@@ -149,25 +162,35 @@ Measured on the 94-entry build:
 
 | Asset | Gzipped |
 |---|---|
-| HTML (index) | 36.7 KB |
+| HTML (`/`) | 36.9 KB |
 | CSS | 6.9 KB |
-| JS | 2.6 KB |
+| JS | 2.8 KB |
 
-Favicons are the only third-party request per card, loaded lazily in a fixed-size box so they cannot shift layout. Every card is server-rendered, so a slow or blocked network still yields a complete, clickable list.
+Favicons are the only third-party request per card: lazy-loaded in a fixed-size box, so they cannot shift layout.
+
+**Not yet measured:** Lighthouse and 200% zoom, because this environment has no browser. Both are one-command checks on a real machine — see *Known gaps* below.
 
 ## Deployment
 
-Static output: any host that serves files. On Vercel, Astro is detected automatically — build `npm run build`, output `dist`.
+Static output: any host that serves files. On Vercel, Astro is detected automatically — build `npm run build`, output `dist`. No environment variables, secrets, database or server functions.
 
-There are no environment variables, secrets, database or server functions to configure.
+**Before launch**
 
-**Before launch:** replace the placeholder `site` in `astro.config.mjs` (`https://connecteverything.example`) with the real domain, and update the sitemap URL in `public/robots.txt`. Everything canonical, OG and sitemap-related derives from it.
+1. Replace the placeholder `site` in [`astro.config.mjs`](astro.config.mjs) (`https://connecteverything.example`) with the real domain, and update the sitemap URL in [`public/robots.txt`](public/robots.txt). Canonical URLs, OG tags and the sitemap all derive from it.
+2. Run `npm run links` from a machine with open internet to confirm no entry has died since it was added.
+3. Add a `LICENSE` — see below.
+
+## Known gaps
+
+- **Lighthouse / 200% zoom** unverified (no browser in the environment that built this).
+- **Dead-link sweep** not yet run against the live web; the tool is written, the environment is not allowed to reach those hosts.
+- **Project name** is still a placeholder from the planning stage (`docs/PLAN.md` §11).
 
 ## Contributing
 
 Suggestions go through GitHub, as described on the site's `/suggest` page:
 
-- **Quick:** [open an issue](https://github.com/mafk21/connect-everything/issues/new) with a link and one line on why it belongs.
+- **Quick:** [open an issue](https://github.com/mafk21/connect-everything/issues/new) with a link and a line on why it belongs.
 - **Hands-on:** edit [`src/data/resources.ts`](src/data/resources.ts) and open a pull request.
 
 Everything is reviewed by the curator before it appears — nothing is published automatically.
