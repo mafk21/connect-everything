@@ -1,0 +1,67 @@
+---
+import FilterPanel from './FilterPanel.astro';
+import type { CountedOption } from '../lib/derive';
+
+interface Props {
+  categories: CountedOption[];
+  tags: CountedOption[];
+  mode?: 'live' | 'links';
+}
+
+const { categories, tags, mode = 'live' } = Astro.props;
+---
+
+<button
+  type="button"
+  data-open-filters
+  class="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-chip border border-line bg-white px-3 text-meta font-medium text-ink-soft transition-colors hover:bg-mint-100 hover:text-teal-900 lg:hidden"
+  aria-haspopup="dialog"
+>
+  <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+    <path d="M4 6h16M7 12h10M10 18h4" />
+  </svg>
+  Filters
+  <span
+    data-filter-badge
+    hidden
+    class="grid min-w-4 place-items-center rounded-full bg-teal-900 px-1 text-[11px] font-semibold leading-4 text-white"
+  >
+    0
+  </span>
+</button>
+
+<dialog
+  data-filter-dialog
+  class="m-0 mt-auto h-[88dvh] w-full max-w-none rounded-t-panel border border-line bg-white p-0 shadow-panel backdrop:bg-ink/25 lg:hidden"
+  aria-label="Filter resources"
+>
+  <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between border-b border-line px-4 py-3">
+      <h2 class="text-nav font-semibold text-ink">Filters</h2>
+      <button
+        type="button"
+        data-close-filters
+        class="grid size-8 place-items-center rounded-md text-ink-soft transition-colors hover:bg-mint-100 hover:text-teal-900"
+        aria-label="Close filters"
+      >
+        <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto px-1 py-5">
+      <FilterPanel categories={categories} tags={tags} mode={mode} idPrefix="sheet" />
+    </div>
+
+    <div class="border-t border-line p-4">
+      <button
+        type="button"
+        data-apply-filters
+        class="inline-flex h-10 w-full items-center justify-center rounded-chip bg-teal-900 text-body font-medium text-white transition-colors hover:bg-teal-700"
+      >
+        Show results
+      </button>
+    </div>
+  </div>
+</dialog>

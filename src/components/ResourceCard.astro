@@ -5,15 +5,25 @@ import { categoryLabel, domainOf, formatDate } from '../lib/derive';
 
 interface Props {
   resource: Resource;
+  /** live = chips toggle filters in place; links = chips navigate to /?tag= */
+  mode?: 'live' | 'links';
 }
-const { resource } = Astro.props;
+
+const { resource, mode = 'live' } = Astro.props;
 const domain = domainOf(resource.url);
 const added = formatDate(resource.dateAdded);
+const chip = 'relative z-10 rounded-chip bg-chip px-2 py-[3px] text-[12px] font-medium text-chip-text transition-colors hover:bg-mint-200 hover:text-teal-900';
 ---
 
 <article
   class="group relative flex h-full flex-col rounded-card border border-line bg-white p-4 shadow-card transition duration-150 ease-out hover:-translate-y-0.5 hover:border-line-strong hover:shadow-card-hover focus-within:border-line-strong"
-  data-resource-id={resource.id}
+  data-resource={resource.id}
+  data-category={resource.category}
+  data-tags={resource.tags.join('|')}
+  data-title={resource.title}
+  data-description={resource.description}
+  data-featured={resource.featured ? 'true' : 'false'}
+  data-date={resource.dateAdded}
 >
   <!-- Whole-card link: one tab stop, opens the resource directly. -->
   <a
@@ -28,7 +38,7 @@ const added = formatDate(resource.dateAdded);
   <header class="flex items-start gap-3">
     <Favicon title={resource.title} url={resource.url} />
     <div class="min-w-0 flex-1 pt-0.5">
-      <h3 class="truncate text-card-title font-semibold text-ink">{resource.title}</h3>
+      <h3 class="truncate text-card-title font-semibold text-ink" data-title-el>{resource.title}</h3>
       <p class="truncate text-meta text-ink-muted">{domain}</p>
     </div>
 
@@ -71,17 +81,21 @@ const added = formatDate(resource.dateAdded);
 
   <ul class="mt-3 flex flex-wrap gap-1.5">
     {
-      resource.tags.map((tag) => (
-        <li>
-          <button
-            type="button"
-            data-filter-tag={tag}
-            class="relative z-10 rounded-chip bg-chip px-2 py-[3px] text-[12px] font-medium text-chip-text transition-colors hover:bg-mint-200 hover:text-teal-900"
-          >
-            {tag}
-          </button>
-        </li>
-      ))
+      resource.tags.map((tag) =>
+        mode === 'live' ? (
+          <li>
+            <button type="button" data-filter-tag={tag} class={chip}>
+              {tag}
+            </button>
+          </li>
+        ) : (
+          <li>
+            <a href={`/?tag=${encodeURIComponent(tag)}`} class={chip}>
+              {tag}
+            </a>
+          </li>
+        )
+      )
     }
   </ul>
 

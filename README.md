@@ -14,7 +14,10 @@ A public, curated toolbox of useful things from across the internet — websites
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # static output in dist/
+npm test         # builds, then runs the search/filter engine against the real HTML
+npm run check    # type-checks .astro and .ts files
 ```
+
 
 ## Adding a resource
 

@@ -1,5 +1,6 @@
 ---
 import Brand from './Brand.astro';
+import FilterPanel from './FilterPanel.astro';
 import type { CountedOption } from '../lib/derive';
 
 interface Props {
@@ -7,10 +8,8 @@ interface Props {
   tags: CountedOption[];
   total: number;
   featuredCount: number;
-  activeCategory?: string;
   currentPath?: string;
-  /** Phase 1: rows are presentational. Phase 2 turns them into live filters. */
-  interactive?: boolean;
+  mode?: 'live' | 'links';
 }
 
 const {
@@ -18,9 +17,8 @@ const {
   tags,
   total,
   featuredCount,
-  activeCategory,
   currentPath = '/',
-  interactive = false,
+  mode = 'links',
 } = Astro.props;
 
 const navBase =
@@ -28,7 +26,7 @@ const navBase =
 ---
 
 <aside
-  class="flex h-full flex-col gap-6 border-line bg-white px-4 py-5 lg:border-r"
+  class="flex h-full flex-col gap-6 overflow-y-auto border-line bg-white px-4 py-5 lg:border-r"
   aria-label="Browse the library"
 >
   <Brand />
@@ -38,6 +36,7 @@ const navBase =
       <li>
         <a
           href="/"
+          data-nav-all
           class:list={[
             navBase,
             currentPath === '/'
@@ -72,65 +71,7 @@ const navBase =
     </ul>
   </nav>
 
-  <section aria-labelledby="sidebar-categories">
-    <h2 id="sidebar-categories" class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
-      Categories
-    </h2>
-    <ul class="space-y-0.5">
-      {
-        categories.map((category) => (
-          <li>
-            <div
-              data-category-row={category.id}
-              data-interactive={interactive ? 'true' : 'false'}
-              aria-current={activeCategory === category.id ? 'true' : undefined}
-              class:list={[
-                'flex items-center gap-3 rounded-md px-3 py-[7px] text-body text-ink-soft',
-                interactive && 'cursor-pointer transition-colors hover:bg-mint-100/70 hover:text-teal-900',
-                activeCategory === category.id && 'bg-mint-100 text-teal-900',
-              ]}
-            >
-              <span
-                data-marker
-                class:list={[
-                  'size-[15px] shrink-0 rounded-[4px] border bg-white',
-                  activeCategory === category.id ? 'border-teal-700 bg-teal-700' : 'border-line-strong',
-                ]}
-              />
-              <span>{category.label}</span>
-              <span class="ml-auto text-meta tabular-nums text-ink-muted">{category.count}</span>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section aria-labelledby="sidebar-tags">
-    <h2 id="sidebar-tags" class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
-      Tags
-    </h2>
-    <ul class="space-y-0.5">
-      {
-        tags.map((tag) => (
-          <li>
-            <div
-              data-tag-row={tag.id}
-              data-interactive={interactive ? 'true' : 'false'}
-              class:list={[
-                'flex items-center gap-3 rounded-md px-3 py-[7px] text-body text-ink-soft',
-                interactive && 'cursor-pointer transition-colors hover:bg-mint-100/70 hover:text-teal-900',
-              ]}
-            >
-              <span data-marker class="size-[15px] shrink-0 rounded-[4px] border border-line-strong bg-white" />
-              <span>{tag.label}</span>
-              <span class="ml-auto text-meta tabular-nums text-ink-muted">{tag.count}</span>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  <FilterPanel categories={categories} tags={tags} mode={mode} idPrefix="sidebar" />
 
   <p class="mt-auto px-3 pt-4 text-meta leading-relaxed text-ink-muted">
     Hand-picked, one entry at a time. Nothing here is an ad.

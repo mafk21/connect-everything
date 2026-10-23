@@ -1,0 +1,141 @@
+---
+import type { CountedOption } from '../lib/derive';
+
+interface Props {
+  categories: CountedOption[];
+  tags: CountedOption[];
+  /** index page gets live buttons; other pages get links that resolve on / */
+  mode?: 'live' | 'links';
+  idPrefix?: string;
+}
+
+const { categories, tags, mode = 'live', idPrefix = 'sidebar' } = Astro.props;
+const live = mode === 'live';
+
+const rowBase =
+  'group flex w-full items-center gap-3 rounded-md px-3 py-[7px] text-left text-body text-ink-soft transition-colors';
+---
+
+<div class="space-y-6" data-filter-panel>
+  <section aria-labelledby={`${idPrefix}-categories`}>
+    <h2
+      id={`${idPrefix}-categories`}
+      class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted"
+    >
+      Categories
+    </h2>
+    <ul class="space-y-0.5" data-category-list>
+      {
+        categories.map((category) => (
+          <li>
+            {live ? (
+              <button
+                type="button"
+                data-filter-category={category.id}
+                data-label={category.label}
+                aria-pressed="false"
+                class:list={[
+                  rowBase,
+                  'hover:bg-mint-100/70 hover:text-teal-900',
+                  category.count === 0 && 'opacity-45',
+                ]}
+              >
+                <span
+                  data-marker
+                  class="grid size-[15px] shrink-0 place-items-center rounded-[4px] border border-line-strong bg-white transition-colors group-hover:border-teal-500"
+                >
+                  <svg viewBox="0 0 12 12" class="hidden size-[9px] text-white" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m2 6.2 2.6 2.6L10 3.2" />
+                  </svg>
+                </span>
+                <span>{category.label}</span>
+                <span
+                  class="ml-auto text-meta tabular-nums text-ink-muted"
+                  data-count-category={category.id}
+                >
+                  {category.count}
+                </span>
+              </button>
+            ) : (
+              <a
+                href={`/?category=${category.id}`}
+                class:list={[
+                  rowBase,
+                  'hover:bg-mint-100/70 hover:text-teal-900',
+                  category.count === 0 && 'opacity-45',
+                ]}
+              >
+                <span class="size-[15px] shrink-0 rounded-[4px] border border-line-strong bg-white transition-colors group-hover:border-teal-500" />
+                <span>{category.label}</span>
+                <span class="ml-auto text-meta tabular-nums text-ink-muted">{category.count}</span>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby={`${idPrefix}-tags`}>
+    <h2
+      id={`${idPrefix}-tags`}
+      class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted"
+    >
+      Tags
+    </h2>
+    <ul class="space-y-0.5" data-tag-list>
+      {
+        tags.map((tag) => (
+          <li>
+            {live ? (
+              <button
+                type="button"
+                data-filter-tag={tag.id}
+                aria-pressed="false"
+                class:list={[rowBase, 'hover:bg-mint-100/70 hover:text-teal-900']}
+              >
+                <span
+                  data-marker
+                  class="grid size-[15px] shrink-0 place-items-center rounded-[4px] border border-line-strong bg-white transition-colors group-hover:border-teal-500"
+                >
+                  <svg viewBox="0 0 12 12" class="hidden size-[9px] text-white" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m2 6.2 2.6 2.6L10 3.2" />
+                  </svg>
+                </span>
+                <span>{tag.label}</span>
+                <span class="ml-auto text-meta tabular-nums text-ink-muted" data-count-tag={tag.id}>
+                  {tag.count}
+                </span>
+              </button>
+            ) : (
+              <a
+                href={`/?tag=${encodeURIComponent(tag.id)}`}
+                class:list={[rowBase, 'hover:bg-mint-100/70 hover:text-teal-900']}
+              >
+                <span class="size-[15px] shrink-0 rounded-[4px] border border-line-strong bg-white transition-colors group-hover:border-teal-500" />
+                <span>{tag.label}</span>
+                <span class="ml-auto text-meta tabular-nums text-ink-muted">{tag.count}</span>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {
+    live && (
+      <button
+        type="button"
+        data-clear-filters
+        hidden
+        class="mx-3 inline-flex items-center gap-1.5 rounded-chip px-2 py-1 text-meta font-medium text-teal-800 transition-colors hover:bg-mint-100"
+      >
+        <svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+        Clear filters
+      </button>
+    )
+  }
+</div>
