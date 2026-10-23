@@ -344,15 +344,15 @@ Accessibility fix found by the contrast audit: `--color-ink-muted` was `#7c8b8a`
 Validation script, `npm run links`, JSON-LD, sitemap, OG image, Lighthouse pass on mobile and desktop, contrast audit, 200%-zoom check.
 **Done when:** Lighthouse ≥ 95 everywhere it matters and a fresh clone builds clean.
 
-Delivered: `@astrojs/sitemap`, `robots.txt`, WebSite + ItemList JSON-LD, generated 1200×630 OG card (`npm run og`), and `npm run links` for dead-link sweeps. Budgets measured on the 94-entry build: 36.7 KB gzipped HTML, 6.9 KB CSS, 2.6 KB JS.
+Delivered: `@astrojs/sitemap`, `robots.txt`, WebSite + ItemList JSON-LD, generated 1200×630 OG card (`npm run og`), and `npm run links` for dead-link sweeps. Budgets measured on the 100-entry build: 38.8 KB gzipped HTML, 6.9 KB CSS, 2.8 KB JS.
 
 Not verified here: Lighthouse and 200% zoom, because the sandbox has no browser. Both are one-command checks on a real machine.
 
-### M5 — Fill the library · **done at 94 entries**
+### M5 — Fill the library · **done at 100 entries**
 Expand to **~100 resources**: review the first 12 for voice consistency, then add in category batches (≈ 12 per category). Each entry gets a real description, not a copy-paste.
 **Done when:** every category has ≥ 8 entries, no dead links, tag vocabulary has not fragmented.
 
-Delivered: **94 resources** — design 12, development 12, learning 12, tools 12, productivity 10, media 12, data & AI 12, reference 12 — with 12 featured. The tag vocabulary grew from 17 to 35 terms, deliberately, rather than letting ad-hoc tags accumulate. Sidebar now collapses the tag list past the first 12 and offers "Show all 35 tags", with a no-JS fallback that shows everything.
+Delivered: **100 resources** — design 13, development 13, learning 13, tools 13, productivity 12, media 12, data & AI 12, reference 12 — with 12 featured. The final six (Laws of UX, Bruno, CS50, Hoppscotch, Super Productivity, Granola) were chosen from a current landscape search rather than from memory. The tag vocabulary grew from 17 to 35 terms, deliberately, rather than letting ad-hoc tags accumulate. Sidebar now collapses the tag list past the first 12 and offers "Show all 35 tags", with a no-JS fallback that shows everything.
 
 Still open: `npm run links` cannot reach arbitrary hosts from this sandbox, so the dead-link sweep has not been run against the live web.
 

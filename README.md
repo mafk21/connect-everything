@@ -2,7 +2,7 @@
 
 **A public, hand-curated toolbox of the useful internet** — websites, tools, tutorials and references worth keeping. Browse, search, filter, and click straight through to the thing you need.
 
-**94 resources · 8 categories · 35 tags · no accounts · no tracking · no ads**
+**100 resources · 8 categories · 35 tags · no accounts · no tracking · no ads**
 
 ![Connect Everything](public/og-default.png)
 
@@ -26,14 +26,16 @@ The web is full of lists that were generated instead of curated. This is the opp
 
 | Category | Entries | What it covers |
 |---|---|---|
-| Design | 12 | UI tools, type, colour, icons, illustrations |
-| Development | 12 | Frameworks, build tools, testing, validation |
-| Learning | 12 | Courses, tutorials, practice and communities |
-| Tools | 12 | Small utilities that save an afternoon |
-| Productivity | 10 | Notes, tasks, planning, time |
+| Design | 13 | UI tools, type, colour, icons, UX principles |
+| Development | 13 | Frameworks, build tools, testing, API clients |
+| Learning | 13 | Courses, tutorials, practice and communities |
+| Tools | 13 | Small utilities that save an afternoon |
+| Productivity | 12 | Notes, tasks, planning, meetings, time |
 | Media | 12 | Images, icons, video, audio, conversion |
 | Data & AI | 12 | Models, datasets, research, assistants |
 | Reference | 12 | Docs worth keeping one tab away |
+
+**100 entries across 99 distinct domains** — the only repeat is typescriptlang.org, for the language and its handbook.
 
 Plus **12 featured picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **35 terms** — every one in use, none drifting into synonyms.
 
@@ -131,7 +133,7 @@ Everything lives in one file: [`src/data/resources.ts`](src/data/resources.ts). 
 | `tags` | 1–5, each already in `src/data/tags.ts` |
 | `dateAdded` | `YYYY-MM-DD`, not in the future |
 
-Descriptions in the current library run 98–168 characters (mean 143). Adding a *tag* means adding one line to [`src/data/tags.ts`](src/data/tags.ts) first — the controlled vocabulary is what stops the sidebar fragmenting into `js` / `javascript` / `JavaScript`.
+Descriptions in the current library run 98–168 characters (mean 144). Adding a *tag* means adding one line to [`src/data/tags.ts`](src/data/tags.ts) first — the controlled vocabulary is what stops the sidebar fragmenting into `js` / `javascript` / `JavaScript`.
 
 **What gets in:** still online and maintained · free, or worth the price · useful before you sign up · something a person would genuinely return to.
 
@@ -158,11 +160,11 @@ Expectations are derived from the page's own data attributes rather than hardcod
 
 ## Performance
 
-Measured on the 94-entry build:
+Measured on the 100-entry build:
 
 | Asset | Gzipped |
 |---|---|
-| HTML (`/`) | 36.9 KB |
+| HTML (`/`) | 38.8 KB |
 | CSS | 6.9 KB |
 | JS | 2.8 KB |
 
