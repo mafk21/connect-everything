@@ -348,11 +348,11 @@ Delivered: `@astrojs/sitemap`, `robots.txt`, WebSite + ItemList JSON-LD, generat
 
 Not verified here: Lighthouse and 200% zoom, because the sandbox has no browser. Both are one-command checks on a real machine.
 
-### M5 — Fill the library · **done at 400 entries**
+### M5 — Fill the library · **done at 462 entries**
 Expand to **~100 resources**: review the first 12 for voice consistency, then add in category batches (≈ 12 per category). Each entry gets a real description, not a copy-paste.
 **Done when:** every category has ≥ 8 entries, no dead links, tag vocabulary has not fragmented.
 
-Delivered: **400 resources, 50 per category**, 47 controlled tags all in use, spanning 385 domains. The first 100 were curated by hand; the remaining 300 were authored in category batches, each with a written description rather than a generated one, and every entry passes the build-time validator.
+Delivered: **462 resources** across **nine categories** — Development grew to 62 to absorb a dozen AI coding agents, and Security was added with 50 entries covering red teaming, blue teaming, bug bounties, OSINT and forensics. 47 controlled tags all in use, spanning 385 domains. The first 100 were curated by hand; the remaining 300 were authored in category batches, each with a written description rather than a generated one, and every entry passes the build-time validator.
 
 Scale changed the performance picture: the fully server-rendered index is now 111 KB gzipped. Two rounds of optimisation (an SVG sprite for repeated card icons, component classes instead of repeated utility strings) brought it down from an initial 130 KB, but pagination or per-category pages are the real fix if the collection grows further. The tag vocabulary grew from 17 to 35 terms, deliberately, rather than letting ad-hoc tags accumulate. Sidebar now collapses the tag list past the first 12 and offers "Show all 35 tags", with a no-JS fallback that shows everything.
 

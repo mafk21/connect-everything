@@ -530,6 +530,86 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2025-11-04',
   },
   {
+    id: "github-copilot",
+    title: "GitHub Copilot",
+    url: "https://github.com/features/copilot",
+    description:
+      "Inline completions and a chat panel inside your editor, with agent mode for multi-file changes. The default, and the one most teams already pay for.",
+    category: 'development',
+    tags: ['AI coding', 'Tools', 'Productivity'],
+    dateAdded: '2026-10-19',
+  },
+  {
+    id: "cursor",
+    title: "Cursor",
+    url: "https://cursor.com",
+    description:
+      "A VS Code fork rebuilt around AI: chat with your codebase, multi-file edits and agent runs. Feels like an editor designed after the models existed.",
+    category: 'development',
+    tags: ['AI coding', 'Tools'],
+    dateAdded: '2026-10-16',
+  },
+  {
+    id: "claude-code",
+    title: "Claude Code",
+    url: "https://www.anthropic.com/claude-code",
+    description:
+      "An agent that works in your terminal, reading the repo, running commands and writing commits. Strong on long, multi-step tasks you would rather not babysit.",
+    category: 'development',
+    tags: ['AI coding', 'CLI', 'Tools'],
+    dateAdded: '2026-10-13',
+  },
+  {
+    id: "windsurf",
+    title: "Windsurf",
+    url: "https://windsurf.com",
+    description:
+      "An AI-first editor built around an agent that keeps track of what it changed and why. The other serious alternative to Cursor.",
+    category: 'development',
+    tags: ['AI coding', 'Tools'],
+    dateAdded: '2026-10-10',
+  },
+  {
+    id: "zed",
+    title: "Zed",
+    url: "https://zed.dev",
+    description:
+      "A fast, collaborative editor written in Rust with AI assistance built in rather than bolted on. Open source, and it opens large files without complaint.",
+    category: 'development',
+    tags: ['AI coding', 'Tools', 'Open source'],
+    dateAdded: '2026-10-07',
+  },
+  {
+    id: "aider",
+    title: "Aider",
+    url: "https://aider.chat",
+    description:
+      "Terminal-based pair programming that edits files in place and commits each change with a sensible message. Works with almost any model you have a key for.",
+    category: 'development',
+    tags: ['AI coding', 'CLI', 'Open source'],
+    dateAdded: '2026-10-04',
+  },
+  {
+    id: "cline",
+    title: "Cline",
+    url: "https://cline.bot",
+    description:
+      "An open-source coding agent for VS Code that reads files, runs commands and shows every step for approval. Bring your own model and API key.",
+    category: 'development',
+    tags: ['AI coding', 'Tools', 'Open source'],
+    dateAdded: '2026-10-01',
+  },
+  {
+    id: "continue",
+    title: "Continue",
+    url: "https://www.continue.dev",
+    description:
+      "A source-controlled AI assistant you configure yourself: models, context and rules live in your repo. The pragmatic choice when policy forbids hosted agents.",
+    category: 'development',
+    tags: ['AI coding', 'Tools', 'Open source'],
+    dateAdded: '2026-09-28',
+  },
+  {
     id: "vue",
     title: "Vue",
     url: "https://vuejs.org",
@@ -550,6 +630,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-26',
   },
   {
+    id: "v0",
+    title: "v0",
+    url: "https://v0.app",
+    description:
+      "Generates React and Tailwind interfaces from a prompt or a screenshot, with an editable result. Fast for prototypes, and the output is real code you can keep.",
+    category: 'development',
+    tags: ['AI coding', 'Tools', 'Design'],
+    dateAdded: '2026-09-25',
+  },
+  {
     id: "nuxt",
     title: "Nuxt",
     url: "https://nuxt.com",
@@ -560,6 +650,26 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-09-23',
   },
   {
+    id: "bolt-new",
+    title: "Bolt",
+    url: "https://bolt.new",
+    description:
+      "Builds and runs a full web app in the browser from a prompt, including dependencies and deployment. Good for testing an idea in an afternoon.",
+    category: 'development',
+    tags: ['AI coding', 'Tools'],
+    dateAdded: '2026-09-22',
+  },
+  {
+    id: "lovable",
+    title: "Lovable",
+    url: "https://lovable.dev",
+    description:
+      "Prompt-to-app for full-stack projects with a Supabase backend attached. Less control than writing it yourself, dramatically less time to something clickable.",
+    category: 'development',
+    tags: ['AI coding', 'Tools'],
+    dateAdded: '2026-09-19',
+  },
+  {
     id: "angular",
     title: "Angular",
     url: "https://angular.dev",
@@ -568,6 +678,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Framework', 'JavaScript', 'Documentation'],
     dateAdded: '2026-09-18',
+  },
+  {
+    id: "openhands",
+    title: "OpenHands",
+    url: "https://github.com/All-Hands-AI/OpenHands",
+    description:
+      "An open-source software agent that runs in a sandbox and does whole tasks from an issue description. Self-hostable, which matters for private codebases.",
+    category: 'development',
+    tags: ['AI coding', 'Open source', 'Tools'],
+    dateAdded: '2026-09-16',
   },
   {
     id: "sveltekit",
@@ -3538,6 +3658,506 @@ export const RESOURCES: Resource[] = [
     tags: ['AI', 'Tools'],
     featured: true,
     dateAdded: '2025-11-11',
+  },
+  {
+    id: "hack-the-box",
+    title: "Hack The Box",
+    url: "https://www.hackthebox.com",
+    description:
+      "Retired machines and live labs you break into legally, with official walkthroughs and a large community. The closest thing to a gym for offensive skills.",
+    category: 'security',
+    tags: ['Red teaming', 'CTF', 'Practice'],
+    dateAdded: '2026-10-20',
+  },
+  {
+    id: "tryhackme",
+    title: "TryHackMe",
+    url: "https://tryhackme.com",
+    description:
+      "Guided, browser-based security rooms that start at absolute beginner and reach red-team territory. The best on-ramp if you have never opened a terminal.",
+    category: 'security',
+    tags: ['Red teaming', 'Blue teaming', 'Learning'],
+    dateAdded: '2026-10-18',
+  },
+  {
+    id: "portswigger-academy",
+    title: "PortSwigger Web Security Academy",
+    url: "https://portswigger.net/web-security",
+    description:
+      "Free, genuinely excellent labs on every class of web vulnerability, written by the makers of Burp Suite. Finish it and you understand appsec better than most.",
+    category: 'security',
+    tags: ['AppSec', 'Red teaming', 'Learning'],
+    dateAdded: '2026-10-15',
+  },
+  {
+    id: "hacktricks",
+    title: "HackTricks",
+    url: "https://book.hacktricks.wiki",
+    description:
+      "An immense, constantly updated wiki of offensive techniques and privilege escalation paths. The bookmarked page you consult halfway through every box.",
+    category: 'security',
+    tags: ['Red teaming', 'Reference', 'Tips'],
+    dateAdded: '2026-10-12',
+  },
+  {
+    id: "payloads-all-the-things",
+    title: "Payloads All The Things",
+    url: "https://github.com/swisskyrepo/PayloadsAllTheThings",
+    description:
+      "A curated list of payloads and bypasses for web and infrastructure attacks, organised by vulnerability class. Reference material, not a tutorial.",
+    category: 'security',
+    tags: ['Red teaming', 'AppSec', 'Reference'],
+    dateAdded: '2026-10-09',
+  },
+  {
+    id: "seclists",
+    title: "SecLists",
+    url: "https://github.com/danielmiessler/SecLists",
+    description:
+      "The wordlists nearly every security tool expects: usernames, passwords, directories, fuzzing strings. Install once and stop hunting for lists.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Open source'],
+    dateAdded: '2026-10-06',
+  },
+  {
+    id: "owasp-zap",
+    title: "OWASP ZAP",
+    url: "https://www.zaproxy.org",
+    description:
+      "A free, open-source web proxy and scanner for finding vulnerabilities in your own applications. The realistic alternative to Burp's paid tiers.",
+    category: 'security',
+    tags: ['AppSec', 'Tools', 'Open source'],
+    dateAdded: '2026-10-03',
+  },
+  {
+    id: "burp-suite",
+    title: "Burp Suite",
+    url: "https://portswigger.net/burp",
+    description:
+      "The standard interception proxy for web security work, with a capable community edition. You will meet it in every bug bounty writeup you read.",
+    category: 'security',
+    tags: ['AppSec', 'Bug bounty', 'Tools'],
+    dateAdded: '2026-09-30',
+  },
+  {
+    id: "kali-linux",
+    title: "Kali Linux",
+    url: "https://www.kali.org",
+    description:
+      "A Debian distribution with the offensive toolset preinstalled, maintained by Offensive Security. Run it in a VM and nothing else on your machine gets exposed.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Open source'],
+    dateAdded: '2026-09-27',
+  },
+  {
+    id: "nmap",
+    title: "Nmap",
+    url: "https://nmap.org",
+    description:
+      "Port scanning and service detection that everything else builds on, with a scripting engine for deeper checks. The first command in most engagements.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Reference'],
+    dateAdded: '2026-09-24',
+  },
+  {
+    id: "metasploit",
+    title: "Metasploit",
+    url: "https://www.metasploit.com",
+    description:
+      "The exploitation framework with modules for known vulnerabilities, payloads and post-exploitation. Loud, effective, and best used on machines you own.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools'],
+    dateAdded: '2026-09-21',
+  },
+  {
+    id: "sqlmap",
+    title: "sqlmap",
+    url: "https://sqlmap.org",
+    description:
+      "Detects and exploits SQL injection automatically, with tamper scripts for awkward filters. A reminder of why parameterised queries are not optional.",
+    category: 'security',
+    tags: ['Red teaming', 'AppSec', 'Tools'],
+    dateAdded: '2026-09-18',
+  },
+  {
+    id: "gtfobins",
+    title: "GTFOBins",
+    url: "https://gtfobins.github.io",
+    description:
+      "Unix binaries that can be abused to escape restrictions or escalate privileges, with the exact syntax. The first lookup after landing on a box.",
+    category: 'security',
+    tags: ['Red teaming', 'Reference', 'Tips'],
+    dateAdded: '2026-09-15',
+  },
+  {
+    id: "lolbas",
+    title: "LOLBAS",
+    url: "https://lolbas-project.github.io",
+    description:
+      "The Windows equivalent of GTFOBins: signed system binaries that can download, execute or bypass controls. Essential for understanding living-off-the-land attacks.",
+    category: 'security',
+    tags: ['Red teaming', 'Blue teaming', 'Reference'],
+    dateAdded: '2026-09-12',
+  },
+  {
+    id: "bloodhound",
+    title: "BloodHound",
+    url: "https://bloodhound.specterops.io",
+    description:
+      "Maps Active Directory relationships as a graph and finds the shortest path to domain admin. The tool that changed how Windows estates are assessed.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Open source'],
+    dateAdded: '2026-09-09',
+  },
+  {
+    id: "impacket",
+    title: "Impacket",
+    url: "https://github.com/fortra/impacket",
+    description:
+      "Python classes for Windows network protocols, behind a lot of the tooling you already use. The library you drop into when a script needs SMB or Kerberos.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Open source'],
+    dateAdded: '2026-09-06',
+  },
+  {
+    id: "revshells",
+    title: "RevShells",
+    url: "https://www.revshells.com",
+    description:
+      "Generates reverse shell one-liners in dozens of languages, with encoding options. Saves hunting through notes for the syntax that works on this box.",
+    category: 'security',
+    tags: ['Red teaming', 'Tools', 'Tips'],
+    dateAdded: '2026-09-03',
+  },
+  {
+    id: "ghidra",
+    title: "Ghidra",
+    url: "https://ghidra-sre.org",
+    description:
+      "NSA's open-source reverse engineering suite, with a decompiler that turns binaries back into readable C. Free, and good enough to replace paid tools.",
+    category: 'security',
+    tags: ['Reverse engineering', 'Malware', 'Open source'],
+    dateAdded: '2026-08-31',
+  },
+  {
+    id: "ida-free",
+    title: "IDA Free",
+    url: "https://hex-rays.com/ida-free",
+    description:
+      "The free tier of the disassembler most professional reverse engineers learned on. Limited to non-commercial use and a subset of architectures.",
+    category: 'security',
+    tags: ['Reverse engineering', 'Tools'],
+    dateAdded: '2026-08-28',
+  },
+  {
+    id: "hashcat",
+    title: "Hashcat",
+    url: "https://hashcat.net/hashcat/",
+    description:
+      "GPU-accelerated password recovery supporting hundreds of hash types. The reality check on whether your password policy means anything.",
+    category: 'security',
+    tags: ['Red teaming', 'Cryptography', 'Tools'],
+    dateAdded: '2026-08-25',
+  },
+  {
+    id: "john-the-ripper",
+    title: "John the Ripper",
+    url: "https://www.openwall.com/john/",
+    description:
+      "The veteran password cracker, strongest on Unix formats and rule-based mangling. Slower than Hashcat on GPUs and still enormously useful.",
+    category: 'security',
+    tags: ['Red teaming', 'Cryptography', 'Open source'],
+    dateAdded: '2026-08-22',
+  },
+  {
+    id: "wireshark",
+    title: "Wireshark",
+    url: "https://www.wireshark.org",
+    description:
+      "The packet analyser everybody eventually installs, with dissectors for nearly every protocol. Nothing else explains a network problem as concretely.",
+    category: 'security',
+    tags: ['Blue teaming', 'Tools', 'Reference'],
+    dateAdded: '2026-08-19',
+  },
+  {
+    id: "zeek",
+    title: "Zeek",
+    url: "https://zeek.org",
+    description:
+      "A network security monitor that turns traffic into rich connection logs rather than packets. The foundation of serious network detection work.",
+    category: 'security',
+    tags: ['Blue teaming', 'Threat intel', 'Open source'],
+    dateAdded: '2026-08-16',
+  },
+  {
+    id: "suricata",
+    title: "Suricata",
+    url: "https://suricata.io",
+    description:
+      "High-performance intrusion detection with rulesets shared across the industry. Pairs naturally with Zeek: alerts from one, context from the other.",
+    category: 'security',
+    tags: ['Blue teaming', 'Threat intel', 'Open source'],
+    dateAdded: '2026-08-13',
+  },
+  {
+    id: "sigma",
+    title: "Sigma",
+    url: "https://sigmahq.io",
+    description:
+      "A vendor-neutral rule format for writing detections once and converting them to whatever SIEM you actually run. The pragmatic answer to lock-in.",
+    category: 'security',
+    tags: ['Blue teaming', 'Threat intel', 'Open source'],
+    dateAdded: '2026-08-10',
+  },
+  {
+    id: "yara",
+    title: "YARA",
+    url: "https://virustotal.github.io/yara/",
+    description:
+      "Pattern-matching rules for identifying and classifying malware samples, used by nearly every scanner. Simple syntax, and it rewards careful writing.",
+    category: 'security',
+    tags: ['Blue teaming', 'Malware', 'Open source'],
+    dateAdded: '2026-08-07',
+  },
+  {
+    id: "atomic-red-team",
+    title: "Atomic Red Team",
+    url: "https://github.com/redcanaryco/atomic-red-team",
+    description:
+      "Small, mapped tests for each ATT&CK technique, so you can prove whether a detection fires. The practical bridge between red and blue.",
+    category: 'security',
+    tags: ['Red teaming', 'Blue teaming', 'Open source'],
+    dateAdded: '2026-08-04',
+  },
+  {
+    id: "mitre-attack",
+    title: "MITRE ATT&CK",
+    url: "https://attack.mitre.org",
+    description:
+      "The shared vocabulary of adversary tactics and techniques, mapped to real groups and software. Everything in detection engineering refers back to it.",
+    category: 'security',
+    tags: ['Threat intel', 'Reference', 'Blue teaming'],
+    dateAdded: '2026-08-01',
+  },
+  {
+    id: "mitre-cve",
+    title: "CVE Program",
+    url: "https://www.cve.org",
+    description:
+      "The canonical identifiers for publicly disclosed vulnerabilities, with the records behind every advisory you read. Dry, and the source of truth.",
+    category: 'security',
+    tags: ['Threat intel', 'Reference', 'AppSec'],
+    dateAdded: '2026-07-29',
+  },
+  {
+    id: "nvd",
+    title: "NIST NVD",
+    url: "https://nvd.nist.gov",
+    description:
+      "Enriched CVE records with CVSS scores, weaknesses and affected products. Where you check severity before deciding whether to panic.",
+    category: 'security',
+    tags: ['Threat intel', 'Reference', 'AppSec'],
+    dateAdded: '2026-07-26',
+  },
+  {
+    id: "exploit-db",
+    title: "Exploit Database",
+    url: "https://www.exploit-db.com",
+    description:
+      "A public archive of exploits and proof-of-concept code, searchable by CVE and product. The gap between a disclosure and something you can test.",
+    category: 'security',
+    tags: ['Red teaming', 'Threat intel', 'Reference'],
+    dateAdded: '2026-07-23',
+  },
+  {
+    id: "cisa-kev",
+    title: "CISA KEV Catalog",
+    url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+    description:
+      "The vulnerabilities confirmed as exploited in the wild, with remediation deadlines for US agencies. The shortest list of things to patch first.",
+    category: 'security',
+    tags: ['Blue teaming', 'Threat intel', 'Reference'],
+    dateAdded: '2026-07-20',
+  },
+  {
+    id: "shodan",
+    title: "Shodan",
+    url: "https://www.shodan.io",
+    description:
+      "A search engine for internet-connected devices, indexed by banner and port. Useful for understanding your own exposure, alarming at scale.",
+    category: 'security',
+    tags: ['OSINT', 'Threat intel', 'Tools'],
+    dateAdded: '2026-07-17',
+  },
+  {
+    id: "censys",
+    title: "Censys",
+    url: "https://censys.com",
+    description:
+      "Internet-wide scanning data with certificates and service fingerprints, and a free research tier. A quieter, more precise Shodan.",
+    category: 'security',
+    tags: ['OSINT', 'Threat intel', 'Tools'],
+    dateAdded: '2026-07-14',
+  },
+  {
+    id: "urlscan",
+    title: "urlscan.io",
+    url: "https://urlscan.io",
+    description:
+      "Scans a URL in a sandbox and records every request it makes, with a screenshot and DOM. The fastest way to see what a suspicious link does.",
+    category: 'security',
+    tags: ['Blue teaming', 'OSINT', 'Tools'],
+    dateAdded: '2026-07-11',
+  },
+  {
+    id: "anyrun",
+    title: "ANY.RUN",
+    url: "https://any.run",
+    description:
+      "Interactive malware sandbox where you click through the execution yourself. A free tier covers small public analyses.",
+    category: 'security',
+    tags: ['Malware', 'Blue teaming', 'Forensics'],
+    dateAdded: '2026-07-08',
+  },
+  {
+    id: "malwarebazaar",
+    title: "MalwareBazaar",
+    url: "https://bazaar.abuse.ch",
+    description:
+      "A public repository of malware samples shared for research, with hashes and family tags. Use it to tune detection, not to run anything.",
+    category: 'security',
+    tags: ['Malware', 'Threat intel', 'Blue teaming'],
+    dateAdded: '2026-07-05',
+  },
+  {
+    id: "velociraptor",
+    title: "Velociraptor",
+    url: "https://docs.velociraptor.app",
+    description:
+      "Endpoint visibility and DFIR collection across a fleet, built around hunting queries. The tool that makes a compromised estate searchable.",
+    category: 'security',
+    tags: ['Blue teaming', 'Forensics', 'Open source'],
+    dateAdded: '2026-07-02',
+  },
+  {
+    id: "wazuh",
+    title: "Wazuh",
+    url: "https://wazuh.com",
+    description:
+      "Open-source SIEM and XDR: log collection, file integrity monitoring and active response in one stack. The most practical free starting point for a SOC.",
+    category: 'security',
+    tags: ['Blue teaming', 'Open source', 'Tools'],
+    dateAdded: '2026-06-29',
+  },
+  {
+    id: "the-dfir-report",
+    title: "The DFIR Report",
+    url: "https://thedfirreport.com",
+    description:
+      "Detailed write-ups of real intrusions, with timelines, commands and the detections that would have caught them. Better than any textbook on incident response.",
+    category: 'security',
+    tags: ['Blue teaming', 'Forensics', 'Threat intel'],
+    dateAdded: '2026-06-26',
+  },
+  {
+    id: "blue-team-labs",
+    title: "Blue Team Labs Online",
+    url: "https://blueteamlabs.online",
+    description:
+      "Defensive challenges built from realistic alert data: phishing triage, log analysis, malware investigation. The counterpart to an offensive lab subscription.",
+    category: 'security',
+    tags: ['Blue teaming', 'Practice', 'Learning'],
+    dateAdded: '2026-06-23',
+  },
+  {
+    id: "letsdefend",
+    title: "LetsDefend",
+    url: "https://letsdefend.io",
+    description:
+      "A simulated SOC with alerts to investigate, scoring and learning paths. The closest you can get to shift experience without a job.",
+    category: 'security',
+    tags: ['Blue teaming', 'Learning', 'Practice'],
+    dateAdded: '2026-06-20',
+  },
+  {
+    id: "cyberdefenders",
+    title: "CyberDefenders",
+    url: "https://cyberdefenders.org",
+    description:
+      "Free blue-team labs built around packet captures, memory dumps and disk images. Each one ends in concrete answers, not a score.",
+    category: 'security',
+    tags: ['Blue teaming', 'Forensics', 'Practice'],
+    dateAdded: '2026-06-17',
+  },
+  {
+    id: "hackerone",
+    title: "HackerOne",
+    url: "https://www.hackerone.com",
+    description:
+      "The largest bug bounty platform, with public disclosure reports that double as a free education in how real bugs are found.",
+    category: 'security',
+    tags: ['Bug bounty', 'Community', 'AppSec'],
+    dateAdded: '2026-06-14',
+  },
+  {
+    id: "bugcrowd",
+    title: "Bugcrowd",
+    url: "https://www.bugcrowd.com",
+    description:
+      "Bug bounty and vulnerability disclosure programmes, with a strong emphasis on trusted researcher relationships. Broad programme catalogue.",
+    category: 'security',
+    tags: ['Bug bounty', 'Community', 'AppSec'],
+    dateAdded: '2026-06-11',
+  },
+  {
+    id: "intigriti",
+    title: "Intigriti",
+    url: "https://www.intigriti.com",
+    description:
+      "A European bug bounty platform with well-scoped programmes and a community that is unusually generous with write-ups.",
+    category: 'security',
+    tags: ['Bug bounty', 'Community', 'AppSec'],
+    dateAdded: '2026-06-08',
+  },
+  {
+    id: "pentester-land",
+    title: "Pentester Land",
+    url: "https://pentester.land",
+    description:
+      "An aggregated, searchable list of bug bounty write-ups and disclosure reports. The fastest way to learn a vulnerability class from real examples.",
+    category: 'security',
+    tags: ['Bug bounty', 'Learning', 'Reference'],
+    dateAdded: '2026-06-05',
+  },
+  {
+    id: "pentesterlab",
+    title: "PentesterLab",
+    url: "https://pentesterlab.com",
+    description:
+      "Hands-on exercises focused on understanding a vulnerability rather than firing a scanner. Paid, with a set of free badges to start.",
+    category: 'security',
+    tags: ['AppSec', 'Red teaming', 'Practice'],
+    dateAdded: '2026-06-02',
+  },
+  {
+    id: "ctftime",
+    title: "CTFtime",
+    url: "https://ctftime.org",
+    description:
+      "The calendar and rankings for capture-the-flag competitions worldwide, with write-ups linked after each event. Where to find your first CTF.",
+    category: 'security',
+    tags: ['CTF', 'Community', 'Learning'],
+    dateAdded: '2026-05-30',
+  },
+  {
+    id: "pwn-college",
+    title: "pwn.college",
+    url: "https://pwn.college",
+    description:
+      "Free, university-grade security courses from Arizona State, taught through browser-hosted labs on exploitation and defence. Demanding, and completely free.",
+    category: 'security',
+    tags: ['Red teaming', 'Learning', 'Practice'],
+    dateAdded: '2026-05-27',
   },
   {
     id: "w3c",

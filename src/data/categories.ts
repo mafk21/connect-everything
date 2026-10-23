@@ -1,6 +1,7 @@
 /**
  * Categories — the browsing spine. Single-select in the UI.
- * Keep this list short (8 max) so the sidebar stays scannable.
+ * Nine categories, one line each, ordered by how often a visitor reaches for
+ * them. Keep the list short so the sidebar stays scannable.
  */
 export const CATEGORIES = [
   {
@@ -37,6 +38,11 @@ export const CATEGORIES = [
     id: 'data-ai',
     label: 'Data & AI',
     blurb: 'Models, datasets and assistants.',
+  },
+  {
+    id: 'security',
+    label: 'Security',
+    blurb: 'Offence, defence, bug bounties and the tools for both.',
   },
   {
     id: 'reference',
