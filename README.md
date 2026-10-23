@@ -29,10 +29,12 @@ The web is full of lists that were generated instead of curated. This is the opp
 | Category + tag filtering with live counts | ✅ Done |
 | Sorting, shareable URLs, empty state | ✅ Done |
 | Mobile filter sheet, keyboard shortcuts | ✅ Done |
-| `/404`, sitemap, JSON-LD, Lighthouse pass | ⏳ Phase 3–4 |
-| Library expanded to ~100 resources | ⏳ Phase 5 |
+| `/404`, footer nav, keyboard and motion polish | ✅ Done |
+| Sitemap, robots, JSON-LD, OG card, link checker | ✅ Done |
+| Library expanded to 94 resources | ✅ Done |
+| Lighthouse and 200% zoom verification | ⏳ Needs a browser |
 
-Currently **12 resources** across **8 categories**, drawn from a **17-word tag vocabulary** — a working library used as the seed for the full collection. Full plan: [`docs/PLAN.md`](docs/PLAN.md).
+**94 resources** across **8 categories**, drawn from a controlled **35-tag vocabulary**. Full plan and milestone history: [`docs/PLAN.md`](docs/PLAN.md).
 
 ## Features
 
@@ -81,8 +83,9 @@ No client framework, no state library, no database, no backend. The interactive 
 │   ├── pages/           # index, featured, suggest
 │   └── styles/          # design tokens
 ├── tests/               # engine tests against the real built HTML
+├── scripts/             # link checker, OG image generator
 ├── docs/PLAN.md         # product + technical plan
-└── public/              # favicon
+└── public/              # favicon, robots.txt, OG card
 ```
 
 ## Adding a resource
@@ -129,18 +132,36 @@ Adding a tag means adding one line to [`src/data/tags.ts`](src/data/tags.ts) fir
 | `npm run preview` | Serve the production build locally |
 | `npm test` | Build, then run the search/filter tests against the real HTML |
 | `npm run check` | Type-check `.astro` and `.ts` files |
+| `npm run links` | Sweep every resource URL for dead links (needs real internet) |
+| `npm run og` | Regenerate `public/og-default.png` (needs `pillow`, `fonttools`, `brotli`) |
 
 ## Testing
 
-`npm test` builds the site and drives the actual engine module against the built HTML in jsdom — not a mocked DOM. It covers search (including multi-term AND and highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, sorting, the empty state, and reset. There is also a hydration test proving a URL like `?q=free&category=learning&tag=Practice&sort=az` restores exactly.
+`npm test` builds the site and drives the actual engine module against the built HTML in jsdom — not a mocked DOM. **34 assertions** cover search (including multi-term AND and highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, sorting, the empty state, card chips and menu behaviour.
+
+Expectations are derived from the page's own data attributes rather than hardcoded counts, so adding resources never breaks the suite. A second process runs **8 hydration assertions** proving that a URL like `?q=free&category=learning&tag=Practice&sort=az` restores exactly that view and the URL is left untouched on load.
 
 Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list — it never leaves a blank page.
+
+## Performance
+
+Measured on the 94-entry build:
+
+| Asset | Gzipped |
+|---|---|
+| HTML (index) | 36.7 KB |
+| CSS | 6.9 KB |
+| JS | 2.6 KB |
+
+Favicons are the only third-party request per card, loaded lazily in a fixed-size box so they cannot shift layout. Every card is server-rendered, so a slow or blocked network still yields a complete, clickable list.
 
 ## Deployment
 
 Static output: any host that serves files. On Vercel, Astro is detected automatically — build `npm run build`, output `dist`.
 
 There are no environment variables, secrets, database or server functions to configure.
+
+**Before launch:** replace the placeholder `site` in `astro.config.mjs` (`https://connecteverything.example`) with the real domain, and update the sitemap URL in `public/robots.txt`. Everything canonical, OG and sitemap-related derives from it.
 
 ## Contributing
 

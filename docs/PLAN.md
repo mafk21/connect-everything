@@ -332,17 +332,29 @@ Astro + Tailwind installed; tokens in `global.css`; BaseLayout with canvas, pane
 Categories and tags with live counts; checkbox filters; URL state; search with highlighting and `/` shortcut; sort control; result count; empty state. Keyboard-only pass.
 **Done when:** any combination of category + tags + query + sort is shareable via URL, survives reload, and is fully operable by keyboard.
 
-### M3 — Secondary surfaces + polish
+### M3 — Secondary surfaces + polish · **done**
 `/featured`, `/suggest`, `/404`, footer, mobile filter sheet, kebab menu, hover/focus/motion polish, reduced-motion, decorative-shape positioning.
 **Done when:** every route exists, mobile is a first-class experience, and no placeholder text remains.
 
-### M4 — Hardening
+Delivered: `/404` with search, category chips and three featured cards; footer nav (Featured, Suggest, GitHub); mobile filter sheet with focus management and a result-counting apply button; kebab menus close on Escape, outside click and after copying; `prefers-reduced-motion` handled globally.
+
+Accessibility fix found by the contrast audit: `--color-ink-muted` was `#7c8b8a` (3.55:1 on white, 3.09:1 on mint) and is now `#5c6e6c` (5.38:1 / 4.68:1), which clears AA for the 13px meta text it carries.
+
+### M4 — Hardening · **done** (Lighthouse unverified)
 Validation script, `npm run links`, JSON-LD, sitemap, OG image, Lighthouse pass on mobile and desktop, contrast audit, 200%-zoom check.
 **Done when:** Lighthouse ≥ 95 everywhere it matters and a fresh clone builds clean.
 
-### M5 — Fill the library
+Delivered: `@astrojs/sitemap`, `robots.txt`, WebSite + ItemList JSON-LD, generated 1200×630 OG card (`npm run og`), and `npm run links` for dead-link sweeps. Budgets measured on the 94-entry build: 36.7 KB gzipped HTML, 6.9 KB CSS, 2.6 KB JS.
+
+Not verified here: Lighthouse and 200% zoom, because the sandbox has no browser. Both are one-command checks on a real machine.
+
+### M5 — Fill the library · **done at 94 entries**
 Expand to **~100 resources**: review the first 12 for voice consistency, then add in category batches (≈ 12 per category). Each entry gets a real description, not a copy-paste.
 **Done when:** every category has ≥ 8 entries, no dead links, tag vocabulary has not fragmented.
+
+Delivered: **94 resources** — design 12, development 12, learning 12, tools 12, productivity 10, media 12, data & AI 12, reference 12 — with 12 featured. The tag vocabulary grew from 17 to 35 terms, deliberately, rather than letting ad-hoc tags accumulate. Sidebar now collapses the tag list past the first 12 and offers "Show all 35 tags", with a no-JS fallback that shows everything.
+
+Still open: `npm run links` cannot reach arbitrary hosts from this sandbox, so the dead-link sweep has not been run against the live web.
 
 ---
 
@@ -367,6 +379,8 @@ Expand to **~100 resources**: review the first 12 for voice consistency, then ad
 
 1. **Name.** The mockup says "Bookmark Manager"; the repo is `connect-everything`. Needs a wordmark and a one-line tagline before M1 (the brand tile is visible immediately). Candidates: *Toolbox*, *The Shelf*, *Index*, *Useful*.
 2. **Suggest mechanism.** Resolved: GitHub issues and pull requests only. No email address or form endpoint.
+5. **Domain.** `astro.config.mjs` still uses `https://connecteverything.example` as `site`, which feeds the canonical URLs, sitemap and OG tags. Swap in the real domain before launch.
+6. **Licence.** No `LICENSE` file yet.
 3. **Category set.** The 8 above are a draft based on the reference's tag mix; confirm before M5 so entries don't get re-sorted twice.
 4. **Language.** English only, or bilingual (Arabic/English) later? Affects font stack and layout direction now.
 
