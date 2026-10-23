@@ -150,6 +150,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-01-06',
   },
   {
+    id: "laws-of-ux",
+    title: "Laws of UX",
+    url: "https://lawsofux.com",
+    description:
+      "Psychology-backed design principles — Fitts, Hick, Miller, Jakob — each explained with the interfaces they show up in, and a poster worth pinning up.",
+    category: 'design',
+    tags: ['Design', 'Reference', 'Tips'],
+    dateAdded: '2026-09-12',
+  },
+  {
     id: "react-docs",
     title: "React Docs",
     url: "https://react.dev",
@@ -270,6 +280,16 @@ export const RESOURCES: Resource[] = [
     category: 'development',
     tags: ['Testing', 'Tools', 'Performance'],
     dateAdded: '2026-01-09',
+  },
+  {
+    id: "bruno",
+    title: "Bruno",
+    url: "https://www.usebruno.com",
+    description:
+      "An open-source API client that keeps collections as plain files inside your repo, so requests diff in Git and no account sits between you and your API.",
+    category: 'development',
+    tags: ['Tools', 'Open source', 'Testing'],
+    dateAdded: '2026-09-26',
   },
   {
     id: "frontend-mentor",
@@ -395,6 +415,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-01-14',
   },
   {
+    id: "cs50",
+    title: "CS50",
+    url: "https://cs50.harvard.edu/x/",
+    description:
+      "Harvard's introduction to computer science, free to follow at your own pace. Genuinely demanding problem sets, excellent lectures, and a large community.",
+    category: 'learning',
+    tags: ['Learning', 'Practice', 'Community'],
+    dateAdded: '2026-08-30',
+  },
+  {
     id: "raycast",
     title: "Raycast",
     url: "https://www.raycast.com",
@@ -517,6 +547,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2026-01-17',
   },
   {
+    id: "hoppscotch",
+    title: "Hoppscotch",
+    url: "https://hoppscotch.io",
+    description:
+      "A browser-based API client for REST, GraphQL and WebSockets that opens instantly and can be self-hosted. No install and no sign-in to send a request.",
+    category: 'tools',
+    tags: ['Tools', 'Open source'],
+    dateAdded: '2026-09-05',
+  },
+  {
     id: "notion",
     title: "Notion",
     url: "https://www.notion.so",
@@ -617,6 +657,26 @@ export const RESOURCES: Resource[] = [
     category: 'productivity',
     tags: ['Notes', 'Privacy', 'Open source'],
     dateAdded: '2026-01-07',
+  },
+  {
+    id: "super-productivity",
+    title: "Super Productivity",
+    url: "https://super-productivity.com",
+    description:
+      "Open-source task manager with time tracking and timeboxing built in, plus GitHub and Jira integrations. Local-first, MIT licensed, no account needed.",
+    category: 'productivity',
+    tags: ['Productivity', 'Tools', 'Open source'],
+    dateAdded: '2026-10-02',
+  },
+  {
+    id: "granola",
+    title: "Granola",
+    url: "https://www.granola.ai",
+    description:
+      "A meeting notepad that listens from your own machine — no bot joining the call — then merges your rough notes with the transcript. Free tier for individuals.",
+    category: 'productivity',
+    tags: ['AI', 'Productivity', 'Notes'],
+    dateAdded: '2026-10-11',
   },
   {
     id: "unsplash",
