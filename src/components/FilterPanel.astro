@@ -10,6 +10,10 @@ interface Props {
 }
 
 const { categories, tags, mode = 'live', idPrefix = 'sidebar' } = Astro.props;
+
+/** How many tags show before the "show all" toggle. */
+const TAGS_ALWAYS_VISIBLE = 12;
+const hasExtraTags = tags.length > TAGS_ALWAYS_VISIBLE;
 const live = mode === 'live';
 
 const rowBase =
@@ -85,8 +89,8 @@ const rowBase =
     </h2>
     <ul class="space-y-0.5" data-tag-list>
       {
-        tags.map((tag) => (
-          <li>
+        tags.map((tag, index) => (
+          <li class:list={[index >= TAGS_ALWAYS_VISIBLE && 'tag-extra']}>
             {live ? (
               <button
                 type="button"
@@ -121,6 +125,34 @@ const rowBase =
         ))
       }
     </ul>
+
+    {
+      hasExtraTags && (
+        <button
+          type="button"
+          data-toggle-tags
+          data-more={`Show all ${tags.length} tags`}
+          data-less="Show fewer tags"
+          hidden
+          class="mx-3 mt-1.5 inline-flex items-center gap-1 rounded-chip px-2 py-1 text-meta font-medium text-teal-800 transition-colors hover:bg-mint-100"
+          aria-expanded="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="size-3.5 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m6 9.5 6 6 6-6" />
+          </svg>
+          <span data-toggle-tags-label>Show all {tags.length} tags</span>
+        </button>
+      )
+    }
   </section>
 
   {
