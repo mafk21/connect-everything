@@ -1,29 +1,51 @@
 /**
  * Controlled tag vocabulary.
- * Order here is the order shown in the sidebar — roughly by how often
- * a visitor will reach for them, not alphabetically.
+ * Order here is the order shown in the sidebar — roughly by how often a
+ * visitor will reach for them, not alphabetically.
  *
  * Rule: a resource may carry 1–5 tags, and every tag must exist here.
  * Adding a new tag means adding one line to this file.
  */
 export const TAGS = [
-  'AI',
-  'Community',
-  'Compatibility',
+  // disciplines
   'CSS',
-  'Design',
-  'Framework',
-  'Git',
-  'HTML',
   'JavaScript',
+  'Design',
   'Layout',
-  'Learning',
   'Performance',
-  'Practice',
+  'Accessibility',
+  'Compatibility',
+  // what it is
   'Reference',
+  'Documentation',
+  'Learning',
+  'Tutorial',
+  'Practice',
   'Tips',
   'Tools',
-  'Tutorial',
+  'Productivity',
+  'Data',
+  'AI',
+  // subject matter
+  'Images',
+  'Icons',
+  'Video',
+  'Audio',
+  'Fonts',
+  'Typography',
+  'Color',
+  'Animation',
+  'Diagrams',
+  'Notes',
+  'Writing',
+  'Testing',
+  'Git',
+  'HTML',
+  'Framework',
+  // qualities
+  'Open source',
+  'Privacy',
+  'Community',
 ] as const;
 
 export type Tag = (typeof TAGS)[number];
