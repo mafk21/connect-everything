@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Brand from '../components/Brand.astro';
 
 const MAIL = 'hello@connecteverything.example';
+const REPO_URL = 'https://github.com/mafk21/connect-everything';
 ---
 
 <BaseLayout
@@ -46,11 +47,49 @@ const MAIL = 'hello@connecteverything.example';
         </a>
       </div>
 
-      <p class="mt-8 border-t border-line pt-5 text-meta text-ink-muted">
-        Prefer to add it yourself? The whole library lives in
-        <code class="rounded bg-mint-100 px-1.5 py-0.5 text-[12px] text-teal-900">src/data/resources.ts</code>
-        — open a pull request and it gets reviewed like any other entry.
-      </p>
+      <a
+        href={REPO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-8 flex items-start gap-3 border-t border-line pt-5 transition-colors"
+      >
+        <span
+          class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-[9px] border border-line bg-white text-teal-900 transition-colors group-hover:border-line-strong group-hover:bg-mint-100"
+        >
+          <svg viewBox="0 0 24 24" class="size-[17px]" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"
+            ></path>
+          </svg>
+        </span>
+
+        <span class="min-w-0">
+          <span class="flex items-center gap-1.5 text-body font-semibold text-ink">
+            Prefer to add it yourself? Suggest it on GitHub
+            <svg
+              viewBox="0 0 24 24"
+              class="size-3.5 text-ink-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal-800"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M8 16 16 8M9.5 8H16v6.5" />
+            </svg>
+          </span>
+          <span class="mt-1 block text-meta leading-relaxed text-ink-muted">
+            The whole library lives in
+            <code class="rounded bg-mint-100 px-1.5 py-0.5 text-[12px] text-teal-900">src/data/resources.ts</code>
+            — open a pull request or an issue on the repo, and it gets reviewed like any other
+            entry.
+          </span>
+          <span class="mt-1.5 block text-[12px] font-medium text-teal-800 group-hover:underline">
+            github.com/mafk21/connect-everything
+          </span>
+        </span>
+      </a>
     </div>
   </div>
 </BaseLayout>
