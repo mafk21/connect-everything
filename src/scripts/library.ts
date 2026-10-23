@@ -339,8 +339,11 @@ function readCards(scope: HTMLElement): Card[] {
     .map((li) => {
       const el = li.querySelector<HTMLElement>('[data-resource]');
       if (!el) return null;
-      const title = el.dataset.title ?? '';
-      const description = el.dataset.description ?? '';
+      // Read the text from the DOM rather than duplicating it into data
+      // attributes — at 400 entries those copies cost real bytes.
+      const title = el.querySelector<HTMLElement>('[data-title-el]')?.textContent?.trim() ?? '';
+      const description =
+        el.querySelector<HTMLElement>('[data-description]')?.textContent?.trim() ?? '';
       const category = el.dataset.category ?? '';
       const tags = (el.dataset.tags ?? '').split('|').filter(Boolean);
       return {

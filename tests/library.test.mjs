@@ -57,8 +57,8 @@ const heading = () => $('[data-heading]').textContent;
 
 function cards() {
   return $$('[data-resource]').map((el) => ({
-    title: el.dataset.title,
-    description: el.dataset.description,
+    title: el.querySelector('[data-title-el]').textContent.trim(),
+    description: el.querySelector('[data-description]').textContent.trim(),
     category: el.dataset.category,
     tags: el.dataset.tags.split('|').filter(Boolean),
     featured: el.dataset.featured === 'true',
