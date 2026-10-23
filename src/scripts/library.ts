@@ -88,7 +88,10 @@ function init(scope: HTMLElement) {
       return;
     }
 
-    if (event.key === 'Escape' && dialog?.open) dialog.close();
+    if (event.key === 'Escape') {
+      closeMenus();
+      if (dialog?.open) dialog.close();
+    }
   });
 
   // --------------------------------------------------------------- filters
@@ -126,8 +129,11 @@ function init(scope: HTMLElement) {
   }
 
   // ----------------------------------------------------------- mobile sheet
-  document.querySelector<HTMLButtonElement>('[data-open-filters]')?.addEventListener('click', () => {
+  const openFilters = document.querySelector<HTMLButtonElement>('[data-open-filters]');
+  openFilters?.addEventListener('click', () => {
     dialog?.showModal();
+    // Land on something useful rather than the first control in the sheet.
+    document.querySelector<HTMLButtonElement>('[data-close-filters]')?.focus();
   });
   document.querySelector<HTMLButtonElement>('[data-close-filters]')?.addEventListener('click', () => {
     dialog?.close();
@@ -137,14 +143,46 @@ function init(scope: HTMLElement) {
     // clicking the backdrop (the dialog element itself) closes
     if (event.target === dialog) dialog.close();
   });
+  dialog?.addEventListener('close', () => {
+    // Return focus to the control that opened the sheet.
+    openFilters?.focus();
+  });
+
+  function closeMenus() {
+    document.querySelectorAll<HTMLDetailsElement>('[data-menu][open]').forEach((menu) => {
+      menu.open = false;
+    });
+  }
 
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
-    if (!target.closest('[data-menu]')) {
-      document.querySelectorAll<HTMLDetailsElement>('[data-menu][open]').forEach((menu) => {
-        menu.open = false;
+    if (!target.closest('[data-menu]')) closeMenus();
+  });
+
+  // ------------------------------------------------------- long tag lists
+  const tagLists = [...document.querySelectorAll<HTMLElement>('[data-tag-list]')];
+  const toggleTags = [...document.querySelectorAll<HTMLButtonElement>('[data-toggle-tags]')];
+
+  tagLists.forEach((list) => {
+    if (!list.querySelector('.tag-extra')) return;
+    list.classList.add('is-collapsed');
+  });
+  toggleTags.forEach((button) => {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const panel = button.closest('[data-filter-panel]');
+      panel?.querySelectorAll<HTMLElement>('[data-tag-list]').forEach((list) => {
+        list.classList.toggle('is-collapsed', expanded);
       });
-    }
+      button.setAttribute('aria-expanded', String(!expanded));
+      const label = button.querySelector('[data-toggle-tags-label]');
+      if (label) {
+        label.textContent = expanded
+          ? (button.dataset.more ?? 'Show all tags')
+          : (button.dataset.less ?? 'Show fewer tags');
+      }
+    });
   });
 
   // --------------------------------------------------------- copy to clip
@@ -156,6 +194,7 @@ function init(scope: HTMLElement) {
       await navigator.clipboard.writeText(url);
       const original = button.textContent;
       button.textContent = 'Copied';
+      button.closest<HTMLDetailsElement>('[data-menu]')?.removeAttribute('open');
       window.setTimeout(() => {
         button.textContent = original;
       }, 1400);

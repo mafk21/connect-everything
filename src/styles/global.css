@@ -25,7 +25,9 @@
 
   --color-ink: #1c2b2a;
   --color-ink-soft: #4d605e;
-  --color-ink-muted: #7c8b8a;
+  /* Was #7c8b8a, which measured 3.55:1 on white and 3.09:1 on mint — below the
+     4.5:1 needed for the 13px meta text it is used on. */
+  --color-ink-muted: #5c6e6c;
 
   /* Decorative only — never used for text */
   --color-accent-cyan: #60bace;
@@ -118,3 +120,11 @@
   }
 }
 
+/* ------------------------------------------------------------------
+   Sidebar tag list
+   Server-rendered in full so it works without JavaScript; the script adds
+   `is-collapsed` on load, which hides everything past the first screenful.
+------------------------------------------------------------------- */
+[data-tag-list].is-collapsed .tag-extra {
+  display: none;
+}

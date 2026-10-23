@@ -18,6 +18,8 @@ interface Props {
   intro?: string;
   /** index = the interactive library; other pages link filters to / */
   mode?: 'live' | 'links';
+  structuredData?: Record<string, unknown>[];
+  noindex?: boolean;
 }
 
 const {
@@ -29,15 +31,18 @@ const {
   metaDescription,
   intro,
   mode = 'links',
+  structuredData,
+  noindex,
 } = Astro.props;
 
+const REPO_URL = 'https://github.com/mafk21/connect-everything';
 const categories: CountedOption[] = categoryCounts(allResources);
 const tags: CountedOption[] = tagCounts(allResources);
 const featuredCount = allResources.filter((resource) => resource.featured).length;
 const live = mode === 'live';
 ---
 
-<BaseLayout title={metaTitle} description={metaDescription}>
+<BaseLayout title={metaTitle} description={metaDescription} structuredData={structuredData} noindex={noindex}>
   <div class="mx-auto w-full max-w-[var(--spacing-page)] px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-6">
     <div
       class="grid min-h-[calc(100dvh-24px)] grid-cols-1 overflow-hidden rounded-panel border border-line bg-white shadow-panel sm:min-h-[calc(100dvh-32px)] lg:min-h-[calc(100dvh-48px)] lg:grid-cols-[var(--spacing-sidebar)_1fr]"
@@ -162,14 +167,46 @@ const live = mode === 'live';
           </div>
         </main>
 
-        <footer class="flex flex-wrap items-center justify-between gap-2 border-t border-line px-4 py-4 text-meta text-ink-muted sm:px-5">
-          <p data-footer-count>{resources.length} of {allResources.length} resources · curated by hand</p>
-          <p>
-            Know something that belongs here?
-            <a href="/suggest" class="font-medium text-teal-800 underline decoration-teal-100 underline-offset-2 hover:decoration-teal-700">
-              Suggest it
-            </a>
+        <footer
+          class="flex flex-col gap-2 border-t border-line px-4 py-4 text-meta text-ink-muted sm:flex-row sm:items-center sm:justify-between sm:px-5"
+        >
+          <p data-footer-count>
+            {resources.length} of {allResources.length} resources · curated by hand
           </p>
+          <nav aria-label="Footer" class="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <a
+              href="/featured"
+              class="rounded transition-colors hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+            >
+              Featured
+            </a>
+            <a
+              href="/suggest"
+              class="rounded transition-colors hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+            >
+              Suggest a resource
+            </a>
+            <a
+              href={REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-1 rounded transition-colors hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+            >
+              GitHub
+              <svg
+                viewBox="0 0 24 24"
+                class="size-3 transition-transform group-hover:-translate-y-px group-hover:translate-x-px"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M8 16 16 8M9.5 8H16v6.5" />
+              </svg>
+            </a>
+          </nav>
         </footer>
       </div>
     </div>

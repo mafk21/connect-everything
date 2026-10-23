@@ -5,6 +5,20 @@ import { RESOURCES } from '../data/resources';
 const featured = RESOURCES.filter((resource) => resource.featured).sort((a, b) =>
   b.dateAdded.localeCompare(a.dateAdded)
 );
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Featured resources',
+  numberOfItems: featured.length,
+  itemListElement: featured.map((resource, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: resource.title,
+    url: resource.url,
+    description: resource.description,
+  })),
+};
 ---
 
 <LibraryLayout
@@ -12,6 +26,7 @@ const featured = RESOURCES.filter((resource) => resource.featured).sort((a, b) =
   resources={featured}
   allResources={RESOURCES}
   currentPath="/featured"
+  structuredData={[itemList]}
   intro="The entries worth starting with — chosen because they are useful on day one, not because anyone paid."
   metaTitle="Featured resources — Connect Everything"
   metaDescription="The curator's picks from the Connect Everything library."
