@@ -298,7 +298,7 @@ Favicons are the one third-party request per card. They load lazily, are fixed-s
 
 - Static output → Vercel (connected) or any static host. Build command `astro build`, output `dist`.
 - Every push to the working branch produces a preview URL; `main` produces production.
-- No environment secrets required, since there is no backend. The only optional env var is a form endpoint for `/suggest` (see §8).
+- No environment secrets required: no backend, no form endpoint, no mail recipient.
 
 ---
 
@@ -307,8 +307,10 @@ Favicons are the one third-party request per card. They load lazily, are fixed-s
 Header button → `/suggest`, which contains:
 
 1. A one-line invitation and the bar for inclusion ("useful, still alive, free or fairly priced, no signup wall to see value").
-2. A short form (URL, why it belongs, optional name) posting to a static form endpoint — Formspree/Netlify-style — **or**, if you prefer zero third parties, a `mailto:` link. Decides at build time based on your preference; default is `mailto:` so nothing external is introduced.
-3. A "contribute via pull request" note linking to `src/data/resources.ts`, for people who want to add it directly.
+2. A primary **"Suggest on GitHub"** action opening a new issue on the repository — no placeholder form endpoint, no email address, no third-party service.
+3. A "prefer to add it yourself?" card linking to the repository, explaining that the library lives in `src/data/resources.ts` and that a pull request gets reviewed like any other entry.
+
+Decided: GitHub is the only submission route. No `mailto:` fallback and no form service, so there is nothing to deliver mail and no inbox to monitor.
 
 No submissions appear publicly without your curation. This keeps the no-account promise intact.
 
@@ -364,7 +366,7 @@ Expand to **~100 resources**: review the first 12 for voice consistency, then ad
 ## 11. Open items
 
 1. **Name.** The mockup says "Bookmark Manager"; the repo is `connect-everything`. Needs a wordmark and a one-line tagline before M1 (the brand tile is visible immediately). Candidates: *Toolbox*, *The Shelf*, *Index*, *Useful*.
-2. **Suggest mechanism.** `mailto:` (zero third parties) vs a static form endpoint. Default in this plan is `mailto:`.
+2. **Suggest mechanism.** Resolved: GitHub issues and pull requests only. No email address or form endpoint.
 3. **Category set.** The 8 above are a draft based on the reference's tag mix; confirm before M5 so entries don't get re-sorted twice.
 4. **Language.** English only, or bilingual (Arabic/English) later? Affects font stack and layout direction now.
 
