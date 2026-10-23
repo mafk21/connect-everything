@@ -1,0 +1,185 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SearchField from '../components/SearchField.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import Brand from '../components/Brand.astro';
+import MobileFilters from '../components/MobileFilters.astro';
+import type { Resource } from '../data/resources';
+import { categoryCounts, tagCounts, type CountedOption } from '../lib/derive';
+
+interface Props {
+  heading: string;
+  resources: Resource[];
+  allResources: Resource[];
+  currentPath: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  intro?: string;
+  /** index = the interactive library; other pages link filters to / */
+  mode?: 'live' | 'links';
+}
+
+const {
+  heading,
+  resources,
+  allResources,
+  currentPath,
+  metaTitle,
+  metaDescription,
+  intro,
+  mode = 'links',
+} = Astro.props;
+
+const categories: CountedOption[] = categoryCounts(allResources);
+const tags: CountedOption[] = tagCounts(allResources);
+const featuredCount = allResources.filter((resource) => resource.featured).length;
+const live = mode === 'live';
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <div class="mx-auto w-full max-w-[var(--spacing-page)] px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-6">
+    <div
+      class="grid min-h-[calc(100dvh-24px)] grid-cols-1 overflow-hidden rounded-panel border border-line bg-white shadow-panel sm:min-h-[calc(100dvh-32px)] lg:min-h-[calc(100dvh-48px)] lg:grid-cols-[var(--spacing-sidebar)_1fr]"
+      data-library={live ? 'live' : 'static'}
+    >
+      <div class="hidden lg:block">
+        <Sidebar
+          categories={categories}
+          tags={tags}
+          total={allResources.length}
+          featuredCount={featuredCount}
+          currentPath={currentPath}
+          mode={mode}
+        />
+      </div>
+
+      <div class="flex min-w-0 flex-col bg-mint-100">
+        <header class="flex flex-wrap items-center gap-2 border-b border-line bg-white px-4 py-3 sm:gap-3 sm:px-5">
+          <div class="lg:hidden">
+            <Brand />
+          </div>
+
+          <div class="order-4 w-full sm:order-none sm:w-auto sm:flex-1">
+            <SearchField />
+          </div>
+
+          <div class="ml-auto flex items-center gap-2">
+            <MobileFilters categories={categories} tags={tags} mode={mode} />
+
+            <a
+              href="/suggest"
+              class="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-chip bg-teal-900 px-3.5 text-meta font-medium text-white transition-colors hover:bg-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+            >
+              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5.5v13M5.5 12h13" />
+              </svg>
+              Suggest a resource
+            </a>
+          </div>
+        </header>
+
+        <main id="main" class="flex-1 px-4 py-5 sm:px-5">
+          <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+            <div class="min-w-0">
+              <h1 class="text-page-title font-bold text-ink" data-heading>{heading}</h1>
+              <p class="mt-1 text-meta text-ink-muted" data-intro>
+                {
+                  intro ? (
+                    intro
+                  ) : (
+                    <span aria-live="polite">
+                      <span data-result-count>{resources.length}</span>
+                      <span data-result-noun>{resources.length === 1 ? 'resource' : 'resources'}</span>
+                    </span>
+                  )
+                }
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <label for="sort-library" class="sr-only">Sort resources</label>
+              <div class="relative">
+                <select
+                  id="sort-library"
+                  data-sort
+                  class="h-9 appearance-none rounded-chip border border-line bg-white pl-3 pr-8 text-meta text-ink-soft transition-colors hover:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+                  disabled={!live}
+                >
+                  <option value="featured">Featured first</option>
+                  <option value="newest">Newest</option>
+                  <option value="az">A–Z</option>
+                </select>
+                <svg
+                  class="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-ink-muted"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9.5 6 6 6-6" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" data-grid>
+            {
+              resources.map((resource) => (
+                <li class="h-full" data-card>
+                  <ResourceCard resource={resource} mode={mode} />
+                </li>
+              ))
+            }
+          </ul>
+
+          <div
+            data-empty-state
+            hidden
+            class="mx-auto flex max-w-sm flex-col items-center rounded-card border border-dashed border-line-strong bg-white/70 px-6 py-12 text-center"
+          >
+            <span class="grid size-11 place-items-center rounded-full bg-mint-100 text-teal-800">
+              <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="m16 16 4 4" />
+              </svg>
+            </span>
+            <h2 class="mt-4 text-nav font-semibold text-ink">Nothing matches yet</h2>
+            <p class="mt-1.5 text-meta leading-relaxed text-ink-muted">
+              No resource fits this combination of filters. Try a broader search, or clear
+              everything and start again.
+            </p>
+            <button
+              type="button"
+              data-clear-filters
+              class="mt-4 inline-flex h-9 items-center rounded-chip bg-teal-900 px-3.5 text-meta font-medium text-white transition-colors hover:bg-teal-700"
+            >
+              Clear filters
+            </button>
+          </div>
+        </main>
+
+        <footer class="flex flex-wrap items-center justify-between gap-2 border-t border-line px-4 py-4 text-meta text-ink-muted sm:px-5">
+          <p data-footer-count>{resources.length} of {allResources.length} resources · curated by hand</p>
+          <p>
+            Know something that belongs here?
+            <a href="/suggest" class="font-medium text-teal-800 underline decoration-teal-100 underline-offset-2 hover:decoration-teal-700">
+              Suggest it
+            </a>
+          </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+{
+  live && (
+    <script>
+      import '../scripts/library';
+    </script>
+  )
+}
