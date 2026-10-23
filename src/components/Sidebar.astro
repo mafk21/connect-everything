@@ -29,7 +29,12 @@ const navBase =
   class="flex h-full flex-col gap-6 overflow-y-auto border-line bg-white px-4 py-5 lg:border-r"
   aria-label="Browse the library"
 >
-  <Brand />
+  <div>
+    <Brand />
+    <p class="mt-2 px-1 text-meta leading-relaxed text-ink-muted">
+      A hand-picked toolbox of the useful internet.
+    </p>
+  </div>
 
   <nav aria-label="Views" class="mt-1">
     <ul class="space-y-0.5">
@@ -64,7 +69,7 @@ const navBase =
           <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">
             <path d="m12 4.5 2.3 4.9 5.2.7-3.8 3.7.9 5.3-4.6-2.5-4.6 2.5.9-5.3L4.5 10l5.2-.7L12 4.5Z" />
           </svg>
-          <span>Featured</span>
+          <span>Start here</span>
           <span class="ml-auto text-meta font-normal tabular-nums text-ink-muted">{featuredCount}</span>
         </a>
       </li>
@@ -73,7 +78,7 @@ const navBase =
 
   <FilterPanel categories={categories} tags={tags} mode={mode} idPrefix="sidebar" />
 
-  <p class="mt-auto px-3 pt-4 text-meta leading-relaxed text-ink-muted">
-    Hand-picked, one entry at a time. Nothing here is an ad.
+  <p class="mt-auto px-2 pt-4 text-meta leading-relaxed text-ink-muted">
+    Click any card to open it. Hand-picked — nothing here is an ad.
   </p>
 </aside>

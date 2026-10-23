@@ -88,6 +88,38 @@ const live = mode === 'live';
         </header>
 
         <main id="main" class="flex-1 px-4 py-5 sm:px-5">
+          <!-- Small screens never see the sidebar, so they get the categories inline. -->
+          <div
+            class="-mx-4 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1 sm:-mx-5 sm:px-5 lg:hidden"
+            data-category-scroller
+            aria-label="Categories"
+          >
+            <button
+              type="button"
+              data-clear-category
+              class="chip chip--filter shrink-0"
+              aria-pressed="true"
+            >
+              All
+            </button>
+            {
+              categories.map((category) => (
+                <button
+                  type="button"
+                  data-filter-category={category.id}
+                  data-label={category.label}
+                  aria-pressed="false"
+                  class="chip chip--filter shrink-0"
+                >
+                  <span>{category.label}</span>
+                  <span class="chip__count" data-count-category={category.id}>
+                    {category.count}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
           <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div class="min-w-0">
               <h1 class="text-page-title font-bold text-ink" data-heading>{heading}</h1>
@@ -96,10 +128,15 @@ const live = mode === 'live';
                   intro ? (
                     intro
                   ) : (
-                    <span aria-live="polite">
-                      <span data-result-count>{resources.length}</span>
-                      <span data-result-noun>{resources.length === 1 ? 'resource' : 'resources'}</span>
-                    </span>
+                    <>
+                      <span aria-live="polite">
+                        <span data-result-count>{resources.length}</span>
+                        <span data-result-noun>
+                          {resources.length === 1 ? 'resource' : 'resources'}
+                        </span>
+                      </span>{' '}
+                      <span class="text-ink-muted/80">· click any card to open it</span>
+                    </>
                   )
                 }
               </p>
@@ -114,8 +151,7 @@ const live = mode === 'live';
                   class="h-9 appearance-none rounded-chip border border-line bg-white pl-3 pr-8 text-meta text-ink-soft transition-colors hover:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
                   disabled={!live}
                 >
-                  <option value="featured">Featured first</option>
-                  <option value="newest">Newest</option>
+                  <option value="newest">Newest first</option>
                   <option value="az">A–Z</option>
                 </select>
                 <svg
@@ -132,6 +168,22 @@ const live = mode === 'live';
                 </svg>
               </div>
             </div>
+          </div>
+
+          <div
+            data-active-filters
+            hidden
+            class="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 rounded-card border border-line bg-white/70 px-3 py-2"
+          >
+            <span class="text-meta text-ink-muted">Showing</span>
+            <ul class="flex flex-wrap items-center gap-1.5" data-active-list></ul>
+            <button
+              type="button"
+              data-clear-filters
+              class="ml-auto inline-flex items-center gap-1 rounded-chip px-2 py-1 text-meta font-medium text-teal-800 transition-colors hover:bg-mint-100"
+            >
+              Clear all
+            </button>
           </div>
 
           <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" data-grid>
@@ -181,7 +233,7 @@ const live = mode === 'live';
               href="/featured"
               class="rounded transition-colors hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
             >
-              Featured
+              Start here
             </a>
             <a
               href="/suggest"

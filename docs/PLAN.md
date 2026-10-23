@@ -358,6 +358,22 @@ Scale changed the performance picture: the fully server-rendered index is now 11
 
 Still open: `npm run links` cannot reach arbitrary hosts from this sandbox, so the dead-link sweep has not been run against the live web.
 
+### M6 — Make the library legible at a glance · **done**
+
+At 533 entries the single page had become hard to enter: a flat 533-card wall, 64 checkbox-style tag rows, a sort control that duplicated the Featured view, and a per-card "⋯" menu that implied options where there was only one action.
+
+What changed, without adding a page or a second navigation model:
+- **Orientation** — a one-line tagline under the brand, and the heading line now says what to do ("533 resources · click any card to open it").
+- **Categories read as navigation** — icon tiles with counts, single-select, instead of empty checkboxes that looked like a form.
+- **Tags became a grouped chip cloud** — seven families (Discipline, Format, Subject, Security, AI & LLM, Practice, Qualities), the last four folded behind "All 64 tags". Same AND semantics, far less visual weight.
+- **Small screens get category chips** inline, since the sidebar is hidden there.
+- **An applied-filter bar** names every active filter and removes them one at a time — the view can no longer look empty without saying why.
+- **One sort concept** (Newest / A–Z). "Featured first" was removed as a sort because it duplicated the Featured view.
+- **The card menu was removed.** The whole card was already the link; "open" and "copy link" were the only items in it.
+- **"Featured" was renamed "Start here"** in the nav, the footer, the page heading and the card badge — it explains itself to a newcomer in a way "Featured" does not.
+
+**Done when:** every earlier test still passes, and the new summary bar, grouped tags and mobile chips are covered by tests. Met: 44/44 engine tests, 8/8 hydration tests.
+
 ---
 
 ## 10. Decisions log
@@ -368,8 +384,8 @@ Still open: `npm run links` cannot reach arbitrary hosts from this sandbox, so t
 | Framework | Astro + Tailwind | Content site; static HTML first, tiny JS |
 | Rendering | Server-rendered grid + client-side enhancement | Works without JS, instant filtering |
 | Taxonomy | Categories (single) + tags (multi, AND) | Category is the spine; tags are facets |
-| Nav labels | "All resources" / "Featured" | "Home"/"Archived" carry no meaning for a public library |
-| Card link | Whole card, new tab | One click to the destination, as requested |
+| Nav labels | "All resources" / "Start here" | "Home"/"Archived" carry no meaning for a public library; "Featured" explained nothing to a newcomer |
+| Card link | Whole card, new tab | One click to the destination, as requested; the per-card menu was removed as redundant |
 | Pin icon | `featured` badge | Pins are curator state, not visitor state |
 | View counter | Removed | Cannot be computed honestly without tracking |
 | Header action | "Suggest a resource" | Keeps the reference's layout without implying visitor accounts |

@@ -125,7 +125,7 @@
    Server-rendered in full so it works without JavaScript; the script adds
    `is-collapsed` on load, which hides everything past the first screenful.
 ------------------------------------------------------------------- */
-[data-tag-list].is-collapsed .tag-extra {
+[data-tag-groups].is-collapsed .tag-extra {
   display: none;
 }
 
@@ -199,64 +199,6 @@
     white-space: nowrap;
   }
 
-  .r-card__menu {
-    position: relative;
-    z-index: 10;
-    flex-shrink: 0;
-    margin: -0.25rem -0.25rem 0 0;
-  }
-
-  .r-card__menu-button {
-    display: grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 6px;
-    color: var(--color-ink-soft);
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .r-card__menu-button::-webkit-details-marker {
-    display: none;
-  }
-
-  .r-card__menu-button:hover {
-    background: var(--color-mint-100);
-    color: var(--color-teal-900);
-  }
-
-  .r-card__menu-panel {
-    position: absolute;
-    top: 2.25rem;
-    right: 0;
-    z-index: 20;
-    width: 11rem;
-    overflow: hidden;
-    padding: 0.25rem 0;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-chip);
-    background: #fff;
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .r-card__menu-item {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    font-size: var(--text-meta);
-    color: var(--color-ink-soft);
-  }
-
-  .r-card__menu-item--button {
-    width: 100%;
-    text-align: left;
-  }
-
-  .r-card__menu-item:hover {
-    background: var(--color-mint-100);
-    color: var(--color-teal-900);
-  }
-
   .r-card__desc {
     margin-top: 0.75rem;
     display: -webkit-box;
@@ -291,6 +233,65 @@
   .chip:hover {
     background: var(--color-mint-200);
     color: var(--color-teal-900);
+  }
+
+  /* Filter chips (sidebar tag cloud, mobile category row) ----------------- */
+  .chip--filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 3px 7px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .chip--filter:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .chip--filter[aria-pressed='true'] {
+    background: var(--color-teal-900);
+    border-color: var(--color-teal-900);
+    color: #fff;
+  }
+
+  .chip__count {
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.6;
+  }
+
+  .chip--filter[aria-pressed='true'] .chip__count {
+    opacity: 0.75;
+  }
+
+  /* Applied-filter chips in the summary bar ------------------------------- */
+  .chip--active {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 2px 4px 2px 8px;
+    border: 1px solid var(--color-line-strong);
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .chip__x {
+    display: grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 999px;
+    background: var(--color-mint-100);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--color-teal-900);
+  }
+
+  .chip--active:hover .chip__x {
+    background: var(--color-teal-900);
+    color: #fff;
   }
 
   .r-card__foot {

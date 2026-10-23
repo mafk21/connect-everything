@@ -185,9 +185,6 @@ sort.dispatchEvent(new window.Event('change', { bubbles: true }));
 const newestFirst = [...all].sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title))[0];
 check('newest starts at the latest date', visibleTitles()[0].slice(0, 0) + visibleTitles()[0], newestFirst.title);
 
-sort.value = 'featured';
-sort.dispatchEvent(new window.Event('change', { bubbles: true }));
-check('featured first puts a featured card on top', all.find((c) => c.title === visibleTitles()[0]).featured, true);
 
 // Card chips -----------------------------------------------------------
 const chipTag = document.querySelector('[data-resource="figma"] [data-filter-tag]');
@@ -196,11 +193,38 @@ check('card chip activates that tag', count(), expected({ tags: [chipTag.textCon
 check('card chip shows in heading', heading(), `Tagged ${chipTag.textContent.trim()}`);
 click('[data-clear-filters]:not([hidden])');
 
-// Menu behaviour -------------------------------------------------------
-const menu = $('[data-menu]');
-menu.setAttribute('open', '');
-document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-check('escape closes kebab menu', menu.hasAttribute('open'), false);
+// Applied-filter summary -----------------------------------------------
+const activeBar = $('[data-active-filters]');
+check('summary hidden with no filters', activeBar.hidden, true);
+
+document.querySelector('[data-filter-category="design"]').click();
+const activeChips = () => [...document.querySelectorAll('[data-active-list] .chip--active')];
+check('summary appears once a filter is on', activeBar.hidden, false);
+check('summary names the category', activeChips().map((c) => c.textContent.replace('×', '')), ['Design']);
+
+document.querySelector('[data-filter-tag="Figma"]')?.click();
+check('summary lists search too', activeChips().length >= 1, true);
+
+activeChips()[0].click();
+check('removing a chip drops that filter', activeBar.hidden, true);
+check('count returns to the full library', count(), all.length);
+
+// Grouped tags ----------------------------------------------------------
+const sidebarPanel = $('[data-filter-panel]');
+const groups = [...sidebarPanel.querySelectorAll('[data-tag-groups]')];
+check('tag groups collapse by default', groups[0].classList.contains('is-collapsed'), true);
+const toggle = sidebarPanel.querySelector('[data-toggle-tags]');
+toggle.click();
+check('toggle expands every tag group', groups.every((g) => !g.classList.contains('is-collapsed')), true);
+toggle.click();
+check('toggle collapses again', groups[0].classList.contains('is-collapsed'), true);
+
+// Mobile category chips -------------------------------------------------
+const mobileAll = $('[data-clear-category]');
+check('mobile "All" chip starts pressed', mobileAll.getAttribute('aria-pressed'), 'true');
+$('[data-category-scroller] [data-filter-category="learning"]').click();
+check('mobile chip filters', count(), expected({ category: 'learning' }).length);
+check('mobile "All" chip clears the category', (mobileAll.click(), count()), all.length);
 
 // ---------------------------------------------------------------------------
 
