@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Brand from '../components/Brand.astro';
+
+const MAIL = 'hello@connecteverything.example';
+---
+
+<BaseLayout
+  title="Suggest a resource — Connect Everything"
+  description="Know a site, tool or tutorial that belongs in the library? Send it in."
+>
+  <div class="mx-auto w-full max-w-[760px] px-4 py-10 sm:py-16">
+    <div class="rounded-panel border border-line bg-white p-7 shadow-panel sm:p-10">
+      <Brand />
+
+      <h1 class="mt-8 text-[28px] font-bold leading-tight text-ink">Suggest a resource</h1>
+      <p class="mt-3 max-w-lg text-body text-ink-soft">
+        The library is curated by hand, so not everything gets in — but everything gets read.
+        Send a link and one line on why it earns a place.
+      </p>
+
+      <div class="mt-7 rounded-card border border-line bg-mint-100/60 p-5">
+        <h2 class="text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
+          What gets in
+        </h2>
+        <ul class="mt-3 space-y-2 text-body text-ink-soft">
+          <li>· Still online, still maintained.</li>
+          <li>· Free to use, or worth the price it asks.</li>
+          <li>· Useful before you sign up, not after.</li>
+          <li>· Something a person would genuinely return to.</li>
+        </ul>
+      </div>
+
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a
+          href={`mailto:${MAIL}?subject=Resource%20suggestion`}
+          class="inline-flex h-10 items-center rounded-chip bg-teal-900 px-4 text-body font-medium text-white transition-colors hover:bg-teal-700"
+        >
+          Email a suggestion
+        </a>
+        <a
+          href="/"
+          class="inline-flex h-10 items-center rounded-chip border border-line px-4 text-body font-medium text-ink-soft transition-colors hover:bg-mint-100 hover:text-teal-900"
+        >
+          Back to the library
+        </a>
+      </div>
+
+      <p class="mt-8 border-t border-line pt-5 text-meta text-ink-muted">
+        Prefer to add it yourself? The whole library lives in
+        <code class="rounded bg-mint-100 px-1.5 py-0.5 text-[12px] text-teal-900">src/data/resources.ts</code>
+        — open a pull request and it gets reviewed like any other entry.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

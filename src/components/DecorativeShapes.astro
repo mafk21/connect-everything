@@ -1,0 +1,79 @@
+---
+/**
+ * Canvas ornaments from the reference mockup.
+ * Purely decorative: never interactive, never over text, hidden on small
+ * screens where they would crowd the panel.
+ */
+---
+
+<div
+  class="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden md:block"
+  aria-hidden="true"
+>
+  <!-- Opening quotation marks, top centre -->
+  <svg
+    class="absolute left-1/2 top-[-2px] h-16 w-28 -translate-x-1/2 text-accent-cyan"
+    viewBox="0 0 84 48"
+    fill="currentColor"
+    style="opacity: 0.55"
+  >
+    <path d="M8 0h26c5 0 8 3 8 8v14c0 12-7 20-18 24l-3-8c7-3 10-7 10-12H8c-4.5 0-8-3.5-8-8V8c0-5 3.5-8 8-8Z" />
+    <path d="M62 0h26c5 0 8 3 8 8v14c0 12-7 20-18 24l-3-8c7-3 10-7 10-12H62c-4.5 0-8-3.5-8-8V8c0-5 3.5-8 8-8Z" />
+  </svg>
+
+  <!-- Coral chevron, left edge -->
+  <svg
+    class="absolute left-[-64px] top-[180px] h-[190px] w-[150px] text-accent-coral"
+    viewBox="0 0 150 190"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="16"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    style="opacity: 0.6"
+  >
+    <path d="M10 12 84 95 10 178" />
+  </svg>
+
+  <!-- Cyan dot grid, right edge -->
+  <svg
+    class="absolute right-[0px] top-[300px] h-[240px] w-[90px] text-accent-cyan"
+    viewBox="0 0 90 240"
+    fill="currentColor"
+    style="opacity: 0.55"
+  >
+    {
+      [0, 1, 2, 3, 4, 5, 6, 7].map((row) =>
+        [0, 1, 2, 3].map((col) => (
+          <circle cx={12 + col * 24} cy={12 + row * 28} r="5.5" />
+        ))
+      )
+    }
+  </svg>
+
+  <!-- Coral zigzag, bottom centre -->
+  <svg
+    class="absolute bottom-[-6px] left-1/2 h-[90px] w-[320px] -translate-x-1/2 text-accent-coral"
+    viewBox="0 0 320 90"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    style="opacity: 0.65"
+  >
+    <path d="M0 66 26 40 52 66 78 40 104 66 130 40 156 66 182 40 208 66 234 40 260 66 286 40 312 66" />
+  </svg>
+
+  <!-- Soft circle, lower left -->
+  <svg
+    class="absolute bottom-[-120px] left-[-120px] h-[360px] w-[360px] text-accent-sun"
+    viewBox="0 0 360 360"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    style="opacity: 0.35"
+  >
+    <circle cx="180" cy="180" r="150" />
+  </svg>
+</div>

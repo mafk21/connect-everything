@@ -1,0 +1,31 @@
+---
+interface Props {
+  id?: string;
+}
+const { id = 'library-search' } = Astro.props;
+---
+
+<div class="relative w-full max-w-[320px]">
+  <label for={id} class="sr-only">Search resources</label>
+  <svg
+    class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m16 16 4 4" />
+  </svg>
+  <input
+    id={id}
+    type="search"
+    name="q"
+    placeholder="Search resources, tools, tutorials…"
+    autocomplete="off"
+    spellcheck="false"
+    class="h-10 w-full rounded-chip border border-line bg-white pl-9 pr-3 text-body text-ink placeholder:text-ink-muted focus:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 [&::-webkit-search-cancel-button]:hidden"
+  />
+</div>

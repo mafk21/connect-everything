@@ -1,0 +1,18 @@
+---
+import LibraryLayout from '../layouts/LibraryLayout.astro';
+import { RESOURCES } from '../data/resources';
+
+const featuredFirst = [...RESOURCES].sort((a, b) => {
+  if (!!b.featured !== !!a.featured) return Number(!!b.featured) - Number(!!a.featured);
+  return b.dateAdded.localeCompare(a.dateAdded);
+});
+---
+
+<LibraryLayout
+  heading="All resources"
+  resources={featuredFirst}
+  allResources={RESOURCES}
+  currentPath="/"
+  metaTitle="Connect Everything — a curated toolbox of the useful internet"
+  metaDescription="A hand-curated library of websites, tools, tutorials and references. Browse, search and click straight through. No account needed."
+/>

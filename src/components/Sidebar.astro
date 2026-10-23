@@ -1,0 +1,138 @@
+---
+import Brand from './Brand.astro';
+import type { CountedOption } from '../lib/derive';
+
+interface Props {
+  categories: CountedOption[];
+  tags: CountedOption[];
+  total: number;
+  featuredCount: number;
+  activeCategory?: string;
+  currentPath?: string;
+  /** Phase 1: rows are presentational. Phase 2 turns them into live filters. */
+  interactive?: boolean;
+}
+
+const {
+  categories,
+  tags,
+  total,
+  featuredCount,
+  activeCategory,
+  currentPath = '/',
+  interactive = false,
+} = Astro.props;
+
+const navBase =
+  'flex items-center gap-3 rounded-chip px-3 py-2 text-nav font-medium transition-colors';
+---
+
+<aside
+  class="flex h-full flex-col gap-6 border-line bg-white px-4 py-5 lg:border-r"
+  aria-label="Browse the library"
+>
+  <Brand />
+
+  <nav aria-label="Views" class="mt-1">
+    <ul class="space-y-0.5">
+      <li>
+        <a
+          href="/"
+          class:list={[
+            navBase,
+            currentPath === '/'
+              ? 'bg-mint-100 text-teal-900'
+              : 'text-ink-soft hover:bg-mint-100/70 hover:text-teal-900',
+          ]}
+        >
+          <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 10.6 12 4l8 6.6V19a1 1 0 0 1-1 1h-4v-5.4H9V20H5a1 1 0 0 1-1-1v-8.4Z" />
+          </svg>
+          <span>All resources</span>
+          <span class="ml-auto text-meta font-normal tabular-nums text-ink-muted">{total}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/featured"
+          class:list={[
+            navBase,
+            currentPath === '/featured'
+              ? 'bg-mint-100 text-teal-900'
+              : 'text-ink-soft hover:bg-mint-100/70 hover:text-teal-900',
+          ]}
+        >
+          <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">
+            <path d="m12 4.5 2.3 4.9 5.2.7-3.8 3.7.9 5.3-4.6-2.5-4.6 2.5.9-5.3L4.5 10l5.2-.7L12 4.5Z" />
+          </svg>
+          <span>Featured</span>
+          <span class="ml-auto text-meta font-normal tabular-nums text-ink-muted">{featuredCount}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="sidebar-categories">
+    <h2 id="sidebar-categories" class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
+      Categories
+    </h2>
+    <ul class="space-y-0.5">
+      {
+        categories.map((category) => (
+          <li>
+            <div
+              data-category-row={category.id}
+              data-interactive={interactive ? 'true' : 'false'}
+              aria-current={activeCategory === category.id ? 'true' : undefined}
+              class:list={[
+                'flex items-center gap-3 rounded-md px-3 py-[7px] text-body text-ink-soft',
+                interactive && 'cursor-pointer transition-colors hover:bg-mint-100/70 hover:text-teal-900',
+                activeCategory === category.id && 'bg-mint-100 text-teal-900',
+              ]}
+            >
+              <span
+                data-marker
+                class:list={[
+                  'size-[15px] shrink-0 rounded-[4px] border bg-white',
+                  activeCategory === category.id ? 'border-teal-700 bg-teal-700' : 'border-line-strong',
+                ]}
+              />
+              <span>{category.label}</span>
+              <span class="ml-auto text-meta tabular-nums text-ink-muted">{category.count}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="sidebar-tags">
+    <h2 id="sidebar-tags" class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
+      Tags
+    </h2>
+    <ul class="space-y-0.5">
+      {
+        tags.map((tag) => (
+          <li>
+            <div
+              data-tag-row={tag.id}
+              data-interactive={interactive ? 'true' : 'false'}
+              class:list={[
+                'flex items-center gap-3 rounded-md px-3 py-[7px] text-body text-ink-soft',
+                interactive && 'cursor-pointer transition-colors hover:bg-mint-100/70 hover:text-teal-900',
+              ]}
+            >
+              <span data-marker class="size-[15px] shrink-0 rounded-[4px] border border-line-strong bg-white" />
+              <span>{tag.label}</span>
+              <span class="ml-auto text-meta tabular-nums text-ink-muted">{tag.count}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <p class="mt-auto px-3 pt-4 text-meta leading-relaxed text-ink-muted">
+    Hand-picked, one entry at a time. Nothing here is an ad.
+  </p>
+</aside>

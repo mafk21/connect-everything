@@ -1,0 +1,121 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SearchField from '../components/SearchField.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import Brand from '../components/Brand.astro';
+import type { Resource } from '../data/resources';
+import {
+  categoryCounts,
+  tagCounts,
+  type CountedOption,
+} from '../lib/derive';
+
+interface Props {
+  heading: string;
+  resources: Resource[];
+  allResources: Resource[];
+  currentPath: string;
+  activeCategory?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  intro?: string;
+}
+
+const {
+  heading,
+  resources,
+  allResources,
+  currentPath,
+  activeCategory,
+  metaTitle,
+  metaDescription,
+  intro,
+} = Astro.props;
+
+const categories: CountedOption[] = categoryCounts(allResources);
+const tags: CountedOption[] = tagCounts(allResources);
+const featuredCount = allResources.filter((resource) => resource.featured).length;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <div class="mx-auto w-full max-w-[var(--spacing-page)] px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-6">
+    <div
+      class="grid min-h-[calc(100dvh-24px)] grid-cols-1 overflow-hidden rounded-panel border border-line bg-white shadow-panel sm:min-h-[calc(100dvh-32px)] lg:min-h-[calc(100dvh-48px)] lg:grid-cols-[var(--spacing-sidebar)_1fr]"
+    >
+      <div class="hidden lg:block">
+        <Sidebar
+          categories={categories}
+          tags={tags}
+          total={allResources.length}
+          featuredCount={featuredCount}
+          activeCategory={activeCategory}
+          currentPath={currentPath}
+        />
+      </div>
+
+      <div class="flex min-w-0 flex-col bg-mint-100">
+        <header
+          class="flex flex-wrap items-center gap-3 border-b border-line bg-white px-4 py-3 sm:px-5"
+        >
+          <div class="lg:hidden">
+            <Brand />
+          </div>
+
+          <div class="order-3 w-full sm:order-none sm:w-auto sm:flex-1">
+            <SearchField />
+          </div>
+
+          <a
+            href="/suggest"
+            class="ml-auto inline-flex h-9 shrink-0 items-center gap-1.5 rounded-chip bg-teal-900 px-3.5 text-meta font-medium text-white transition-colors hover:bg-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+          >
+            <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5.5v13M5.5 12h13" />
+            </svg>
+            Suggest a resource
+          </a>
+        </header>
+
+        <main id="main" class="flex-1 px-4 py-5 sm:px-5">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h1 class="text-page-title font-bold text-ink">{heading}</h1>
+              {intro && <p class="mt-1 max-w-xl text-meta text-ink-muted">{intro}</p>}
+            </div>
+
+            <span
+              class="inline-flex h-9 items-center gap-2 rounded-chip border border-line bg-white px-3 text-meta text-ink-soft"
+              title="Sorting arrives in the next phase"
+            >
+              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 4.5v15M4 16.5l3 3 3-3M17 19.5v-15M14 7.5l3-3 3 3" />
+              </svg>
+              Sort: Featured
+            </span>
+          </div>
+
+          <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {
+              resources.map((resource) => (
+                <li class="h-full">
+                  <ResourceCard resource={resource} />
+                </li>
+              ))
+            }
+          </ul>
+        </main>
+
+        <footer class="flex flex-wrap items-center justify-between gap-2 border-t border-line px-4 py-4 text-meta text-ink-muted sm:px-5">
+          <p>{resources.length} of {allResources.length} resources · curated by hand</p>
+          <p>
+            Know something that belongs here?
+            <a href="/suggest" class="font-medium text-teal-800 underline decoration-teal-100 underline-offset-2 hover:decoration-teal-700">
+              Suggest it
+            </a>
+          </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

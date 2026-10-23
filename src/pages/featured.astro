@@ -1,0 +1,18 @@
+---
+import LibraryLayout from '../layouts/LibraryLayout.astro';
+import { RESOURCES } from '../data/resources';
+
+const featured = RESOURCES.filter((resource) => resource.featured).sort((a, b) =>
+  b.dateAdded.localeCompare(a.dateAdded)
+);
+---
+
+<LibraryLayout
+  heading="Featured"
+  resources={featured}
+  allResources={RESOURCES}
+  currentPath="/featured"
+  intro="The entries worth starting with — chosen because they are useful on day one, not because anyone paid."
+  metaTitle="Featured resources — Connect Everything"
+  metaDescription="The curator's picks from the Connect Everything library."
+/>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  href?: string;
+}
+const { href = '/' } = Astro.props;
+---
+
+<a
+  href={href}
+  class="flex items-center gap-3 rounded-chip py-1 pr-2 transition-opacity hover:opacity-80"
+  aria-label="Connect Everything — home"
+>
+  <span
+    class="grid size-9 shrink-0 place-items-center rounded-[10px] bg-teal-900 text-mint-100 shadow-[inset_0_-6px_10px_rgba(0,0,0,0.18)]"
+  >
+    <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+      <path d="M6.5 4.8h11a1.7 1.7 0 0 1 1.7 1.7v13l-7.2-4.3-7.2 4.3v-13A1.7 1.7 0 0 1 6.5 4.8Z" stroke-linejoin="round" />
+    </svg>
+  </span>
+  <span class="text-brand font-semibold tracking-[-0.02em] text-ink">Connect Everything</span>
+</a>
