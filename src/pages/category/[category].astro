@@ -1,0 +1,44 @@
+---
+import LibraryLayout from '../../layouts/LibraryLayout.astro';
+import { RESOURCES } from '../../data/resources';
+import { CATEGORIES } from '../../data/categories';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((category) => ({
+    params: { category: category.id },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const resources = RESOURCES.filter((resource) => resource.category === category.id).sort((a, b) =>
+  b.dateAdded.localeCompare(a.dateAdded)
+);
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${category.label} resources`,
+  numberOfItems: resources.length,
+  itemListElement: resources.map((resource, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: resource.title,
+    url: resource.url,
+    description: resource.description,
+  })),
+};
+---
+
+<LibraryLayout
+  heading={category.label}
+  resources={resources}
+  allResources={RESOURCES}
+  currentPath={`/category/${category.id}`}
+  mode="links"
+  structuredData={[itemList]}
+  intro={`${resources.length} hand-picked ${resources.length === 1 ? 'entry' : 'entries'} · ${category.blurb}`}
+  metaTitle={`${category.label} resources — Connect Everything`}
+  metaDescription={`${resources.length} hand-picked ${category.label.toLowerCase()} resources: ${category.blurb}`}
+/>

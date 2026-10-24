@@ -6,9 +6,11 @@ interface Props {
   categories: CountedOption[];
   tags: CountedOption[];
   mode?: 'live' | 'links';
+  activeCategory?: string;
+  activeTag?: string;
 }
 
-const { categories, tags, mode = 'live' } = Astro.props;
+const { categories, tags, mode = 'live', activeCategory, activeTag } = Astro.props;
 ---
 
 <button
@@ -51,7 +53,14 @@ const { categories, tags, mode = 'live' } = Astro.props;
     </div>
 
     <div class="flex-1 overflow-y-auto px-1 py-5">
-      <FilterPanel categories={categories} tags={tags} mode={mode} idPrefix="sheet" />
+      <FilterPanel
+        categories={categories}
+        tags={tags}
+        mode={mode}
+        idPrefix="sheet"
+        activeCategory={activeCategory}
+        activeTag={activeTag}
+      />
     </div>
 
     <div class="border-t border-line p-4">

@@ -37,6 +37,12 @@ const {
 } = Astro.props;
 
 const REPO_URL = 'https://github.com/mafk21/connect-everything';
+
+// Which browsable page we are on, so the sidebar can mark it.
+const activeCategory = currentPath.startsWith('/category/')
+  ? currentPath.split('/')[2]
+  : undefined;
+const activeTag = currentPath.startsWith('/tag/') ? currentPath.split('/')[2] : undefined;
 const categories: CountedOption[] = categoryCounts(allResources);
 const tags: CountedOption[] = tagCounts(allResources);
 const featuredCount = allResources.filter((resource) => resource.featured).length;
@@ -59,6 +65,8 @@ const live = mode === 'live';
           featuredCount={featuredCount}
           currentPath={currentPath}
           mode={mode}
+          activeCategory={activeCategory}
+          activeTag={activeTag}
         />
       </div>
 
@@ -73,7 +81,13 @@ const live = mode === 'live';
           </div>
 
           <div class="ml-auto flex items-center gap-2">
-            <MobileFilters categories={categories} tags={tags} mode={mode} />
+            <MobileFilters
+              categories={categories}
+              tags={tags}
+              mode={mode}
+              activeCategory={activeCategory}
+              activeTag={activeTag}
+            />
 
             <a
               href="/suggest"
@@ -221,6 +235,25 @@ const live = mode === 'live';
             </button>
           </div>
         </main>
+
+        <!-- Crawlable category links: the live sidebar uses buttons, so without
+             these the static /category and /tag pages would have no inbound links. -->
+        <nav
+          aria-label="Browse by category"
+          class="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line px-4 py-3 text-meta text-ink-muted sm:px-5"
+        >
+          <span class="text-[11px] font-semibold uppercase tracking-[0.09em]">Categories</span>
+          {
+            categories.map((category) => (
+              <a
+                href={`/category/${category.id}`}
+                class="rounded transition-colors hover:text-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+              >
+                {category.label}
+              </a>
+            ))
+          }
+        </nav>
 
         <footer
           class="flex flex-col gap-2 border-t border-line px-4 py-4 text-meta text-ink-muted sm:flex-row sm:items-center sm:justify-between sm:px-5"

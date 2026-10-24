@@ -67,6 +67,14 @@ export function tagCounts(resources: Resource[]): CountedOption[] {
   })).filter((option) => option.count > 0);
 }
 
+/** `Red teaming` → `red-teaming`; used for /tag/<slug> URLs. */
+export const tagSlug = (tag: string): string =>
+  tag
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
 export const categoryLabel = (id: CategoryId): string =>
   CATEGORIES.find((category) => category.id === id)?.label ?? id;
 

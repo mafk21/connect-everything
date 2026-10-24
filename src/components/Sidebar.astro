@@ -10,6 +10,8 @@ interface Props {
   featuredCount: number;
   currentPath?: string;
   mode?: 'live' | 'links';
+  activeCategory?: string;
+  activeTag?: string;
 }
 
 const {
@@ -19,6 +21,8 @@ const {
   featuredCount,
   currentPath = '/',
   mode = 'links',
+  activeCategory,
+  activeTag,
 } = Astro.props;
 
 const navBase =
@@ -76,7 +80,14 @@ const navBase =
     </ul>
   </nav>
 
-  <FilterPanel categories={categories} tags={tags} mode={mode} idPrefix="sidebar" />
+  <FilterPanel
+    categories={categories}
+    tags={tags}
+    mode={mode}
+    idPrefix="sidebar"
+    activeCategory={activeCategory}
+    activeTag={activeTag}
+  />
 
   <p class="mt-auto px-2 pt-4 text-meta leading-relaxed text-ink-muted">
     Click any card to open it. Hand-picked — nothing here is an ad.
