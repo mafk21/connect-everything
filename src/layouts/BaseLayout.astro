@@ -2,6 +2,7 @@
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 import DecorativeShapes from '../components/DecorativeShapes.astro';
+import ThemeScript from '../components/ThemeScript.astro';
 
 interface Props {
   title?: string;
@@ -66,6 +67,8 @@ const schema = [website, ...structuredData];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <ThemeScript />
+
     <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   </head>
 
@@ -80,5 +83,9 @@ const schema = [website, ...structuredData];
     <DecorativeShapes />
 
     <slot />
+
+    <script>
+      import '../scripts/theme';
+    </script>
   </body>
 </html>

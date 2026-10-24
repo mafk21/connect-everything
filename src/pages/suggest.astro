@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Brand from '../components/Brand.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 const REPO_URL = 'https://github.com/mafk21/connect-everything';
 // Deep-links the issue form template, so a suggestion arrives with the three
@@ -14,7 +15,10 @@ const ISSUE_URL = `${REPO_URL}/issues/new?template=suggest-resource.yml`;
 >
   <div class="mx-auto w-full max-w-[760px] px-4 py-10 sm:py-16">
     <div class="rounded-panel border border-line bg-surface p-7 shadow-panel sm:p-10">
-      <Brand />
+      <div class="flex items-center justify-between gap-4">
+        <Brand />
+        <ThemeToggle />
+      </div>
 
       <h1 class="mt-8 text-[28px] font-bold leading-tight text-ink">Suggest a resource</h1>
       <p class="mt-3 max-w-lg text-body text-ink-soft">

@@ -5,6 +5,7 @@ import SearchField from '../components/SearchField.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Brand from '../components/Brand.astro';
 import MobileFilters from '../components/MobileFilters.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import IconSprite from '../components/IconSprite.astro';
 import type { Resource } from '../data/resources';
 import { categoryCounts, tagCounts, type CountedOption } from '../lib/derive';
@@ -83,7 +84,7 @@ const live = mode === 'live';
             <SearchField />
           </div>
 
-          <div class="ml-auto flex items-center gap-2">
+          <div class="ml-auto flex flex-wrap items-center justify-end gap-2">
             <MobileFilters
               categories={categories}
               tags={tags}
@@ -91,6 +92,8 @@ const live = mode === 'live';
               activeCategory={activeCategory}
               activeTag={activeTag}
             />
+
+            <ThemeToggle />
 
             <a
               href="/rss.xml"
