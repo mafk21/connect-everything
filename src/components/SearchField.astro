@@ -1,11 +1,19 @@
 ---
 interface Props {
   id?: string;
+  /** false on pages without the engine: the form still submits to the library. */
+  live?: boolean;
 }
-const { id = 'library-search' } = Astro.props;
+
+const { id = 'library-search', live = true } = Astro.props;
 ---
 
-<div class="relative w-full max-w-[320px]">
+<!--
+  A real form, not just an input: on the static pages (/category, /tag, /new)
+  there is no engine to filter in place, so pressing Enter submits `?q=` to the
+  library and the search still works with JavaScript disabled.
+-->
+<form action="/" method="get" role="search" data-search-form class="relative w-full max-w-[320px]">
   <label for={id} class="sr-only">Search resources</label>
   <svg
     class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-muted"
@@ -23,9 +31,11 @@ const { id = 'library-search' } = Astro.props;
     id={id}
     type="search"
     name="q"
+    data-search-input
+    data-live={live ? 'true' : 'false'}
     placeholder="Search resources, tools, tutorials…"
     autocomplete="off"
     spellcheck="false"
     class="h-10 w-full rounded-chip border border-line bg-surface pl-9 pr-3 text-body text-ink placeholder:text-ink-muted focus:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 [&::-webkit-search-cancel-button]:hidden"
   />
-</div>
+</form>

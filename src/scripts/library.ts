@@ -33,7 +33,8 @@ function init(scope: HTMLElement) {
   const cards = readCards(scope);
   if (cards.length === 0) return;
 
-  const search = document.querySelector<HTMLInputElement>('#library-search');
+  const search = document.querySelector<HTMLInputElement>('[data-search-input], #library-search');
+  const searchForm = document.querySelector<HTMLFormElement>('[data-search-form]');
   const heading = document.querySelector<HTMLElement>('[data-heading]');
   const countEl = document.querySelector<HTMLElement>('[data-result-count]');
   const nounEl = document.querySelector<HTMLElement>('[data-result-noun]');
@@ -69,6 +70,14 @@ function init(scope: HTMLElement) {
         state.query = search.value.trim();
         update();
       }, 120);
+    });
+    // The field is a real form so it also works on the static pages; here the
+    // engine takes over and filters in place instead of navigating away.
+    searchForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      window.clearTimeout(debounce);
+      state.query = search.value.trim();
+      update();
     });
     search.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && search.value !== '') {

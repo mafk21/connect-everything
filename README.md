@@ -173,8 +173,9 @@ Descriptions in the current library run 98–178 characters (mean 147). Adding a
 
 `npm test` builds the site, then drives the real engine module against the real built HTML in jsdom — not a mocked DOM.
 
-- **50 assertions** on the library page: search (single and multi-term AND, domain search, typo rescue, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, both sorts, empty state, applied-filter chips, grouped tag collapse, the mobile category row, and clearing.
+- **53 assertions** on the library page: search (single and multi-term AND, domain search, typo rescue, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, both sorts, empty state, applied-filter chips, grouped tag collapse, the mobile category row, and clearing.
 - **16 assertions** on theming: switching applies and persists a choice, the button's label and `aria-pressed` track it, a stored choice is restored on load, the browser-chrome colour follows, the fallback cross-fade engages, and the bootstrap script is inline rather than deferred.
+- **15 assertions** on the static pages: no dead filter buttons where there is no engine, the search box works as a plain form, cards open in a new tab, chips point at the tag pages, every page has its own title and canonical, and the feed and robots file are correct.
 - **8 assertions** in a separate process: a shared link restores query, category, tag and sort, every visible card genuinely matches, and the URL is left untouched on load.
 
 Expectations are derived from the page's own data attributes rather than hardcoded counts, so growing the library never breaks the suite. Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list rather than a blank page.
@@ -206,7 +207,7 @@ Static output: any host that serves files. On Vercel, Astro is detected automati
 
 **Before launch**
 
-1. Set `SITE_URL` to the real domain — one variable, and canonical URLs, `og:url`, the sitemap and the generated `robots.txt` all follow. Without it the build still works, using `https://connecteverything.example` as a clearly-fake placeholder.
+1. Nothing, on Vercel: `VERCEL_PROJECT_PRODUCTION_URL` is picked up automatically, so canonical URLs, `og:url`, the sitemap and `robots.txt` all point at the production host — including from preview builds. Anywhere else, set `SITE_URL`. A build with neither falls back to `https://connecteverything.example`, so a misconfiguration is visible rather than silent.
 2. Run `npm run icons` once and commit the result, so the icons are served locally rather than from a third party.
 3. Run `npm run links` (or wait for the Monday CI run) to confirm nothing has died since it was added.
 

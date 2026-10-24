@@ -222,6 +222,19 @@ check('nonsense still finds nothing', count(), 0);
 check('empty state shown for nonsense', $('[data-empty-state]').hidden, false);
 click('[data-clear-filters]:not([hidden])');
 
+// Search form ----------------------------------------------------------
+const form = $('[data-search-form]');
+check('search is a real form', form?.getAttribute('action'), '/');
+searchBox.value = 'figma';
+searchBox.dispatchEvent(new window.Event('input', { bubbles: true }));
+await settle();
+const beforeSubmit = count();
+form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await settle();
+check('submitting filters in place instead of navigating', count(), beforeSubmit);
+check('submitting keeps us on the library page', window.location.pathname, '/');
+click('[data-clear-filters]:not([hidden])');
+
 // Applied-filter summary -----------------------------------------------
 const activeBar = $('[data-active-filters]');
 check('summary hidden with no filters', activeBar.hidden, true);

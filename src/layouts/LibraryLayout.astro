@@ -81,7 +81,7 @@ const live = mode === 'live';
           </div>
 
           <div class="order-4 w-full sm:order-none sm:w-auto sm:flex-1">
-            <SearchField />
+            <SearchField live={live} />
           </div>
 
           <div class="ml-auto flex flex-wrap items-center justify-end gap-2">
@@ -120,29 +120,50 @@ const live = mode === 'live';
             data-category-scroller
             aria-label="Categories"
           >
-            <button
-              type="button"
-              data-clear-category
-              class="chip chip--filter shrink-0"
-              aria-pressed="true"
-            >
-              All
-            </button>
             {
-              categories.map((category) => (
-                <button
-                  type="button"
-                  data-filter-category={category.id}
-                  data-label={category.label}
-                  aria-pressed="false"
-                  class="chip chip--filter shrink-0"
-                >
-                  <span>{category.label}</span>
-                  <span class="chip__count" data-count-category={category.id}>
-                    {category.count}
-                  </span>
-                </button>
-              ))
+              live ? (
+                <>
+                  <button
+                    type="button"
+                    data-clear-category
+                    class="chip chip--filter shrink-0"
+                    aria-pressed="true"
+                  >
+                    All
+                  </button>
+                  {categories.map((category) => (
+                    <button
+                      type="button"
+                      data-filter-category={category.id}
+                      data-label={category.label}
+                      aria-pressed="false"
+                      class="chip chip--filter shrink-0"
+                    >
+                      <span>{category.label}</span>
+                      <span class="chip__count" data-count-category={category.id}>
+                        {category.count}
+                      </span>
+                    </button>
+                  ))}
+                </>
+              ) : (
+                /* No engine on these pages: the row is navigation, not filters. */
+                <>
+                  <a href="/" class="chip chip--filter shrink-0">
+                    All
+                  </a>
+                  {categories.map((category) => (
+                    <a
+                      href={`/category/${category.id}`}
+                      aria-current={activeCategory === category.id ? 'page' : undefined}
+                      class="chip chip--filter shrink-0"
+                    >
+                      <span>{category.label}</span>
+                      <span class="chip__count">{category.count}</span>
+                    </a>
+                  ))}
+                </>
+              )
             }
           </div>
 

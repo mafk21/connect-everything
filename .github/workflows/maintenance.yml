@@ -29,7 +29,11 @@ jobs:
       - run: npm ci
 
       - name: Check every URL
-        run: npm run links > link-report.txt 2>&1 || true
+        run: |
+          # check-links exits 1 when it finds dead links; that is a result, not
+          # a failure of the job.
+          npm run links > link-report.txt 2>&1 || true
+          tail -5 link-report.txt
 
       - name: Show the summary
         run: head -40 link-report.txt
@@ -54,6 +58,12 @@ jobs:
             echo ""
             echo "A \`403\` or \`429\` is often just bot protection rather than a dead site — worth opening before removing anything."
           } > issue-body.md
+
+          # Labels are not created implicitly; without this the first run fails
+          # instead of filing the issue it just computed.
+          gh label create link-check --force \
+            --description "Filed by the weekly dead-link check" \
+            --color "B60205" >/dev/null 2>&1 || true
 
           existing=$(gh issue list --label link-check --state open --json number --jq '.[0].number')
           if [ -n "$existing" ]; then
@@ -85,14 +95,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet -- public/icons src/data/favicons.json; then
+          # Untracked files are invisible to `git diff`, and the first run
+          # creates nothing but untracked files — so stage first, then compare.
+          git add -A public/icons src/data/favicons.json
+
+          if git diff --cached --quiet; then
             echo "Icons are already up to date."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b icons/refresh
+          # -B so a leftover branch from a previous run is reused, not fatal.
+          git checkout -B icons/refresh
           git add public/icons src/data/favicons.json
           git commit -m "Refresh self-hosted favicons"
           git push --force origin icons/refresh
