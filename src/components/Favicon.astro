@@ -1,5 +1,6 @@
 ---
-import { faviconUrl, monogramOf } from '../lib/derive';
+import { monogramOf, remoteFaviconUrl } from '../lib/derive';
+import favicons from '../data/favicons.json';
 
 interface Props {
   title: string;
@@ -9,7 +10,20 @@ interface Props {
 
 const { title, url, size = 40 } = Astro.props;
 const monogram = monogramOf(title);
-const src = faviconUrl(url);
+
+const domain = (() => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return '';
+  }
+})();
+
+// Prefer the icon fetched at build time (see scripts/fetch-favicons.mjs). Until
+// that has run for this domain, fall back to the remote lookup so the page
+// does not lose its icons — after `npm run icons` the request never leaves.
+const localIcon = (favicons as Record<string, string>)[domain];
+const src = localIcon ?? remoteFaviconUrl(url);
 ---
 
 <span

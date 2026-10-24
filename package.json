@@ -10,6 +10,7 @@
     "check": "astro check",
     "test": "npm run build && node --experimental-strip-types tests/library.test.mjs && node --experimental-strip-types tests/hydrate.test.mjs",
     "links": "node --experimental-strip-types scripts/check-links.mjs",
+    "icons": "node --experimental-strip-types scripts/fetch-favicons.mjs",
     "og": "python3 scripts/generate-og.py"
   },
   "dependencies": {
