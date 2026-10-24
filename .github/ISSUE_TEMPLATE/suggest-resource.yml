@@ -1,0 +1,63 @@
+name: Suggest a resource
+description: Propose a link for the library
+title: '[Suggestion] '
+labels: ['suggestion']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting something. Three fields is all it takes.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What is it called?
+      placeholder: Obsidian
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: The address a visitor should land on. It must start with https://
+      placeholder: https://obsidian.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it belong here?
+      description: One or two sentences. What does it do that is genuinely useful, and who is it for?
+      placeholder: Local-first Markdown notes with a plugin ecosystem, and the vault is just a folder you own.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Pick the closest fit. The curator may move it.
+      options:
+        - Design
+        - Development
+        - Learning
+        - Tools
+        - Productivity
+        - Media
+        - Data & AI
+        - Security
+        - Reference
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: It is free to use, or free enough to be worth listing
+          required: true
+        - label: It is not already in the library
+          required: true
+        - label: It is a real, working site and not an affiliate link
+          required: true
