@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Brand from '../components/Brand.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { RESOURCES } from '../data/resources';
 import { CATEGORIES } from '../data/categories';
@@ -17,7 +18,10 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
 >
   <div class="mx-auto w-full max-w-[860px] px-4 py-8 sm:py-14">
     <div class="rounded-panel border border-line bg-surface p-6 shadow-panel sm:p-10">
-      <Brand />
+      <div class="flex items-center justify-between gap-4">
+        <Brand />
+        <ThemeToggle />
+      </div>
 
       <p class="mt-9 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
         404

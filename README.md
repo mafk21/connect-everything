@@ -66,7 +66,10 @@ Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a
 - `/new` lists the 40 most recent additions; `/rss.xml` carries the same set as a feed
 
 **Details that matter**
-- Dark theme via `prefers-color-scheme`; every text pair clears WCAG AA in both themes (lowest measured 6.57:1 in dark)
+- **Light/dark toggle** in the header of every page. The choice is saved and wins over the operating system; with nothing saved, the site follows the OS live
+- The switch plays a **circular reveal** from the button using the View Transitions API, with a short cross-fade fallback for browsers that lack it, and no animation at all under `prefers-reduced-motion`
+- A blocking inline script applies a saved theme before first paint, so there is no light flash on load
+- Every text pair clears WCAG AA in both themes (lowest measured 6.57:1 in dark)
 - Favicons are fetched once into `public/icons/` rather than loaded from a third party on every visit
 - Tag chips on a card add that tag to your filters
 - One action per card: the whole card opens the resource in a new tab
@@ -171,6 +174,7 @@ Descriptions in the current library run 98–178 characters (mean 147). Adding a
 `npm test` builds the site, then drives the real engine module against the real built HTML in jsdom — not a mocked DOM.
 
 - **50 assertions** on the library page: search (single and multi-term AND, domain search, typo rescue, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, both sorts, empty state, applied-filter chips, grouped tag collapse, the mobile category row, and clearing.
+- **16 assertions** on theming: switching applies and persists a choice, the button's label and `aria-pressed` track it, a stored choice is restored on load, the browser-chrome colour follows, the fallback cross-fade engages, and the bootstrap script is inline rather than deferred.
 - **8 assertions** in a separate process: a shared link restores query, category, tag and sort, every visible card genuinely matches, and the URL is left untouched on load.
 
 Expectations are derived from the page's own data attributes rather than hardcoded counts, so growing the library never breaks the suite. Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list rather than a blank page.

@@ -80,8 +80,46 @@
    already reads from them. `color-scheme` lets native controls and
    scrollbars follow.
 ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------
+   Theme
+   Two sources of truth, one palette. An explicit choice (the toggle)
+   wins; otherwise the operating system decides. The declarations are
+   duplicated between the two rules on purpose — a selector cannot be
+   shared across a media query, and keeping the palette literal is
+   clearer than three layers of custom-property indirection.
+------------------------------------------------------------------- */
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+
+    --color-surface: #16201f;
+    --color-mint-100: #101a19;
+    --color-mint-200: #1b2726;
+
+    --color-chip: #22302e;
+    --color-chip-text: #c6d6d3;
+
+    --color-line: #26332f;
+    --color-line-strong: #384844;
+
+    --color-ink: #eef4f3;
+    --color-ink-soft: #b6c7c4;
+    --color-ink-muted: #92a7a4;
+
+    /* Button backgrounds: a touch lighter so they read against the panel. */
+    --color-teal-900: #0e5f5b;
+    --color-teal-700: #12736e;
+    --color-teal-100: #1d3431;
+
+    --color-accent: #7fd1c9;
+
+    --color-accent-coral: #7a5b58;
+    --color-accent-sun: #7a6b4a;
+    --color-accent-cyan: #3f6f7a;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     color-scheme: dark;
 
     --color-surface: #16201f;
@@ -111,7 +149,46 @@
   }
 }
 
+/* The theme switch animates as a circular reveal from the toggle, using a
+   view transition. The button itself is named so it is not dragged into
+   the clip animation. */
+[data-theme-toggle] {
+  view-transition-name: theme-toggle;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Fallback for browsers without view transitions: a short cross-fade on the
+   surfaces that actually change colour. Scoped to a temporary attribute so
+   ordinary interactions never pay for a transition. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme-switching] body,
+  html[data-theme-switching] [data-library],
+  html[data-theme-switching] .r-card,
+  html[data-theme-switching] .chip,
+  html[data-theme-switching] header,
+  html[data-theme-switching] footer,
+  html[data-theme-switching] dialog {
+    transition:
+      background-color 280ms ease,
+      color 280ms ease,
+      border-color 280ms ease;
+  }
+}
+
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
@@ -362,5 +439,62 @@
 
   .r-card__featured span {
     font-weight: 500;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Theme toggle
+   Icons are swapped by CSS so the correct one is painted before any
+   script runs. Both occupy the same grid cell and cross-rotate, which
+   gives the swap a little movement without JavaScript.
+------------------------------------------------------------------- */
+.theme-toggle__icons {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle__sun,
+.theme-toggle__moon {
+  grid-area: 1 / 1;
+  width: 18px;
+  height: 18px;
+  transition:
+    opacity 200ms ease,
+    transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.theme-toggle__moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+:root[data-theme='dark'] .theme-toggle__sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+:root[data-theme='dark'] .theme-toggle__moon {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .theme-toggle__sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.6);
+  }
+
+  :root:not([data-theme='light']) .theme-toggle__moon {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__sun,
+  .theme-toggle__moon {
+    transition: none;
   }
 }

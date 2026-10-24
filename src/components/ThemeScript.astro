@@ -1,0 +1,22 @@
+---
+/**
+ * Applies a saved theme before the first paint.
+ *
+ * Must stay an inline, blocking script in <head>: a module would be deferred,
+ * and the page would flash light before switching to dark. It only reads
+ * localStorage — no toggle logic lives here.
+ */
+---
+
+<script is:inline>
+  (() => {
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        document.documentElement.dataset.theme = stored;
+      }
+    } catch {
+      /* Private mode, or storage disabled — fall back to the OS preference. */
+    }
+  })();
+</script>
