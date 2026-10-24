@@ -59,6 +59,7 @@ function cards() {
   return $$('[data-resource]').map((el) => ({
     title: el.querySelector('[data-title-el]').textContent.trim(),
     description: el.querySelector('[data-description]').textContent.trim(),
+    domain: el.querySelector('.r-card__domain').textContent.trim(),
     category: el.dataset.category,
     tags: el.dataset.tags.split('|').filter(Boolean),
     featured: el.dataset.featured === 'true',
@@ -128,8 +129,10 @@ check(
 
 pressSearch('zzzznotathing', window);
 await settle();
-check('no results hides grid', $('[data-grid]').classList.contains('hidden'), true);
-check('no results shows empty state', $('[data-empty-state]').classList.contains('hidden'), false);
+// Properties, not classes: an element with the `hidden` attribute stayed
+// invisible no matter what class was toggled on it.
+check('no results hides grid', $('[data-grid]').hidden, true);
+check('no results shows empty state', $('[data-empty-state]').hidden, false);
 
 pressSearch('', window);
 await settle();
@@ -191,6 +194,32 @@ const chipTag = document.querySelector('[data-resource="figma"] [data-filter-tag
 chipTag.click();
 check('card chip activates that tag', count(), expected({ tags: [chipTag.textContent.trim()] }).length);
 check('card chip shows in heading', heading(), `Tagged ${chipTag.textContent.trim()}`);
+click('[data-clear-filters]:not([hidden])');
+
+// Search quality -------------------------------------------------------
+const searchBox = $('#library-search');
+searchBox.value = 'github';
+searchBox.dispatchEvent(new window.Event('input', { bubbles: true }));
+await settle();
+check('search finds entries by domain, not just title', count() > 0, true);
+check(
+  'domain search surfaces github.com entries',
+  visibleTitles().some((title) => all.find((c) => c.title === title)?.domain === 'github.com'),
+  true
+);
+click('[data-clear-filters]:not([hidden])');
+
+searchBox.value = 'javascrpt';
+searchBox.dispatchEvent(new window.Event('input', { bubbles: true }));
+await settle();
+check('a typo still returns results', count() > 0, true);
+check('typo results are labelled approximate', $('[data-fuzzy-note]').hidden, false);
+
+searchBox.value = 'zzzqqqxxx';
+searchBox.dispatchEvent(new window.Event('input', { bubbles: true }));
+await settle();
+check('nonsense still finds nothing', count(), 0);
+check('empty state shown for nonsense', $('[data-empty-state]').hidden, false);
 click('[data-clear-filters]:not([hidden])');
 
 // Applied-filter summary -----------------------------------------------

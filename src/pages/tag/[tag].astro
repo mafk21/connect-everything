@@ -1,0 +1,52 @@
+---
+import LibraryLayout from '../../layouts/LibraryLayout.astro';
+import { RESOURCES } from '../../data/resources';
+import { TAGS } from '../../data/tags';
+import { tagSlug } from '../../lib/derive';
+
+export function getStaticPaths() {
+  const used = new Set(RESOURCES.flatMap((resource) => resource.tags));
+  const slugs = new Map<string, string>();
+
+  return TAGS.filter((tag) => used.has(tag)).map((tag) => {
+    const slug = tagSlug(tag);
+    if (slugs.has(slug)) {
+      throw new Error(`Tag slug collision: "${tag}" and "${slugs.get(slug)}" both become /tag/${slug}`);
+    }
+    slugs.set(slug, tag);
+    return { params: { tag: slug }, props: { tag } };
+  });
+}
+
+const { tag } = Astro.props;
+
+const resources = RESOURCES.filter((resource) => resource.tags.includes(tag)).sort((a, b) =>
+  b.dateAdded.localeCompare(a.dateAdded)
+);
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Resources tagged ${tag}`,
+  numberOfItems: resources.length,
+  itemListElement: resources.map((resource, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: resource.title,
+    url: resource.url,
+    description: resource.description,
+  })),
+};
+---
+
+<LibraryLayout
+  heading={tag}
+  resources={resources}
+  allResources={RESOURCES}
+  currentPath={`/tag/${tagSlug(tag)}`}
+  mode="links"
+  structuredData={[itemList]}
+  intro={`${resources.length} ${resources.length === 1 ? 'entry' : 'entries'} tagged “${tag}”, newest first.`}
+  metaTitle={`${tag} — Connect Everything`}
+  metaDescription={`${resources.length} curated resources tagged ${tag}. Hand-picked tools, references and tutorials, one click from here.`}
+/>

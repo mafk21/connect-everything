@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Build, type-check and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check Astro components
+        run: npm run check
+
+      # `npm test` builds the site and then drives the real engine against the
+      # built HTML in jsdom, so this covers both rendering and behaviour.
+      - name: Build and run the test suites
+        run: npm test

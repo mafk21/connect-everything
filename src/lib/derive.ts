@@ -13,8 +13,14 @@ export function domainOf(url: string): string {
 
 const FAVICON_ENDPOINT = 'https://www.google.com/s2/favicons';
 
-/** Remote favicon, sized for the 40px card tile (2x for retina). */
-export function faviconUrl(url: string): string {
+/**
+ * Remote favicon, sized for the 40px card tile (2x for retina).
+ *
+ * Fallback only: `scripts/fetch-favicons.mjs` writes local icons into
+ * public/icons and a manifest into src/data/favicons.json, and those win.
+ * Running `npm run icons` removes this call from the page entirely.
+ */
+export function remoteFaviconUrl(url: string): string {
   const domain = domainOf(url);
   return `${FAVICON_ENDPOINT}?domain=${encodeURIComponent(domain)}&sz=64`;
 }
@@ -66,6 +72,14 @@ export function tagCounts(resources: Resource[]): CountedOption[] {
     count: resources.filter((resource) => resource.tags.includes(tag)).length,
   })).filter((option) => option.count > 0);
 }
+
+/** `Red teaming` → `red-teaming`; used for /tag/<slug> URLs. */
+export const tagSlug = (tag: string): string =>
+  tag
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 export const categoryLabel = (id: CategoryId): string =>
   CATEGORIES.find((category) => category.id === id)?.label ?? id;

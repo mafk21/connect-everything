@@ -374,6 +374,45 @@ What changed, without adding a page or a second navigation model:
 
 **Done when:** every earlier test still passes, and the new summary bar, grouped tags and mobile chips are covered by tests. Met: 44/44 engine tests, 8/8 hydration tests.
 
+### M7 — Distribution, privacy and upkeep · **done**
+
+Four things were outstanding after the library reached its full size, none of
+them about the browsing experience, all of them about a site that has to live
+in public.
+
+**1. Indexable surface.** Four pages for 533 links meant search engines saw one
+URL. Every category and every tag now has a real page with its own title,
+description, canonical and `ItemList` data — 73 new pages, all in the sitemap,
+with the sidebar, card chips and footer linking into them.
+
+**2. Privacy and speed.** Cards loaded every icon from a third-party service:
+up to 533 external requests per visit on a site whose pitch is "no tracking".
+`scripts/fetch-favicons.mjs` downloads one icon per domain into
+`public/icons/`, records it in `src/data/favicons.json`, and the cards use it
+when present. The remote lookup remains only as a fallback for domains the
+fetch has not reached.
+
+**3. Correctness.** The client search index omitted the domain, so `github`
+missed entries hosted on GitHub unless their titles said so. Fixed, and a
+one-edit rescue pass handles typos. Writing the test for it exposed a real bug:
+the empty state carried the `hidden` attribute in markup while the script
+toggled a `hidden` class, so a zero-result search showed a blank page with no
+explanation.
+
+**4. Upkeep.** `ci.yml` runs build, type-check and tests on every PR.
+`maintenance.yml` sweeps for dead links weekly and files an issue, and refreshes
+icons into a PR. `LICENSE` is MIT. `SITE_URL` now drives canonical URLs,
+`og:url`, the sitemap and a generated `robots.txt`, so the domain is a
+one-variable change instead of four edits.
+
+Polish in the same round: a "New" view and `/rss.xml` for repeat visitors, and
+a dark theme built on semantic tokens with every text pair clearing WCAG AA
+(lowest 6.57:1).
+
+**Done when:** CI passes on the work itself and nothing about the deploy path
+still contains a placeholder host name. Met, apart from `SITE_URL` itself,
+which needs the real domain.
+
 ---
 
 ## 10. Decisions log
@@ -390,6 +429,9 @@ What changed, without adding a page or a second navigation model:
 | View counter | Removed | Cannot be computed honestly without tracking |
 | Header action | "Suggest a resource" | Keeps the reference's layout without implying visitor accounts |
 | Publishing | Commit to this branch | Confirmed: curator comes back here, or edits/PRs in the repo |
+| SEO surface | A page per category and per tag | One URL for 533 links gives search engines nothing to rank |
+| Favicons | Fetched to `public/icons` at build time | Removes up to 533 third-party requests per view and matches the no-tracking claim |
+| Theme | Light and dark from one token set | `prefers-color-scheme`, no toggle to store or maintain |
 
 ---
 

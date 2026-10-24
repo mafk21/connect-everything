@@ -16,7 +16,7 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
   description="That page does not exist. Search the library or pick a category instead."
 >
   <div class="mx-auto w-full max-w-[860px] px-4 py-8 sm:py-14">
-    <div class="rounded-panel border border-line bg-white p-6 shadow-panel sm:p-10">
+    <div class="rounded-panel border border-line bg-surface p-6 shadow-panel sm:p-10">
       <Brand />
 
       <p class="mt-9 text-[11px] font-semibold uppercase tracking-[0.09em] text-ink-muted">
@@ -51,7 +51,7 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
             name="q"
             placeholder="Search resources, tools, tutorials…"
             autocomplete="off"
-            class="h-10 w-full rounded-chip border border-line bg-white pl-9 pr-3 text-body text-ink placeholder:text-ink-muted focus:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 [&::-webkit-search-cancel-button]:hidden"
+            class="h-10 w-full rounded-chip border border-line bg-surface pl-9 pr-3 text-body text-ink placeholder:text-ink-muted focus:border-line-strong focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 [&::-webkit-search-cancel-button]:hidden"
           />
         </div>
         <button
@@ -69,7 +69,7 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
               <li>
                 <a
                   href={`/?category=${category.id}`}
-                  class="inline-flex items-center gap-1.5 rounded-chip border border-line bg-white px-2.5 py-1.5 text-meta text-ink-soft transition-colors hover:border-line-strong hover:bg-mint-100 hover:text-teal-900"
+                  class="inline-flex items-center gap-1.5 rounded-chip border border-line bg-surface px-2.5 py-1.5 text-meta text-ink-soft transition-colors hover:border-line-strong hover:bg-mint-100 hover:text-accent"
                 >
                   {category.label}
                   <span class="tabular-nums text-ink-muted">{category.count}</span>
@@ -107,7 +107,7 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
         </a>
         <a
           href="/suggest"
-          class="inline-flex h-10 items-center rounded-chip border border-line px-4 text-body font-medium text-ink-soft transition-colors hover:bg-mint-100 hover:text-teal-900"
+          class="inline-flex h-10 items-center rounded-chip border border-line px-4 text-body font-medium text-ink-soft transition-colors hover:bg-mint-100 hover:text-accent"
         >
           Suggest a resource
         </a>

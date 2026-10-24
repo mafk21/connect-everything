@@ -1,6 +1,7 @@
 ---
 import type { CountedOption } from '../lib/derive';
 import { TAG_GROUPS, TAG_GROUPS_VISIBLE } from '../data/tags';
+import { tagSlug } from '../lib/derive';
 
 interface Props {
   categories: CountedOption[];
@@ -8,9 +9,19 @@ interface Props {
   /** index page gets live buttons; other pages get links that resolve on / */
   mode?: 'live' | 'links';
   idPrefix?: string;
+  /** Which row is the page we are on, for the non-JS (link) variant. */
+  activeCategory?: string;
+  activeTag?: string;
 }
 
-const { categories, tags, mode = 'live', idPrefix = 'sidebar' } = Astro.props;
+const {
+  categories,
+  tags,
+  mode = 'live',
+  idPrefix = 'sidebar',
+  activeCategory,
+  activeTag,
+} = Astro.props;
 const live = mode === 'live';
 
 /** Tags render as grouped chips: 64 checkbox rows was the least usable part of the sidebar. */
@@ -43,11 +54,11 @@ const groupClass = 'mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.07em
                 data-filter-category={category.id}
                 data-label={category.label}
                 aria-pressed="false"
-                class:list={[rowBase, 'hover:bg-mint-100 hover:text-teal-900']}
+                class:list={[rowBase, 'hover:bg-mint-100 hover:text-accent']}
               >
                 <span
                   data-marker
-                  class="grid size-7 shrink-0 place-items-center rounded-[8px] bg-mint-100 text-teal-800 transition-colors"
+                  class="grid size-7 shrink-0 place-items-center rounded-[8px] bg-mint-100 text-accent transition-colors"
                 >
                   <svg class="size-4" aria-hidden="true">
                     <use href={`#icon-${category.id}`} />
@@ -62,8 +73,16 @@ const groupClass = 'mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.07em
                 </span>
               </button>
             ) : (
-              <a href={`/?category=${category.id}`} class:list={[rowBase, 'hover:bg-mint-100']}>
-                <span class="grid size-7 shrink-0 place-items-center rounded-[8px] bg-mint-100 text-teal-800">
+              <a
+                href={`/category/${category.id}`}
+                aria-current={activeCategory === category.id ? 'page' : undefined}
+                class:list={[
+                  rowBase,
+                  'hover:bg-mint-100',
+                  activeCategory === category.id && 'bg-mint-100 font-medium text-accent',
+                ]}
+              >
+                <span class="grid size-7 shrink-0 place-items-center rounded-[8px] bg-mint-100 text-accent">
                   <svg class="size-4" aria-hidden="true">
                     <use href={`#icon-${category.id}`} />
                   </svg>
@@ -102,7 +121,11 @@ const groupClass = 'mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.07em
                       </span>
                     </button>
                   ) : (
-                    <a href={`/?tag=${encodeURIComponent(tag.id)}`} class="chip chip--filter">
+                    <a
+                      href={`/tag/${tagSlug(tag.id)}`}
+                      aria-current={activeTag === tagSlug(tag.id) ? 'page' : undefined}
+                      class="chip chip--filter"
+                    >
                       <span>{tag.id}</span>
                       <span class="chip__count">{tag.count}</span>
                     </a>
@@ -123,7 +146,7 @@ const groupClass = 'mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.07em
           data-more={`All ${totalTags} tags`}
           data-less="Fewer tags"
           hidden
-          class="mx-2 mt-1 inline-flex items-center gap-1 rounded-chip px-2 py-1 text-meta font-medium text-teal-800 transition-colors hover:bg-mint-100"
+          class="mx-2 mt-1 inline-flex items-center gap-1 rounded-chip px-2 py-1 text-meta font-medium text-accent transition-colors hover:bg-mint-100"
           aria-expanded="false"
         >
           <svg
@@ -150,7 +173,7 @@ const groupClass = 'mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.07em
         type="button"
         data-clear-filters
         hidden
-        class="mx-2 inline-flex items-center gap-1.5 rounded-chip px-2 py-1 text-meta font-medium text-teal-800 transition-colors hover:bg-mint-100"
+        class="mx-2 inline-flex items-center gap-1.5 rounded-chip px-2 py-1 text-meta font-medium text-accent transition-colors hover:bg-mint-100"
       >
         <svg
           viewBox="0 0 24 24"

@@ -8,6 +8,10 @@
 @theme {
   /* Brand / surface */
   --color-teal-900: #004847;
+  /* Text accent and page surface are separated from the button colours so a
+     dark theme can move them independently. */
+  --color-accent: #004847;
+  --color-surface: #ffffff;
   --color-teal-800: #04524f;
   --color-teal-700: #0b5f5c;
   --color-teal-500: #75a29f;
@@ -70,6 +74,43 @@
 /* ------------------------------------------------------------------
    Base
 ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------
+   Dark theme
+   Only the semantic tokens change; every utility and component rule above
+   already reads from them. `color-scheme` lets native controls and
+   scrollbars follow.
+------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-surface: #16201f;
+    --color-mint-100: #101a19;
+    --color-mint-200: #1b2726;
+
+    --color-chip: #22302e;
+    --color-chip-text: #c6d6d3;
+
+    --color-line: #26332f;
+    --color-line-strong: #384844;
+
+    --color-ink: #eef4f3;
+    --color-ink-soft: #b6c7c4;
+    --color-ink-muted: #92a7a4;
+
+    /* Button backgrounds: a touch lighter so they read against the panel. */
+    --color-teal-900: #0e5f5b;
+    --color-teal-700: #12736e;
+    --color-teal-100: #1d3431;
+
+    --color-accent: #7fd1c9;
+
+    --color-accent-coral: #7a5b58;
+    --color-accent-sun: #7a6b4a;
+    --color-accent-cyan: #3f6f7a;
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
@@ -103,7 +144,7 @@
 
   ::selection {
     background: var(--color-teal-100);
-    color: var(--color-teal-900);
+    color: var(--color-accent);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -146,7 +187,7 @@
     padding: 1rem;
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    background: #fff;
+    background: var(--color-surface);
     box-shadow: var(--shadow-card);
     transition: transform 150ms ease-out, box-shadow 150ms ease-out, border-color 150ms ease-out;
   }
@@ -232,7 +273,7 @@
 
   .chip:hover {
     background: var(--color-mint-200);
-    color: var(--color-teal-900);
+    color: var(--color-accent);
   }
 
   /* Filter chips (sidebar tag cloud, mobile category row) ----------------- */
@@ -273,7 +314,7 @@
     gap: 0.3rem;
     padding: 2px 4px 2px 8px;
     border: 1px solid var(--color-line-strong);
-    background: #fff;
+    background: var(--color-surface);
     cursor: pointer;
   }
 
@@ -286,7 +327,7 @@
     background: var(--color-mint-100);
     font-size: 12px;
     line-height: 1;
-    color: var(--color-teal-900);
+    color: var(--color-accent);
   }
 
   .chip--active:hover .chip__x {
@@ -316,7 +357,7 @@
     align-items: center;
     gap: 0.375rem;
     margin-left: auto;
-    color: var(--color-teal-800);
+    color: var(--color-accent);
   }
 
   .r-card__featured span {

@@ -12,6 +12,7 @@ interface Card {
   id: string;
   title: string;
   description: string;
+  domain: string;
   category: string;
   tags: string[];
   featured: boolean;
@@ -52,6 +53,7 @@ function init(scope: HTMLElement) {
   const badge = document.querySelector<HTMLElement>('[data-filter-badge]');
   const allLink = document.querySelector<HTMLElement>('[data-nav-all]');
   const activeBar = document.querySelector<HTMLElement>('[data-active-filters]');
+  const fuzzyNote = document.querySelector<HTMLElement>('[data-fuzzy-note]');
   const activeList = document.querySelector<HTMLElement>('[data-active-list]');
   const clearCategory = document.querySelector<HTMLButtonElement>('[data-clear-category]');
 
@@ -187,7 +189,20 @@ function init(scope: HTMLElement) {
   }
 
   function render(): number {
-    const matched = cards.filter((card) => matches(card, state));
+    let matched = cards.filter((card) => matches(card, state));
+    let fuzzy = false;
+
+    // Rescue pass: a query like "javascrpt" should not dead-end the page.
+    // It only runs when the strict search found nothing, so it costs nothing
+    // in the common case.
+    if (matched.length === 0 && state.query) {
+      const terms = state.query.toLowerCase().split(/\s+/).filter(Boolean);
+      const approx = cards.filter((card) => matchesApprox(card, state, terms));
+      if (approx.length > 0) {
+        matched = approx;
+        fuzzy = true;
+      }
+    }
 
     matched.sort(comparator(state.sort));
 
@@ -257,8 +272,18 @@ function init(scope: HTMLElement) {
     if (footerCount) {
       footerCount.textContent = `${matched.length} of ${total} resources · curated by hand`;
     }
-    if (grid) grid.classList.toggle('hidden', matched.length === 0);
-    if (emptyState) emptyState.classList.toggle('hidden', matched.length !== 0);
+    // Use the property, not a class: the markup ships the `hidden` attribute
+    // on the empty state, and an attribute beats a class — toggling the class
+    // left the panel permanently invisible and a zero-result search blank.
+    if (grid) grid.hidden = matched.length === 0;
+    if (emptyState) emptyState.hidden = matched.length !== 0;
+
+    if (fuzzyNote) {
+      fuzzyNote.hidden = !fuzzy;
+      if (fuzzy) {
+        fuzzyNote.textContent = `No exact matches for “${state.query}” — showing close spellings.`;
+      }
+    }
 
     const anyFilter = isFiltered(state);
     clearCategory?.addEventListener('click', () => {
@@ -272,7 +297,7 @@ function init(scope: HTMLElement) {
 
     // "All resources" only reads as the current view when nothing is narrowed.
     if (allLink) {
-      ['bg-mint-100', 'text-teal-900'].forEach((name) => allLink.classList.toggle(name, !anyFilter));
+      ['bg-mint-100', 'text-accent'].forEach((name) => allLink.classList.toggle(name, !anyFilter));
       allLink.classList.toggle('text-ink-soft', anyFilter);
     }
 
@@ -393,6 +418,7 @@ function readCards(scope: HTMLElement): Card[] {
       const description =
         el.querySelector<HTMLElement>('[data-description]')?.textContent?.trim() ?? '';
       const category = el.dataset.category ?? '';
+      const domain = el.querySelector<HTMLElement>('.r-card__domain')?.textContent?.trim() ?? '';
       const tags = (el.dataset.tags ?? '').split('|').filter(Boolean);
       return {
         li,
@@ -404,7 +430,10 @@ function readCards(scope: HTMLElement): Card[] {
         tags,
         featured: el.dataset.featured === 'true',
         date: el.dataset.date ?? '',
-        haystack: [title, description, category, ...tags].join(' ').toLowerCase(),
+        // The domain belongs here: people search "github" or "figma" and mean
+        // the site, not a word that happens to appear in a description.
+        haystack: [title, domain, description, category, ...tags].join(' ').toLowerCase(),
+        domain: domain.toLowerCase(),
         titleEl: el.querySelector<HTMLElement>('[data-title-el]'),
         descriptionEl: el.querySelector<HTMLElement>('[data-description]'),
       } satisfies Card;
@@ -422,6 +451,44 @@ function matches(card: Card, state: State): boolean {
   return true;
 }
 
+/** Levenshtein distance, capped — we only care whether it is 0, 1 or more. */
+function withinOneEdit(a: string, b: string): boolean {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i += 1;
+      j += 1;
+      continue;
+    }
+    edits += 1;
+    if (edits > 1) return false;
+    if (a.length > b.length) i += 1;
+    else if (a.length < b.length) j += 1;
+    else {
+      i += 1;
+      j += 1;
+    }
+  }
+  return edits + (a.length - i) + (b.length - j) <= 1;
+}
+
+function matchesApprox(card: Card, state: State, terms: string[]): boolean {
+  if (state.category && card.category !== state.category) return false;
+  if (state.tags.size > 0 && ![...state.tags].every((tag) => card.tags.includes(tag))) return false;
+
+  // Short terms are too easy to match by accident ("css" vs "cs").
+  const words = card.haystack.split(/[^a-z0-9.+#-]+/).filter((word) => word.length > 2);
+
+  return terms.every(
+    (term) =>
+      card.haystack.includes(term) ||
+      (term.length >= 4 && words.some((word) => withinOneEdit(term, word)))
+  );
+}
+
 function comparator(sort: State['sort']) {
   return (a: Card, b: Card) => {
     if (sort === 'az') return a.title.localeCompare(b.title);
@@ -429,9 +496,9 @@ function comparator(sort: State['sort']) {
   };
 }
 
-const ACTIVE_ROW = ['bg-mint-100', 'text-teal-900', 'font-medium'];
+const ACTIVE_ROW = ['bg-mint-100', 'text-accent', 'font-medium'];
 const ACTIVE_TILE = ['bg-teal-900', 'text-white'];
-const IDLE_TILE = ['bg-mint-100', 'text-teal-800'];
+const IDLE_TILE = ['bg-mint-100', 'text-accent'];
 
 function styleRow(button: HTMLButtonElement, active: boolean, count: number) {
   button.classList.toggle('opacity-45', !active && count === 0);

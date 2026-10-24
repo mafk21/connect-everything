@@ -1,0 +1,105 @@
+name: Maintenance
+
+# Two jobs that keep a curated link library honest:
+#   links     — finds dead URLs and files an issue, once a week
+#   favicons  — refreshes the self-hosted icons and opens a PR
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  links:
+    name: Dead link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check every URL
+        run: npm run links > link-report.txt 2>&1 || true
+
+      - name: Show the summary
+        run: head -40 link-report.txt
+
+      - name: File or update an issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! grep -q '^Dead links:' link-report.txt; then
+            echo "No dead links this week."
+            exit 0
+          fi
+
+          {
+            echo "The weekly check found unreachable resources."
+            echo ""
+            echo "Detected $(date -u '+%Y-%m-%d %H:%M UTC')."
+            echo ""
+            echo '```'
+            sed -n '/^Dead links:/,$p' link-report.txt
+            echo '```'
+            echo ""
+            echo "A \`403\` or \`429\` is often just bot protection rather than a dead site — worth opening before removing anything."
+          } > issue-body.md
+
+          existing=$(gh issue list --label link-check --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file issue-body.md
+          else
+            gh issue create \
+              --title "Dead links found by the weekly check" \
+              --label link-check \
+              --body-file issue-body.md
+          fi
+
+  favicons:
+    name: Refresh favicons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch any missing icons
+        run: npm run icons || echo "Fetcher reported failures; continuing with what it got."
+
+      - name: Open a PR if anything changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- public/icons src/data/favicons.json; then
+            echo "Icons are already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b icons/refresh
+          git add public/icons src/data/favicons.json
+          git commit -m "Refresh self-hosted favicons"
+          git push --force origin icons/refresh
+
+          gh pr create \
+            --base main \
+            --head icons/refresh \
+            --title "Refresh self-hosted favicons" \
+            --body "Automated refresh of the icons in \`public/icons\` and the manifest in \`src/data/favicons.json\`. Merging this removes the last remote requests for domains added since the previous run." \
+            || echo "A refresh PR is already open."
