@@ -47,6 +47,21 @@ check(
 check('category page has its own title', /<title>Security resources/.test(category), true);
 check('tag page has its own title', /<title>LLM —/.test(tag), true);
 
+// Pagination: every collection page is capped, and the rest is reachable.
+const development = read('category/development/index.html');
+const cardsOf = (html) => [...html.matchAll(/<li class="h-full" data-card([^>]*)>/g)];
+const visibleOf = (html) => cardsOf(html).filter((m) => !/hidden/.test(m[1])).length;
+
+check('big category page paints one page of cards', visibleOf(development), 36);
+check('the rest are still in the document', cardsOf(development).length > 36, true);
+check('a show-more control is offered', /data-load-more/.test(development), true);
+check(
+  'no-JS visitors get every card',
+  /\[data-card\]\[hidden\] \{ display: block !important; \}/.test(development),
+  true
+);
+check('small pages are not paginated away', visibleOf(tag), cardsOf(tag).length);
+
 // Machine-readable files.
 const rss = read('rss.xml');
 check('rss is well-formed-ish', rss.startsWith('<?xml'), true);

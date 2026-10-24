@@ -48,6 +48,7 @@ Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a
 - Categories also appear as a scrolling chip row on small screens, where the sidebar is hidden
 - An applied-filter bar names everything currently narrowing the view and lets you remove it one chip at a time
 - Sort by newest or A–Z
+- **36 cards at a time**, with "Show more" for the rest — the library is 533 entries, and painting all of them at once made the page about 24 screens tall
 - Counts recalculated against your *other* active filters, so you always see what is reachable
 
 **Search**
@@ -197,7 +198,9 @@ Favicons are lazy-loaded in a fixed-size box, so they cannot shift layout, and a
 
 **The HTML is now the biggest asset.** At 400 entries the page is 1.16 MB raw and 111 KB gzipped, because every card is server-rendered so that the library works without JavaScript and stays crawlable. Three optimisations applied so far: one SVG sprite instead of four inlined icons per card, component classes instead of repeated utility strings (together cutting 1.96 MB to 1.16 MB at 400 entries), and `content-visibility: auto` on cards so off-screen entries skip layout and paint entirely.
 
-The per-category pages above absorb most of this: the heavy document is now only the "everything" view. If the collection grows much beyond 550, the remaining lever is paginating that one page — render the first ~60 cards and load the rest on demand — at the cost of the "everything visible at once" behaviour.
+**Pagination** keeps the page short without giving up the single page: every card is still server-rendered (so it stays crawlable and complete without JavaScript), but only the first 36 are painted, and "Show more" reveals the next batch instantly from the DOM. Changing a filter, the sort order or the search starts again at page one. A `<noscript>` rule unhides everything, so a visitor without JavaScript sees the full list as before.
+
+The remaining weight is the markup itself. If the collection grows much beyond 550, the lever is trimming what is shipped: rendering the first page server-side and fetching later batches, or dropping `description` from the payload and filling it in on reveal.
 
 **Not yet measured:** Lighthouse and 200% zoom, because this environment has no browser. Both are one-command checks on a real machine — see *Known gaps* below.
 

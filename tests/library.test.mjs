@@ -53,6 +53,21 @@ function visibleTitles() {
 }
 
 const count = () => Number($('[data-result-count]').textContent);
+
+/** Click "Show more" until everything matching is painted. */
+function showAll() {
+  const more = $('[data-load-more]');
+  let guard = 0;
+  while (more && !more.hidden && guard++ < 100) more.click();
+}
+
+/** Compare the full visible set, having paged through every batch. */
+function allVisibleTitles() {
+  showAll();
+  return visibleTitles();
+}
+
+const loadMoreLabel = () => $('[data-load-more-label]')?.textContent?.trim() ?? '';
 const heading = () => $('[data-heading]').textContent;
 
 function cards() {
@@ -115,7 +130,7 @@ check('search field starts empty', $('#library-search').value, '');
 // Search ---------------------------------------------------------------
 pressSearch('css', window);
 await settle();
-check('search matches derived set', visibleTitles().sort(), expected({ query: 'css' }).map((c) => c.title).sort());
+check('search matches derived set', allVisibleTitles().sort(), expected({ query: 'css' }).map((c) => c.title).sort());
 check('search count', count(), expected({ query: 'css' }).length);
 check('search highlights matches', $$('[data-title-el] mark, [data-description] mark').length > 0, true);
 
@@ -123,7 +138,7 @@ pressSearch('design system', window);
 await settle();
 check(
   'multi-term search is AND',
-  visibleTitles().sort(),
+  allVisibleTitles().sort(),
   expected({ query: 'design system' }).map((c) => c.title).sort()
 );
 
@@ -146,7 +161,7 @@ check('category aria-pressed', $('[data-filter-category="learning"]').getAttribu
 check('category in url', window.location.search, '?category=learning');
 check(
   'category results match',
-  visibleTitles().sort(),
+  allVisibleTitles().sort(),
   expected({ category: 'learning' }).map((c) => c.title).sort()
 );
 
@@ -161,7 +176,7 @@ check('single tag filters', count(), withCss.length);
 check('tag aria-pressed', $('[data-filter-tag="CSS"]').getAttribute('aria-pressed'), 'true');
 
 click('[data-filter-tag="JavaScript"]');
-check('two tags use AND', visibleTitles().sort(), expected({ tags: ['CSS', 'JavaScript'] }).map((c) => c.title).sort());
+check('two tags use AND', allVisibleTitles().sort(), expected({ tags: ['CSS', 'JavaScript'] }).map((c) => c.title).sort());
 check('two tags in url', window.location.search, '?tag=CSS&tag=JavaScript');
 
 const cssCounter = $(`[data-count-tag="CSS"]`).textContent;
@@ -233,6 +248,30 @@ form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true 
 await settle();
 check('submitting filters in place instead of navigating', count(), beforeSubmit);
 check('submitting keeps us on the library page', window.location.pathname, '/');
+click('[data-clear-filters]:not([hidden])');
+
+// Pagination ------------------------------------------------------------
+check('first page is capped', $$('[data-card]').filter((li) => !li.hidden).length <= 36, true);
+check('page size comes from the server', Number($('[data-grid]').dataset.pageSize), 36);
+check(
+  'pagination reports the range',
+  /of \d+ shown/.test(
+    (document.querySelector('[data-shown-count]')?.parentElement.textContent ?? '')
+      .replace(/\s+/g, ' ')
+      .trim()
+  ),
+  true
+);
+
+showAll();
+check('paging to the end hides the button', $('[data-load-more]').hidden, true);
+check('every card reachable by paging', $$('[data-card]').filter((li) => !li.hidden).length, all.length);
+
+// Changing the filter must start again at page one, not stay scrolled deep.
+document.querySelector('[data-filter-category="learning"]').click();
+check('a new filter resets to the first page', $$('[data-card]').filter((li) => !li.hidden).length <= 36, true);
+check('reset page still offers more', $('[data-load-more]').hidden, false);
+check('the first page covers the newest entries', count(), expected({ category: 'learning' }).length);
 click('[data-clear-filters]:not([hidden])');
 
 // Applied-filter summary -----------------------------------------------

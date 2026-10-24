@@ -431,6 +431,7 @@ which needs the real domain.
 | Publishing | Commit to this branch | Confirmed: curator comes back here, or edits/PRs in the repo |
 | SEO surface | A page per category and per tag | One URL for 533 links gives search engines nothing to rank |
 | Favicons | Fetched to `public/icons` at build time | Removes up to 533 third-party requests per view and matches the no-tracking claim |
+| Long lists | 36 cards per page, "Show more" reveals from the DOM | The 533-card page was ~24 screens tall; every card stays server-rendered, so no-JS visitors and crawlers still get everything |
 | Theme | Light and dark from one token set, with a toggle | System preference is the default; an explicit choice is stored in `localStorage` and wins. The switch is a view-transition circular reveal, falling back to a cross-fade |
 
 ---

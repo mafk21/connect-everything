@@ -55,10 +55,22 @@ function init(scope: HTMLElement) {
   const allLink = document.querySelector<HTMLElement>('[data-nav-all]');
   const activeBar = document.querySelector<HTMLElement>('[data-active-filters]');
   const fuzzyNote = document.querySelector<HTMLElement>('[data-fuzzy-note]');
+  const loadMoreWrap = document.querySelector<HTMLElement>('[data-load-more-wrap]');
+  const loadMore = document.querySelector<HTMLButtonElement>('[data-load-more]');
+  const loadMoreLabel = document.querySelector<HTMLElement>('[data-load-more-label]');
+  const shownCount = document.querySelector<HTMLElement>('[data-shown-count]');
+  const shownTotal = document.querySelector<HTMLElement>('[data-shown-total]');
   const activeList = document.querySelector<HTMLElement>('[data-active-list]');
   const clearCategory = document.querySelector<HTMLButtonElement>('[data-clear-category]');
 
   const state: State = readUrl();
+
+  // How many cards are currently painted. Every card exists in the DOM; this
+  // only decides which ones are shown, so revealing more is instant. The page
+  // size comes from the server so there is a single source of truth for it.
+  const PAGE_SIZE = Number(scope.querySelector<HTMLElement>('[data-grid]')?.dataset.pageSize) || 36;
+  let shown = PAGE_SIZE;
+  let lastSignature = '';
 
   // ---------------------------------------------------------------- search
   let debounce: number | undefined;
@@ -190,6 +202,11 @@ function init(scope: HTMLElement) {
     });
   });
 
+  loadMore?.addEventListener('click', () => {
+    shown += PAGE_SIZE;
+    update();
+  });
+
   // ------------------------------------------------------------ the render
   function update() {
     const visible = render();
@@ -215,17 +232,35 @@ function init(scope: HTMLElement) {
 
     matched.sort(comparator(state.sort));
 
+    // Any change to what is being asked for starts again at page one; only
+    // "show more" advances the page.
+    const signature = [
+      state.query,
+      state.category ?? '',
+      [...state.tags].sort().join(','),
+      state.sort,
+    ].join('|');
+    if (signature !== lastSignature) {
+      lastSignature = signature;
+      shown = PAGE_SIZE;
+    }
+
+    const limit = Math.min(shown, matched.length);
+
     const order = new Map<HTMLElement, number>();
     matched.forEach((card, index) => order.set(card.li, index));
 
     cards.forEach((card) => {
-      const hit = order.has(card.li);
-      card.li.hidden = !hit;
-      if (hit) {
-        card.li.style.order = String(order.get(card.li));
+      const index = order.get(card.li);
+      const revealed = index !== undefined && index < limit;
+      card.li.hidden = !revealed;
+      if (revealed) {
+        card.li.style.order = String(index);
         highlight(card, state.query);
       }
     });
+
+    renderPagination(limit, matched.length);
 
     // counts, computed against the *other* active filters
     const categoryTotals = new Map<string, number>();
@@ -386,6 +421,29 @@ function init(scope: HTMLElement) {
       li.append(button);
       activeList.append(li);
     });
+  }
+
+  function renderPagination(limit: number, total: number) {
+    if (!loadMoreWrap || !loadMore) return;
+
+    const remaining = total - limit;
+    loadMoreWrap.hidden = remaining <= 0;
+    loadMore.hidden = remaining <= 0;
+
+    if (loadMoreLabel) {
+      loadMoreLabel.textContent = `Show ${Math.min(PAGE_SIZE, remaining)} more`;
+    }
+    if (shownCount) shownCount.textContent = String(limit);
+    if (shownTotal) shownTotal.textContent = String(total);
+
+    // Screen readers hear the new range when paging, which the aria-live
+    // result count alone would not announce.
+    loadMore.setAttribute(
+      'aria-label',
+      remaining > 0
+        ? `Show ${Math.min(PAGE_SIZE, remaining)} more resources, ${limit} of ${total} shown`
+        : 'All results shown'
+    );
   }
 
   function announce(visible: number) {
