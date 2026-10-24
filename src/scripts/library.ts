@@ -297,7 +297,7 @@ function init(scope: HTMLElement) {
 
     // "All resources" only reads as the current view when nothing is narrowed.
     if (allLink) {
-      ['bg-mint-100', 'text-teal-900'].forEach((name) => allLink.classList.toggle(name, !anyFilter));
+      ['bg-mint-100', 'text-accent'].forEach((name) => allLink.classList.toggle(name, !anyFilter));
       allLink.classList.toggle('text-ink-soft', anyFilter);
     }
 
@@ -496,9 +496,9 @@ function comparator(sort: State['sort']) {
   };
 }
 
-const ACTIVE_ROW = ['bg-mint-100', 'text-teal-900', 'font-medium'];
+const ACTIVE_ROW = ['bg-mint-100', 'text-accent', 'font-medium'];
 const ACTIVE_TILE = ['bg-teal-900', 'text-white'];
-const IDLE_TILE = ['bg-mint-100', 'text-teal-800'];
+const IDLE_TILE = ['bg-mint-100', 'text-accent'];
 
 function styleRow(button: HTMLButtonElement, active: boolean, count: number) {
   button.classList.toggle('opacity-45', !active && count === 0);

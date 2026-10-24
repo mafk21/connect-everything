@@ -7,6 +7,7 @@ interface Props {
   categories: CountedOption[];
   tags: CountedOption[];
   total: number;
+  recentCount: number;
   featuredCount: number;
   currentPath?: string;
   mode?: 'live' | 'links';
@@ -18,6 +19,7 @@ const {
   categories,
   tags,
   total,
+  recentCount,
   featuredCount,
   currentPath = '/',
   mode = 'links',
@@ -30,7 +32,7 @@ const navBase =
 ---
 
 <aside
-  class="flex h-full flex-col gap-6 overflow-y-auto border-line bg-white px-4 py-5 lg:border-r"
+  class="flex h-full flex-col gap-6 overflow-y-auto border-line bg-surface px-4 py-5 lg:border-r"
   aria-label="Browse the library"
 >
   <div>
@@ -49,8 +51,8 @@ const navBase =
           class:list={[
             navBase,
             currentPath === '/'
-              ? 'bg-mint-100 text-teal-900'
-              : 'text-ink-soft hover:bg-mint-100/70 hover:text-teal-900',
+              ? 'bg-mint-100 text-accent'
+              : 'text-ink-soft hover:bg-mint-100/70 hover:text-accent',
           ]}
         >
           <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -62,12 +64,30 @@ const navBase =
       </li>
       <li>
         <a
+          href="/new"
+          class:list={[
+            navBase,
+            currentPath === '/new'
+              ? 'bg-mint-100 text-accent'
+              : 'text-ink-soft hover:bg-mint-100/70 hover:text-accent',
+          ]}
+        >
+          <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m12 4.5 1.8 4.7 4.7 1.8-4.7 1.8L12 17.5l-1.8-4.7L5.5 11l4.7-1.8L12 4.5Z" />
+            <path d="M17.8 16.2 18.6 18l1.8.8-1.8.8-.8 1.8-.8-1.8-1.8-.8 1.8-.8.8-1.8Z" />
+          </svg>
+          <span>New</span>
+          <span class="ml-auto text-meta font-normal tabular-nums text-ink-muted">{recentCount}</span>
+        </a>
+      </li>
+      <li>
+        <a
           href="/featured"
           class:list={[
             navBase,
             currentPath === '/featured'
-              ? 'bg-mint-100 text-teal-900'
-              : 'text-ink-soft hover:bg-mint-100/70 hover:text-teal-900',
+              ? 'bg-mint-100 text-accent'
+              : 'text-ink-soft hover:bg-mint-100/70 hover:text-accent',
           ]}
         >
           <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">

@@ -51,15 +51,23 @@ Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a
 - Counts recalculated against your *other* active filters, so you always see what is reachable
 
 **Search**
-- Matches title, domain, description, category and tags
+- Matches title, domain, description, category and tags — so `github` and `figma` work as site searches, not just word matches
 - Multi-word queries are AND (`css grid` → CSS-Tricks, and nothing else)
+- A rescue pass allows one typo per word (`javascrpt`) and says so when it kicks in, instead of dead-ending on a blank page
 - Matches highlighted in place; `/` or `⌘K` focuses the field, `Esc` clears it
 
 **Every view is linkable**
 - Query, category, tags and sort are mirrored in the URL
 - `?q=free&category=learning&tag=Practice&sort=az` restores exactly that view
 
+**Every collection has its own page**
+- `/category/<id>` and `/tag/<slug>` are real static pages with their own title, description, canonical URL and `ItemList` structured data — 73 of them, all in the sitemap
+- The sidebar and card chips link to those pages, and the footer carries a crawlable link to every category
+- `/new` lists the 40 most recent additions; `/rss.xml` carries the same set as a feed
+
 **Details that matter**
+- Dark theme via `prefers-color-scheme`; every text pair clears WCAG AA in both themes (lowest measured 6.57:1 in dark)
+- Favicons are fetched once into `public/icons/` rather than loaded from a third party on every visit
 - Tag chips on a card add that tag to your filters
 - One action per card: the whole card opens the resource in a new tab
 - Works without JavaScript: the grid is server-rendered and every card links out
@@ -70,8 +78,13 @@ Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a
 | Route | Purpose |
 |---|---|
 | `/` | The library — all resources, live filtering |
+| `/category/<id>` | One page per category (9) |
+| `/tag/<slug>` | One page per tag in use (64) |
 | `/featured` | Start here — the twelve picks to open first |
-| `/suggest` | How to suggest a resource, via GitHub |
+| `/new` | The 40 most recently added entries |
+| `/rss.xml` | Feed of the same recent additions |
+| `/suggest` | How to suggest a resource, via GitHub (deep-links the issue form) |
+| `/robots.txt` | Generated, so the sitemap URL always matches the deployed domain |
 | `/404` | Search, category shortcuts and three picks instead of a dead end |
 
 ## Accessibility
@@ -149,14 +162,15 @@ Descriptions in the current library run 98–178 characters (mean 147). Adding a
 | `npm run preview` | Serve the production build locally |
 | `npm test` | Build, then run both test suites against the real HTML |
 | `npm run check` | Type-check `.astro` and `.ts` files |
-| `npm run links` | Sweep every resource URL for dead links (needs real internet) |
+| `npm run links` | Sweep every resource URL for dead links (needs real internet; runs weekly in CI) |
+| `npm run icons` | Fetch one favicon per domain into `public/icons/` (needs real internet) |
 | `npm run og` | Regenerate the OG card (needs `pillow`, `fonttools`, `brotli`) |
 
 ## Testing
 
 `npm test` builds the site, then drives the real engine module against the real built HTML in jsdom — not a mocked DOM.
 
-- **34 assertions** on the library page: search (single and multi-term AND, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, all three sorts, empty state, clearing, card chips, and menu behaviour.
+- **50 assertions** on the library page: search (single and multi-term AND, domain search, typo rescue, highlighting), category and tag filtering, post-filter counts, ARIA state, URL sync, both sorts, empty state, applied-filter chips, grouped tag collapse, the mobile category row, and clearing.
 - **8 assertions** in a separate process: a shared link restores query, category, tag and sort, every visible card genuinely matches, and the URL is left untouched on load.
 
 Expectations are derived from the page's own data attributes rather than hardcoded counts, so growing the library never breaks the suite. Every resource is server-rendered before JavaScript runs, so a broken script degrades to a plain, fully linked list rather than a blank page.
@@ -167,15 +181,18 @@ Measured on the 533-entry build:
 
 | Asset | Gzipped |
 |---|---|
-| HTML (`/`) | 133.2 KB |
-| CSS | 7.2 KB |
-| JS | 2.8 KB |
+| HTML (`/`) | 133.6 KB |
+| HTML (`/category/security`) | 20.3 KB |
+| CSS | 7.4 KB |
+| JS | 3.2 KB |
 
-Favicons are the only third-party request per card: lazy-loaded in a fixed-size box, so they cannot shift layout.
+78 pages, 10 MB of output in total. The per-category and per-tag pages mean a visitor who arrives from a search result gets a 20 KB page instead of the 133 KB index.
+
+Favicons are lazy-loaded in a fixed-size box, so they cannot shift layout, and are served from `public/icons/` once `npm run icons` has run — before that they fall back to a remote lookup.
 
 **The HTML is now the biggest asset.** At 400 entries the page is 1.16 MB raw and 111 KB gzipped, because every card is server-rendered so that the library works without JavaScript and stays crawlable. Three optimisations applied so far: one SVG sprite instead of four inlined icons per card, component classes instead of repeated utility strings (together cutting 1.96 MB to 1.16 MB at 400 entries), and `content-visibility: auto` on cards so off-screen entries skip layout and paint entirely.
 
-The next step, if this grows much beyond 550, is to render the first ~60 cards and paginate the rest, or split each category onto its own page. Not done yet, because it trades away the "everything visible in one place" behaviour that makes the library pleasant to browse.
+The per-category pages above absorb most of this: the heavy document is now only the "everything" view. If the collection grows much beyond 550, the remaining lever is paginating that one page — render the first ~60 cards and load the rest on demand — at the cost of the "everything visible at once" behaviour.
 
 **Not yet measured:** Lighthouse and 200% zoom, because this environment has no browser. Both are one-command checks on a real machine — see *Known gaps* below.
 
@@ -185,16 +202,23 @@ Static output: any host that serves files. On Vercel, Astro is detected automati
 
 **Before launch**
 
-1. Replace the placeholder `site` in [`astro.config.mjs`](astro.config.mjs) (`https://connecteverything.example`) with the real domain, and update the sitemap URL in [`public/robots.txt`](public/robots.txt). Canonical URLs, OG tags and the sitemap all derive from it.
-2. Run `npm run links` from a machine with open internet to confirm no entry has died since it was added.
-3. Add a `LICENSE` — see below.
+1. Set `SITE_URL` to the real domain — one variable, and canonical URLs, `og:url`, the sitemap and the generated `robots.txt` all follow. Without it the build still works, using `https://connecteverything.example` as a clearly-fake placeholder.
+2. Run `npm run icons` once and commit the result, so the icons are served locally rather than from a third party.
+3. Run `npm run links` (or wait for the Monday CI run) to confirm nothing has died since it was added.
+
+## Automation
+
+| Workflow | When | What it does |
+|---|---|---|
+| `ci.yml` | Every PR and push to `main` | `npm ci`, `astro check`, build and both test suites |
+| `maintenance.yml` | Mondays 06:00 UTC, or on demand | Runs the dead-link sweep and files or updates a `link-check` issue; refreshes `public/icons` into a PR |
 
 ## Known gaps
 
 - **Lighthouse / 200% zoom** unverified (no browser in the environment that built this).
-- **Dead-link sweep** not yet run against the live web; the tool is written, the environment is not allowed to reach those hosts.
+- **Dead-link sweep** has not run against the live web yet — this sandbox cannot reach arbitrary hosts. The weekly workflow does it from GitHub's runners from the first merge onwards.
+- **Icons** ship unfetched: `public/icons/` is empty until `npm run icons` runs, so the first build falls back to the remote favicon lookup. The Monday workflow fills it in via PR.
 - **Project name** is still a placeholder from the planning stage (`docs/PLAN.md` §11).
-- **Link checking at this size matters more.** 400 URLs were written by hand; run `npm run links` from a machine with open internet before launch. A single dead entry out of 400 is easy to miss by eye.
 
 ## Contributing
 
@@ -207,4 +231,4 @@ Everything is reviewed by the curator before it appears — nothing is published
 
 ## License
 
-Not yet specified.
+MIT — see [`LICENSE`](LICENSE). The library itself is a set of links; each destination keeps its own terms.

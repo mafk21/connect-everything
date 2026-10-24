@@ -1,0 +1,33 @@
+---
+import LibraryLayout from '../layouts/LibraryLayout.astro';
+import { RESOURCES } from '../data/resources';
+import { recentResources, RECENT_WINDOW_DAYS } from '../lib/recent';
+
+const recent = recentResources(RESOURCES);
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Recently added',
+  numberOfItems: recent.length,
+  itemListElement: recent.map((resource, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: resource.title,
+    url: resource.url,
+    description: resource.description,
+  })),
+};
+---
+
+<LibraryLayout
+  heading="Recently added"
+  resources={recent}
+  allResources={RESOURCES}
+  currentPath="/new"
+  mode="links"
+  structuredData={[itemList]}
+  intro={`The ${recent.length} newest entries, added in the last ${RECENT_WINDOW_DAYS} days. Also available as an RSS feed.`}
+  metaTitle="Recently added — Connect Everything"
+  metaDescription="The newest additions to the Connect Everything library of tools, references and tutorials."
+/>
