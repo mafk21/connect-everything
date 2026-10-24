@@ -81,6 +81,25 @@
    scrollbars follow.
 ------------------------------------------------------------------- */
 /* ------------------------------------------------------------------
+   Static-page filter disclosure
+   On pages with no engine the mobile filter panel is a native <details>, so
+   the summary has to lose its default marker and read as a button.
+------------------------------------------------------------------- */
+[data-static-filters] > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+[data-static-filters] > summary::-webkit-details-marker {
+  display: none;
+}
+
+[data-static-filters][open] > summary {
+  background: var(--color-mint-100);
+  color: var(--color-accent);
+}
+
+/* ------------------------------------------------------------------
    Theme
    Two sources of truth, one palette. An explicit choice (the toggle)
    wins; otherwise the operating system decides. The declarations are

@@ -5,7 +5,7 @@ import { categoryLabel, domainOf, formatDate, tagSlug } from '../lib/derive';
 
 interface Props {
   resource: Resource;
-  /** live = chips toggle filters in place; links = chips navigate to /?tag= */
+  /** live = chips toggle filters in place; links = chips navigate to /tag/<slug> */
   mode?: 'live' | 'links';
 }
 
@@ -52,7 +52,7 @@ const added = formatDate(resource.dateAdded);
               {tag}
             </button>
           ) : (
-            <a href={`/?tag=${encodeURIComponent(tag)}`} class="chip">
+            <a href={`/tag/${tagSlug(tag)}`} class="chip">
               {tag}
             </a>
           )}

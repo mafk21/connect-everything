@@ -14,7 +14,7 @@
  * to the monogram (and, until the first run, to the remote icon).
  */
 
-import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,15 +48,6 @@ const readJson = async (path, fallback) => {
     return JSON.parse(await readFile(path, 'utf8'));
   } catch {
     return fallback;
-  }
-};
-
-const exists = async (path) => {
-  try {
-    await access(path);
-    return true;
-  } catch {
-    return false;
   }
 };
 

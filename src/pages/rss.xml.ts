@@ -20,7 +20,6 @@ export const GET: APIRoute = ({ site }) => {
 
   const entries = items
     .map((resource) => {
-      const link = new URL(`/category/${resource.category}`, base).href;
       return [
         '    <item>',
         `      <title>${escape(resource.title)}</title>`,
@@ -29,7 +28,6 @@ export const GET: APIRoute = ({ site }) => {
         `      <pubDate>${new Date(`${resource.dateAdded}T09:00:00Z`).toUTCString()}</pubDate>`,
         `      <category>${escape(resource.category)}</category>`,
         `      <description>${escape(resource.description)}</description>`,
-        `      <comments>${escape(link)}</comments>`,
         '    </item>',
       ].join('\n');
     })

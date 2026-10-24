@@ -4,7 +4,6 @@ import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { RESOURCES } from '../data/resources';
-import { CATEGORIES } from '../data/categories';
 import { categoryCounts } from '../lib/derive';
 
 /** A few genuinely useful starting points, rather than an apology. */
@@ -72,7 +71,7 @@ const categories = categoryCounts(RESOURCES).filter((category) => category.count
             categories.map((category) => (
               <li>
                 <a
-                  href={`/?category=${category.id}`}
+                  href={`/category/${category.id}`}
                   class="inline-flex items-center gap-1.5 rounded-chip border border-line bg-surface px-2.5 py-1.5 text-meta text-ink-soft transition-colors hover:border-line-strong hover:bg-mint-100 hover:text-accent"
                 >
                   {category.label}
