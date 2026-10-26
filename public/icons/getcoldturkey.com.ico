@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="h-full">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cold Turkey - Page Not Found</title>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		
+		<meta name="description" content="The free website blocker designed for studying or focusing on work. Block distractions like social media, games, apps, Youtube or even the entire Internet."> 
+		<meta name="keywords" content="website blocker, app blocker, internet blocker, youtube blocker, facebook blocker, block websites, block apps, block distractions, cold turkey, coldturkey, getcoldturkey">
+		<meta name="author" content="Cold Turkey Software">
+
+		<meta property="og:image" content="//getcoldturkey.com/assets/icons/og-logo.png" />
+		<meta property="og:title" content="Cold Turkey Blocker" />
+		<meta property="og:site_name" content="Cold Turkey Blocker" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://getcoldturkey.com/" />
+		<meta property="og:description" content="The free website blocker designed for studying or focusing on work. Block distractions like social media, games, apps, Youtube or even the entire Internet." />
+	
+		<link rel="canonical" href="https://getcoldturkey.com/404/" />
+		<link rel="shortcut icon" href="/assets/icons/favicon.ico" />
+		<link rel="stylesheet" href="/assets/css/styles.css?v=4.9.2" />
+		
+		<!-- Matomo -->
+		<script type="text/javascript" defer>
+			var _paq = _paq || [];
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+			_paq.push(['trackPageView']);
+			_paq.push(['enableLinkTracking']);
+			(function() {
+			var u="//getcoldturkey.com/analytics/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', '1']);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+			})();
+		</script>
+		<!-- End Matomo Code -->
+	</head>
+	<body class="leading-relaxed tracking-wide flex flex-col h-full">
+		
+		<nav id="header" class="fixed w-full z-30 top-0 bg-gray-800 text-gray-50 py-1">
+			<div class="w-full max-w-screen-xlg container mx-auto flex flex-wrap items-center justify-between mt-0">
+				<a class="no-underline hover:no-underline font-bold text-2xl" href="https://getcoldturkey.com">
+					<svg class="h-8 w-8 mr-1 inline-block fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 50 700 500" preserveAspectRatio="xMidYMid meet">
+						<g transform="translate(0.000000,489.000000) scale(0.100000,-0.100000)" fill="#FAFAFA" stroke="none">
+							<path d="M3440 4863 c-52 -10 -147 -61 -208 -112 -192 -160 -371 -531 -456 -946 -42 -204 -70 -398 -56 -393 4 2 27 28 49 58 150 199 354 331 589 379 73 15 243 14 327 -3 230 -45 431 -174 581 -373 31 -41 57 -73 59 -71 3 3 -18 158 -35 258 -54 308 -121 523 -237 755 -164 327 -387 490 -613 448z"></path>
+							<path d="M2285 4530 c-108 -26 -210 -119 -273 -247 -21 -44 -42 -90 -46 -104 -50 -179 -66 -301 -66 -513 0 -206 21 -396 65 -611 20 -98 54 -235 64 -265 5 -14 17 -52 26 -85 29 -101 90 -274 140 -395 52 -126 153 -338 165 -345 4 -2 22 24 40 58 44 85 113 188 175 261 l52 61 -19 55 c-78 225 -79 532 -2 757 28 83 29 91 10 112 -13 14 -12 33 4 146 25 172 36 234 56 330 9 44 18 91 21 105 15 71 69 267 99 359 19 57 34 109 34 116 0 19 -150 121 -234 160 -109 51 -223 67 -311 45z"></path>
+							<path d="M4523 4530 c-92 -19 -323 -150 -323 -184 0 -7 11 -46 25 -87 71 -206 132 -460 176 -734 6 -33 14 -94 19 -135 9 -69 8 -76 -12 -97 -21 -22 -21 -23 -3 -65 29 -72 33 -83 49 -149 28 -118 36 -182 36 -298 0 -137 -17 -246 -60 -371 l-30 -93 27 -34 c66 -83 143 -198 173 -258 18 -36 36 -63 40 -60 14 8 115 222 173 365 115 283 199 576 247 860 55 324 53 697 -5 910 -8 30 -18 66 -21 80 -4 14 -27 64 -51 112 -98 194 -259 277 -460 238z"></path>
+							<path d="M1322 3885 c-69 -19 -98 -35 -152 -83 -94 -82 -130 -190 -130 -385 0 -161 21 -272 90 -477 109 -323 367 -747 659 -1084 142 -164 408 -426 432 -426 4 0 10 26 13 58 9 71 31 180 52 252 8 30 18 64 20 75 3 12 -26 85 -74 185 -102 210 -157 345 -226 550 -145 435 -212 799 -229 1230 -2 61 3 58 -132 96 -77 22 -259 27 -323 9z"></path>
+							<path d="M5445 3894 c-11 -2 -45 -10 -75 -16 -30 -7 -77 -20 -105 -29 l-50 -16 -11 -189 c-11 -189 -26 -325 -44 -419 -6 -27 -17 -86 -26 -130 -70 -363 -213 -776 -396 -1140 -54 -107 -54 -112 -24 -215 21 -71 43 -180 52 -252 3 -32 9 -58 13 -58 13 0 125 102 236 214 444 450 773 979 904 1451 48 174 58 410 22 525 -38 123 -115 210 -223 252 -51 20 -222 34 -273 22z"></path>
+							<path d="M3405 3701 c-285 -38 -552 -269 -661 -571 -85 -240 -77 -532 22 -749 l25 -55 -69 -70 c-221 -229 -342 -496 -372 -823 -41 -445 146 -902 474 -1158 131 -101 248 -160 431 -215 76 -23 253 -33 357 -21 109 13 119 15 239 55 263 88 515 312 651 581 198 391 205 853 18 1237 -64 130 -126 222 -217 318 l-75 80 36 87 c61 151 70 199 70 383 0 165 -7 210 -49 335 -78 231 -254 431 -467 528 -114 52 -279 75 -413 58z m-59 -640 c88 -54 93 -240 7 -296 -56 -37 -126 -13 -160 55 -26 52 -23 147 6 194 39 63 92 80 147 47z m453 5 c87 -46 104 -211 29 -286 -42 -43 -104 -42 -147 0 -66 66 -63 197 6 266 37 37 67 43 112 20z m-299 -846 c0 -176 -4 -320 -8 -320 -4 0 -14 17 -21 38 -8 20 -23 57 -34 82 -20 46 -94 225 -129 315 -11 28 -30 74 -44 102 -13 29 -26 64 -30 78 l-6 25 136 0 136 0 0 -320z m310 312 c0 -5 -57 -147 -127 -316 -113 -270 -150 -344 -147 -291 0 8 1 150 2 315 l2 300 135 0 c74 0 135 -4 135 -8z"></path>
+							<path d="M760 2779 c-333 -75 -450 -299 -319 -610 168 -397 747 -872 1409 -1157 157 -67 425 -160 435 -150 3 2 -6 49 -20 104 -14 54 -28 146 -31 204 l-7 105 -61 55 c-123 110 -394 388 -487 500 -236 284 -417 557 -556 838 l-66 132 -106 -1 c-65 0 -139 -8 -191 -20z"></path>
+							<path d="M5872 2692 c-138 -286 -350 -605 -582 -878 -93 -109 -340 -361 -456 -464 l-61 -55 -6 -110 c-6 -108 -23 -207 -47 -280 -7 -20 -10 -39 -7 -42 8 -7 131 30 270 83 168 63 203 79 387 171 333 166 643 384 866 607 330 332 447 636 330 855 -71 133 -285 221 -537 221 l-104 0 -53 -108z"></path>
+							<path d="M569 1666 c-238 -85 -440 -232 -508 -371 -30 -61 -40 -174 -20 -242 78 -284 510 -535 1154 -672 51 -11 96 -18 310 -48 154 -21 680 -24 830 -5 106 14 215 33 215 38 0 1 -24 36 -52 76 -29 41 -75 117 -103 170 l-50 97 -105 36 c-114 39 -192 68 -255 96 -22 9 -69 29 -105 44 -36 15 -123 57 -195 92 -383 192 -698 406 -975 662 -30 27 -59 50 -65 50 -5 0 -40 -10 -76 -23z"></path>
+							<path d="M6290 1639 c-276 -255 -596 -472 -975 -662 -72 -35 -159 -77 -195 -92 -36 -15 -78 -33 -95 -40 -87 -37 -147 -60 -251 -95 -64 -21 -117 -40 -118 -42 -1 -1 -26 -48 -55 -103 -29 -55 -75 -130 -102 -168 -27 -37 -49 -69 -49 -72 0 -6 94 -22 215 -37 142 -17 643 -17 785 0 628 75 1112 251 1360 494 170 167 207 352 104 513 -65 101 -199 207 -356 279 -71 32 -190 76 -206 76 -4 -1 -32 -24 -62 -51z"></path>
+						</g>
+					</svg>
+					Cold Turkey
+				</a>
+				<div class="block md:hidden">
+					<button id="nav-toggle" class="flex items-center focus:outline-none">
+						<svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+						</svg>
+					</button>
+				</div>
+				<div class="md:flex md:items-center md:mt-0 md:w-auto md:bg-transparent bg-gray-800 md:p-0 w-full flex-grow hidden mt-2 p-4 z-20" id="nav-content">
+					<ul class="list-reset md:flex justify-end flex-1 items-center">
+						<li class="md:mr-2 md:text-left text-center">
+							<div @click.away="flyoutMenuOpen = false" x-data="{ flyoutMenuOpen: false }" class="relative">
+								<button type="button" class="group inline-flex items-center font-bold text-gray-50 hover:text-gray-200 my-2 focus:outline-none" @click="flyoutMenuOpen = !flyoutMenuOpen" :class="{ 'text-gray-200': flyoutMenuOpen, 'text-gray-50': !flyoutMenuOpen }">
+									<span>Products</span>
+									<svg class="ml-1 h-5 w-5 group-hover:text-gray-200 text-gray-50" x-bind:class="{ 'text-gray-200': flyoutMenuOpen, 'text-gray-50': !flyoutMenuOpen }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+									</svg>
+								</button>
+								<div x-cloak class="absolute transform px-2 w-screen max-w-md sm:px-0 ml-0 left-1/2 -translate-x-1/2" x-show="flyoutMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1">
+									<div class="text-left rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+										<div class="z-20 relative grid gap-6 bg-gray-50 px-5 py-6 sm:gap-8 sm:p-8">
+											<a href="//getcoldturkey.com" class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-100">
+												<img class="flex-shrink-0 h-6 w-6" src="/assets/img/blocker-icon-48.png">
+												<div class="ml-4">
+													<p class="text-base font-medium text-gray-900">
+														Blocker
+													</p>
+													<p class="mt-1 text-sm text-gray-500">
+														The website and app blocker that blocks distractions so you can be more productive.
+													</p>
+												</div>
+											</a>
+											<a href="//getcoldturkey.com/writer/" class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-100">
+												<img class="flex-shrink-0 h-6 w-6" src="/assets/img/writer-icon-48.png">
+												<div class="ml-4">
+													<p class="text-base font-medium text-gray-900">
+														Writer
+													</p>
+													<p class="mt-1 text-sm text-gray-500">
+														Downgrade your computer into a typewriter that forces you to write, nothing else.
+													</p>
+												</div>
+											</a>
+											<a href="//getcoldturkey.com/micromanager/" class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-100">
+												<img class="flex-shrink-0 h-6 w-6" src="/assets/img/micromanager-icon-48.png">
+												<div class="ml-4">
+													<p class="text-base font-medium text-gray-900">
+														Micromanager
+													</p>
+													<p class="mt-1 text-sm text-gray-500">
+														Block all applications except the ones you need for short productive sprints.
+													</p>
+												</div>
+											</a>
+										</div>
+										<div class="px-5 py-5 bg-gray-100 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
+											<div class="flow-root">
+												<a href="//getcoldturkey.com/compare/" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-200">
+													<img class="flex-shrink-0 h-6 w-6" src="/assets/img/compare-icon-48.png">
+													<span class="ml-3">Compare Products</span>
+												</a>
+											</div>
+											<div class="flow-root">
+												<a href="//getcoldturkey.com/support/" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-200">
+													<img class="flex-shrink-0 h-6 w-6" src="/assets/img/email-icon-48.png">
+													<span class="ml-3">Ask a Question</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="md:mx-4 md:text-left text-center">
+							<a class="inline-block font-bold text-gray-50 hover:text-gray-200 my-2" href="//getcoldturkey.com/features/">Features</a>
+						</li>
+						<li class="md:mx-4 md:text-left text-center">
+							<a class="inline-block font-bold text-gray-50 hover:text-gray-200 my-2" href="//getcoldturkey.com/support/">Support</a>
+						</li>
+					</ul>
+					<div class="md:ml-2 text-center">
+						<a href="//getcoldturkey.com/pricing/" class="inline-block bg-green-600 hover:bg-green-700 text-gray-50 hover:text-gray-100 font-bold rounded py-1 px-4 md:my-0 my-2 focus:outline-none">
+							Download
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	
+		<div class="pt-24 bg-gradient-to-b from-gray-800 from-10% to-gray-900 to-90% flex-grow">
+			<div class="text-center px-3">
+				<h1 class="my-6 text-5xl text-gray-50 font-bold">
+					Page Not Found
+				</h1>
+				<h2 class="mx-auto max-w-screen-sm text-xl text-gray-50 mb-8">
+					The page your looking for doesn't exist.
+				</h2>
+				<div class="w-full mx-auto pt-4 pb-12">
+					<img src="/assets/img/404/turkey.jpg" alt="Turkey walking on a fence" class="w-full max-w-3xl mx-auto rounded-xl"/>
+				</div>
+			</div>
+		</div>
+		
+		<section class="bg-gray-100 w-full mx-auto text-center pt-8 pb-12">
+			<h3 class="my-6 text-3xl font-extrabold tracking-tight text-gray-800">
+				Want to visit the homepage instead?
+			</h3>
+			<a href="//getcoldturkey.com/" class="inline-block mx-auto bg-green-600 hover:bg-green-700 text-lg font-bold text-gray-50 hover:text-gray-100 rounded my-2 md:my-6 py-4 px-8 focus:outline-none">
+				Yes, please!
+			</a>
+		</section>
+		<!--Footer-->
+		<footer class="bg-gray-800 text-gray-50">
+			<div class="container">
+				<div class="w-full flex flex-col md:flex-row pt-12">
+					<div class="flex-1 mb-6">
+						<a class="no-underline hover:no-underline font-bold text-xl" href="https://getcoldturkey.com">
+							<svg class="h-6 w-6 mr-1 inline-block fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 50 700 500" preserveAspectRatio="xMidYMid meet">
+								<g transform="translate(0.000000,489.000000) scale(0.100000,-0.100000)" fill="#FAFAFA" stroke="none">
+									<path d="M3440 4863 c-52 -10 -147 -61 -208 -112 -192 -160 -371 -531 -456 -946 -42 -204 -70 -398 -56 -393 4 2 27 28 49 58 150 199 354 331 589 379 73 15 243 14 327 -3 230 -45 431 -174 581 -373 31 -41 57 -73 59 -71 3 3 -18 158 -35 258 -54 308 -121 523 -237 755 -164 327 -387 490 -613 448z"></path>
+									<path d="M2285 4530 c-108 -26 -210 -119 -273 -247 -21 -44 -42 -90 -46 -104 -50 -179 -66 -301 -66 -513 0 -206 21 -396 65 -611 20 -98 54 -235 64 -265 5 -14 17 -52 26 -85 29 -101 90 -274 140 -395 52 -126 153 -338 165 -345 4 -2 22 24 40 58 44 85 113 188 175 261 l52 61 -19 55 c-78 225 -79 532 -2 757 28 83 29 91 10 112 -13 14 -12 33 4 146 25 172 36 234 56 330 9 44 18 91 21 105 15 71 69 267 99 359 19 57 34 109 34 116 0 19 -150 121 -234 160 -109 51 -223 67 -311 45z"></path>
+									<path d="M4523 4530 c-92 -19 -323 -150 -323 -184 0 -7 11 -46 25 -87 71 -206 132 -460 176 -734 6 -33 14 -94 19 -135 9 -69 8 -76 -12 -97 -21 -22 -21 -23 -3 -65 29 -72 33 -83 49 -149 28 -118 36 -182 36 -298 0 -137 -17 -246 -60 -371 l-30 -93 27 -34 c66 -83 143 -198 173 -258 18 -36 36 -63 40 -60 14 8 115 222 173 365 115 283 199 576 247 860 55 324 53 697 -5 910 -8 30 -18 66 -21 80 -4 14 -27 64 -51 112 -98 194 -259 277 -460 238z"></path>
+									<path d="M1322 3885 c-69 -19 -98 -35 -152 -83 -94 -82 -130 -190 -130 -385 0 -161 21 -272 90 -477 109 -323 367 -747 659 -1084 142 -164 408 -426 432 -426 4 0 10 26 13 58 9 71 31 180 52 252 8 30 18 64 20 75 3 12 -26 85 -74 185 -102 210 -157 345 -226 550 -145 435 -212 799 -229 1230 -2 61 3 58 -132 96 -77 22 -259 27 -323 9z"></path>
+									<path d="M5445 3894 c-11 -2 -45 -10 -75 -16 -30 -7 -77 -20 -105 -29 l-50 -16 -11 -189 c-11 -189 -26 -325 -44 -419 -6 -27 -17 -86 -26 -130 -70 -363 -213 -776 -396 -1140 -54 -107 -54 -112 -24 -215 21 -71 43 -180 52 -252 3 -32 9 -58 13 -58 13 0 125 102 236 214 444 450 773 979 904 1451 48 174 58 410 22 525 -38 123 -115 210 -223 252 -51 20 -222 34 -273 22z"></path>
+									<path d="M3405 3701 c-285 -38 -552 -269 -661 -571 -85 -240 -77 -532 22 -749 l25 -55 -69 -70 c-221 -229 -342 -496 -372 -823 -41 -445 146 -902 474 -1158 131 -101 248 -160 431 -215 76 -23 253 -33 357 -21 109 13 119 15 239 55 263 88 515 312 651 581 198 391 205 853 18 1237 -64 130 -126 222 -217 318 l-75 80 36 87 c61 151 70 199 70 383 0 165 -7 210 -49 335 -78 231 -254 431 -467 528 -114 52 -279 75 -413 58z m-59 -640 c88 -54 93 -240 7 -296 -56 -37 -126 -13 -160 55 -26 52 -23 147 6 194 39 63 92 80 147 47z m453 5 c87 -46 104 -211 29 -286 -42 -43 -104 -42 -147 0 -66 66 -63 197 6 266 37 37 67 43 112 20z m-299 -846 c0 -176 -4 -320 -8 -320 -4 0 -14 17 -21 38 -8 20 -23 57 -34 82 -20 46 -94 225 -129 315 -11 28 -30 74 -44 102 -13 29 -26 64 -30 78 l-6 25 136 0 136 0 0 -320z m310 312 c0 -5 -57 -147 -127 -316 -113 -270 -150 -344 -147 -291 0 8 1 150 2 315 l2 300 135 0 c74 0 135 -4 135 -8z"></path>
+									<path d="M760 2779 c-333 -75 -450 -299 -319 -610 168 -397 747 -872 1409 -1157 157 -67 425 -160 435 -150 3 2 -6 49 -20 104 -14 54 -28 146 -31 204 l-7 105 -61 55 c-123 110 -394 388 -487 500 -236 284 -417 557 -556 838 l-66 132 -106 -1 c-65 0 -139 -8 -191 -20z"></path>
+									<path d="M5872 2692 c-138 -286 -350 -605 -582 -878 -93 -109 -340 -361 -456 -464 l-61 -55 -6 -110 c-6 -108 -23 -207 -47 -280 -7 -20 -10 -39 -7 -42 8 -7 131 30 270 83 168 63 203 79 387 171 333 166 643 384 866 607 330 332 447 636 330 855 -71 133 -285 221 -537 221 l-104 0 -53 -108z"></path>
+									<path d="M569 1666 c-238 -85 -440 -232 -508 -371 -30 -61 -40 -174 -20 -242 78 -284 510 -535 1154 -672 51 -11 96 -18 310 -48 154 -21 680 -24 830 -5 106 14 215 33 215 38 0 1 -24 36 -52 76 -29 41 -75 117 -103 170 l-50 97 -105 36 c-114 39 -192 68 -255 96 -22 9 -69 29 -105 44 -36 15 -123 57 -195 92 -383 192 -698 406 -975 662 -30 27 -59 50 -65 50 -5 0 -40 -10 -76 -23z"></path>
+									<path d="M6290 1639 c-276 -255 -596 -472 -975 -662 -72 -35 -159 -77 -195 -92 -36 -15 -78 -33 -95 -40 -87 -37 -147 -60 -251 -95 -64 -21 -117 -40 -118 -42 -1 -1 -26 -48 -55 -103 -29 -55 -75 -130 -102 -168 -27 -37 -49 -69 -49 -72 0 -6 94 -22 215 -37 142 -17 643 -17 785 0 628 75 1112 251 1360 494 170 167 207 352 104 513 -65 101 -199 207 -356 279 -71 32 -190 76 -206 76 -4 -1 -32 -24 -62 -51z"></path>
+								</g>
+							</svg>
+							Cold Turkey
+						</a>
+					</div>
+					<div class="flex-1">
+						<p class="uppercase font-extrabold text-gray-100 md:mb-6">Blocker</p>
+						<ul class="list-reset mb-6">
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/features/" class="font-light no-underline hover:underline">Features</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/pricing/" class="font-light no-underline hover:underline">Pricing</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/support/" class="font-light no-underline hover:underline">Support</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/support/user-guide/" class="font-light no-underline hover:underline">User Guide</a>
+							</li>
+						</ul>
+					</div>
+					<div class="flex-1">
+						<p class="uppercase font-extrabold text-gray-100 md:mb-6">Products</p>
+						<ul class="list-reset mb-6">
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/" class="font-light no-underline hover:underline">Blocker</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/writer/" class="font-light no-underline hover:underline">Writer</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/micromanager/" class="font-light no-underline hover:underline">Micromanager</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/compare/" class="font-light no-underline hover:underline">Compare</a>
+							</li>
+						</ul>
+					</div>
+					<div class="flex-1">
+						<p class="uppercase font-extrabold text-gray-100 md:mb-6">Company</p>
+						<ul class="list-reset mb-6">
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/story/" class="font-light no-underline hover:underline">About Us</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/donations/" class="font-light no-underline hover:underline">Donations to WWF</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/terms/" class="font-light no-underline hover:underline">Terms</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/privacy/" class="font-light no-underline hover:underline">Privacy</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/ai/" class="font-light no-underline hover:underline">AI Policy</a>
+							</li>
+						</ul>
+					</div>
+					<div class="flex-1">
+						<p class="uppercase font-extrabold text-gray-100 md:mb-6">Updates</p>
+						<ul class="list-reset mb-6">
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://getcoldturkey.com/news/" class="font-light no-underline hover:underline">Release Notes</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://bsky.app/profile/getcoldturkey.com" class="font-light no-underline hover:underline">Bluesky</a>
+							</li>
+							<li class="mt-2 inline-block mr-2 md:block md:mr-0">
+								<a href="https://www.reddit.com/r/coldturkeyblocker/" class="font-light no-underline hover:underline">Reddit</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="w-full py-6 text-gray-300 text-sm text-center">
+					<p>
+						Copyright &copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> Cold Turkey Software, Inc. Made with
+						<svg class="inline-block" xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 22" preserveAspectRatio="xMidYMid meet">
+							<title>Pride</title>
+							<g fill="#ffca3a"><path d="M 0.33 8.27 c -0.25 -1.10 -0.05 -2.95 0.44 -4 l 0.09 -0.20 11.14 0 11.14 0 0.09 0.20 c 0.49 1.05 0.69 2.90 0.44 4 l -0.10 0.44 -11.57 0 -11.57 0 -0.10 -0.44 z "></path></g>
+							<g fill="#ff595e"><path d="M 0.88 4.03 c 0.36 -0.86 1.40 -2.10 2.27 -2.69 1.40 -0.95 3.07 -1.38 4.66 -1.20 1.45 0.17 2.69 0.72 3.87 1.71 l 0.32 0.27 0.32 -0.27 c 0.84 -0.72 1.53 -1.10 2.54 -1.43 1.98 -0.64 4.19 -0.30 5.99 0.92 0.86 0.59 1.91 1.83 2.27 2.69 l 0.11 0.25 -11.23 0 -11.23 0 0.11 -0.25 z "></path></g>
+							<g fill="#8ac926"><path d="M 2.69 12.40 c -1 -1.06 -1.49 -1.73 -1.84 -2.51 -0.22 -0.48 -0.43 -1.12 -0.44 -1.28 0 -0.12 0.60 -0.13 11.58 -0.13 10.98 0 11.58 0.01 11.58 0.13 -0.01 0.15 -0.22 0.79 -0.44 1.28 -0.34 0.77 -0.84 1.45 -1.84 2.51 l -0.48 0.51 -8.82 0 -8.82 0 -0.48 -0.51 z "></path></g>
+							<g fill="#1982c4"><path d="M 5.12 14.84 l -2.14 -2.14 9.02 0 9.02 0 -2.14 2.14 -2.14 2.14 -4.74 0 -4.74 0 -2.14 -2.14 z "></path></g>
+							<g fill="#6a4c93"><path d="M 9.51 19.23 l -2.46 -2.46 4.95 0 4.95 0 -2.46 2.46 c -1.35 1.35 -2.47 2.46 -2.49 2.46 -0.02 0 -1.14 -1.10 -2.49 -2.46 z "></path></g>					
+						</svg>
+						 in 
+						<svg class="inline-block" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 3920 4230" preserveAspectRatio="xMidYMid meet">
+							<title>Canada</title>
+							<g fill="#ff595e"><path d="M1883 4123 c4 -54 14 -279 23 -501 l17 -403 -29 -30 c-28 -30 -31 -31 -94 -25 -36 3 -246 31 -467 63 -221 31 -405 54 -409 51 -3 -4 13 -70 36 -147 47 -160 46 -182 -13 -238 -17 -17 -232 -194 -477 -393 -245 -198 -444 -363 -443 -366 1 -3 47 -27 103 -54 55 -26 107 -53 115 -60 27 -23 16 -90 -65 -383 -44 -160 -79 -293 -78 -297 2 -4 126 20 277 52 362 77 326 91 403 -165 l23 -77 215 241 c118 133 226 250 239 260 24 19 76 25 97 11 18 -12 34 -49 34 -80 0 -24 -165 -926 -185 -1010 -5 -20 10 -15 140 53 158 82 201 92 247 56 13 -11 100 -161 193 -335 94 -174 172 -316 175 -316 3 0 81 142 175 316 93 174 180 324 193 335 46 36 90 26 248 -56 128 -67 144 -73 139 -53 -20 85 -185 986 -185 1010 0 31 16 68 34 80 16 11 64 10 85 -2 10 -5 112 -114 226 -242 115 -128 216 -241 225 -251 16 -17 19 -11 53 109 39 135 52 159 95 167 15 3 148 -20 297 -52 149 -32 271 -54 273 -51 1 4 -34 137 -78 297 -81 295 -92 360 -64 383 8 8 59 34 113 59 54 25 99 51 99 56 0 6 -199 171 -442 368 -242 197 -456 373 -473 390 -59 56 -60 78 -13 238 23 77 39 143 36 147 -4 3 -188 -19 -409 -51 -221 -32 -431 -60 -468 -64 -64 -5 -65 -5 -93 28 l-28 33 6 121 c3 66 8 257 11 425 3 168 8 338 11 378 l6 72 -78 0 -77 0 6 -97z"/></g>
+						</svg>
+					</p>
+				</div>
+			</div>
+		</footer>
+		
+		<script type="module" src="/assets/js/alpine.min.js"></script>
+		<script nomodule src="/assets/js/alpine-ie11.min.js" defer></script>
+		
+		<script>
+			/*Toggle dropdown list*/
+			/*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+			var navMenuDiv = document.getElementById("nav-content");
+			var navMenu = document.getElementById("nav-toggle");
+			document.onclick = check;
+			function check(e) {
+				var target = (e && e.target) || (event && event.srcElement);
+				//Nav Menu
+				if (!checkParent(target, navMenuDiv)) {
+					// click NOT on the menu
+					if (checkParent(target, navMenu)) {
+						// click on the link
+						if (navMenuDiv.classList.contains("hidden")) {
+							navMenuDiv.classList.remove("hidden");
+						} else {
+							navMenuDiv.classList.add("hidden");
+						}
+					} else {
+						// click both outside link and outside menu, hide menu
+						navMenuDiv.classList.add("hidden");
+					}
+				}
+			}
+			function checkParent(t, elm) {
+				while (t.parentNode) {
+					if (t == elm) {
+						return true;
+					}
+					t = t.parentNode;
+				}
+				return false;
+			}
+		</script>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
