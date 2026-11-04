@@ -2,7 +2,7 @@
 
 **A public, hand-curated toolbox of the useful internet** — websites, tools, tutorials and references worth keeping. Browse, search, filter, and click straight through to the thing you need.
 
-**533 resources · 9 categories · 64 tags · no accounts · no tracking · no ads**
+**534 resources · 9 categories · 64 tags · no accounts · no tracking · no ads**
 
 ![Connect Everything](public/og-default.png)
 
@@ -32,11 +32,11 @@ The web is full of lists that were generated instead of curated. This is the opp
 | Tools | 50 | CLI, automation, small web utilities |
 | Productivity | 50 | Notes, tasks, calendars, email, time |
 | Media | 50 | Photos, video, audio, icons, editors, conversion |
-| Data & AI | 81 | LLM APIs, agents, RAG, fine-tuning, evals, data tooling |
+| Data & AI | 82 | LLM APIs, agents, RAG, fine-tuning, evals, data tooling |
 | Security | 50 | Red teaming, blue teaming, bug bounties, OSINT, forensics |
 | Reference | 50 | Specs, docs, standards, cheatsheets |
 
-**533 entries across 504 distinct domains.** Thirteen domains carry more than one entry. GitHub accounts for 17 — each a separate open-source project (ripgrep, fzf, llama.cpp, Sigma-style rules and others) — and Hugging Face for 3 (models, Learn, PEFT). The rest are sites that genuinely cover two things: Figma and FigJam, Svelte and SvelteKit, MDN's reference and its tutorials.
+**534 entries across 504 distinct domains.** Thirteen domains carry more than one entry. GitHub accounts for 18 — each a separate open-source project (ripgrep, fzf, llama.cpp, Sigma-style rules and others) — and Hugging Face for 3 (models, Learn, PEFT). The rest are sites that genuinely cover two things: Figma and FigJam, Svelte and SvelteKit, MDN's reference and its tutorials.
 
 Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a controlled tag vocabulary of **64 terms, grouped into seven families** — every one in use, none drifting into synonyms.
 
@@ -48,7 +48,7 @@ Plus **12 "Start here" picks** on [`/featured`](src/pages/featured.astro), and a
 - Categories also appear as a scrolling chip row on small screens, where the sidebar is hidden
 - An applied-filter bar names everything currently narrowing the view and lets you remove it one chip at a time
 - Sort by newest or A–Z
-- **36 cards at a time**, with "Show more" for the rest — the library is 533 entries, and painting all of them at once made the page about 24 screens tall
+- **36 cards at a time**, with "Show more" for the rest — the library is 534 entries, and painting all of them at once made the page about 24 screens tall
 - Counts recalculated against your *other* active filters, so you always see what is reachable
 
 **Search**
@@ -133,7 +133,7 @@ Everything lives in one file: [`src/data/resources.ts`](src/data/resources.ts). 
   url: 'https://css-tricks.com',          // https only
   description:
     'A long-running publication about CSS and front-end craft, with the deepest explainers anywhere on layout, grid, and the odd corners of the cascade.',
-  category: 'learning',                   // one of 8
+  category: 'learning',                   // one of 9
   tags: ['CSS', 'Layout', 'Tips'],        // 1–5, from the vocabulary
   featured: true,                         // optional — curator's pick
   dateAdded: '2026-01-12',                // YYYY-MM-DD
@@ -149,7 +149,7 @@ Everything lives in one file: [`src/data/resources.ts`](src/data/resources.ts). 
 | `id` | kebab-case, unique |
 | `url` | absolute, `https`, no duplicates (`www` and trailing slashes are normalised) |
 | `description` | 60–220 characters, written in a human voice |
-| `category` | one of the 8 in `src/data/categories.ts` |
+| `category` | one of the 9 in `src/data/categories.ts` |
 | `tags` | 1–5, each already in `src/data/tags.ts` |
 | `dateAdded` | `YYYY-MM-DD`, not in the future |
 
@@ -183,7 +183,7 @@ Expectations are derived from the page's own data attributes rather than hardcod
 
 ## Performance
 
-Measured on the 533-entry build:
+Measured on the 534-entry build:
 
 | Asset | Gzipped |
 |---|---|
