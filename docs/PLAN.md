@@ -239,7 +239,7 @@ connect-everything/
 │   └── og-default.png
 └── src/
     ├── data/
-    │   ├── categories.ts    # the 8 categories + labels + blurb
+    │   ├── categories.ts    # the 9 categories + labels + blurb
     │   ├── tags.ts          # controlled vocabulary, ordered for the sidebar
     │   └── resources.ts     # the library (single source of truth)
     ├── components/          # (see §5)

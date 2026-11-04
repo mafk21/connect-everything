@@ -3559,6 +3559,16 @@ export const RESOURCES: Resource[] = [
     dateAdded: '2025-11-10',
   },
   {
+    id: "jarvis",
+    title: "JARVIS",
+    url: "https://github.com/mafk21/jarvis",
+    description:
+      "A local-first AI companion that sees your screen, speaks, remembers, and operates the machine itself — apps, browser, files and terminal. Python, MIT, on all three desktops.",
+    category: 'data-ai',
+    tags: ['Agents', 'AI', 'Open source', 'Privacy', 'Automation'],
+    dateAdded: '2026-11-04',
+  },
+  {
     id: "openai-platform",
     title: "OpenAI Platform",
     url: "https://platform.openai.com/docs",
